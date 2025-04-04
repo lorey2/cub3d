@@ -2,7 +2,8 @@
 CC = cc
 SRC_DIR = ./
 OBJ_DIR = obj/
-CFLAGS = -g -I/usr/include -Imlx_linux -O3 -Wall -Wextra -Werror
+CFLAGS = -g -I/usr/include -Imlx_linux -O3 
+#-Wall -Wextra -Werror
 LDFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Wall -Wextra -Werror
 
 NAME = so_long
