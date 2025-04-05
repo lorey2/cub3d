@@ -6,11 +6,12 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/04 17:35:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/05 04:27:04 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 void	init(t_mlx_data *data)
 {
@@ -44,7 +45,7 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[2] = strdup("1000001001");
 	data->grid[3] = strdup("1000001001");
 	data->grid[4] = strdup("1000001001");
-	data->grid[5] = strdup("1000001001");
+	data->grid[5] = strdup("1010001001");
 	data->grid[6] = strdup("1000001001");
 	data->grid[7] = strdup("1000001001");
 	data->grid[8] = strdup("1000001001");

@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/04 17:35:08 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/05 04:32:58 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			setup_grid(t_mlx_data *data);
 int				handle_key(int keysym, t_mlx_data *data);
 int				display(t_mlx_data *data);
 int				close_cross(t_mlx_data *data);
-int 			close_ESC(int keysym, t_mlx_data *data);
+int				close_esc(int keysym, t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);
