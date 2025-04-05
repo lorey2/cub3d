@@ -15,7 +15,7 @@ CYAN      = \033[0;96m
 NAME = cub3d
 
 # Source and object files
-SRC_FILES = cub3d draw hook setup_init utils
+SRC_FILES = cub3d draw hook setup_init utils draw_best_line
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 

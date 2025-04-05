@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/05 04:32:58 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/05 21:45:16 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define MV_SPD			5
 # define TILE_SIZE		50
 # define PI				3.1415926535
+# define MAX_RAY_STEPS	20
+# define TOLERANCE		0.01
 
 typedef struct s_data
 {
@@ -48,7 +50,29 @@ typedef struct s_mlx_data
 	int				player_y;
 	double			angle;
 	char			**grid;
+	int				ray_ver;
+	int				ray_hor;
 }				t_mlx_data;
+
+typedef struct s_linex
+{
+	int				x;
+	int				neg;
+	int				col_index;
+	int				row_index;
+	double			delta_x;
+	double			offset;
+}				t_linex;
+
+typedef struct s_liney
+{
+	int				y;
+	int				neg;
+	int				col_index;
+	int				row_index;
+	double			delta_y;
+	double			offset;
+}				t_liney;
 
 //init_setp
 void			init(t_mlx_data *data);
@@ -63,8 +87,11 @@ int				close_esc(int keysym, t_mlx_data *data);
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);
 void			draw_grid(t_data *img, t_mlx_data *data);
-void			draw_line(t_mlx_data *data, int x1, int y1, int x2, int y2, int color);
+void			draw_line(t_mlx_data *data,
+					int x1, int y1, int x2, int y2, int color);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+//draw_best_line
+void			draw_best_line(t_mlx_data *data);
 
 #endif

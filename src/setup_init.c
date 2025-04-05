@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/05 04:27:04 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/05 20:18:28 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	init(t_mlx_data *data)
 {
-	data->angle = 0;
+	data->angle = M_PI / 2;
 	data->player_x = 60;
 	data->player_y = 320;
 	data->img_ptr = malloc(sizeof(t_data));
