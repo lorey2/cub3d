@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/05 21:45:16 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 11:30:09 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,25 @@
 # include <stdio.h>
 # include <string.h>
 
+# define RED      0x00FF0000  // Red: R=255, G=0, B=0
+# define GREEN    0x0000FF00  // Green: R=0, G=255, B=0
+# define BLUE     0x000000FF  // Blue: R=0, G=0, B=255
+# define WHITE    0x00FFFFFF  // White: R=255, G=255, B=255
+# define BLACK    0x00000000  // Black: R=0, G=0, B=0
+# define YELLOW   0x00FFFF00  // Yellow: R=255, G=255, B=0
+# define CYAN     0x0000FFFF  // Cyan: R=0, G=255, B=255
+# define MAGENTA  0x00FF00FF  // Magenta: R=255, G=0, B=255
+# define GRAY     0x00808080  // Gray: R=128, G=128, B=128
+
 # define MALLOC_ERROR	1
 # define MV_SPD			5
 # define TILE_SIZE		50
-# define PI				3.1415926535
 # define MAX_RAY_STEPS	20
 # define TOLERANCE		0.01
+# define FOV			60
+# define RAY_NUMBER		1000
+# define S_RAY_X		1000
+# define S_RAY_Y		1000
 
 typedef struct s_data
 {
@@ -42,6 +55,7 @@ typedef struct s_data
 typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
+	t_data			*raycast;
 	int				size_x_window;
 	int				size_y_window;
 	void			*mlx_ptr;
@@ -52,6 +66,11 @@ typedef struct s_mlx_data
 	char			**grid;
 	int				ray_ver;
 	int				ray_hor;
+	double			best;
+	int				color;
+	int				i;
+	double			angle_bkp;
+	int				j;
 }				t_mlx_data;
 
 typedef struct s_linex

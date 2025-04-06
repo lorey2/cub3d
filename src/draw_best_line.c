@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:48:06 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/05 22:12:58 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 02:56:36 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,25 +102,43 @@ int	ver_best_line(t_mlx_data *data, t_linex *ver)
 	return (0);
 }
 
+void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
+{
+
+	draw_line(data, data->player_x, data->player_y, ver->delta_x, (int)(data->player_y + ver->offset), GRAY);
+	data->best = data->ray_ver;
+	data->color = GRAY;
+}
+
+void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
+{
+	draw_line(data, data->player_x, data->player_y, (int)(data->player_x + hor->offset), hor->delta_y, WHITE);
+	data->best = data->ray_hor;
+	data->color = BLACK;
+}
+
 void	draw_best_line(t_mlx_data *data)
 {
-	printf("%f\n", data->angle);
+	//printf("%f\n", data->angle);
 	t_linex	ver;
 	t_liney	hor;
 	int		ver_no;
 	int		hor_no;
-
 
 	ver_no = ver_best_line(data, &ver);
 	hor_no = hor_best_line(data, &hor);
 	data->ray_hor = sqrt(pow(hor.offset, 2) + pow(hor.delta_y - (double)data->player_y, 2));
 	data->ray_ver = sqrt(pow(ver.delta_x -data->player_x, 2) + pow(ver.offset, 2));
 	if (ver_no == -1)
-		draw_line(data, data->player_x, data->player_y, (int)(data->player_x + hor.offset), hor.delta_y, 0xFFFFFFFF);
+		draw_horizontal_line(data, &hor);
+		//draw_line(data, data->player_x, data->player_y, (int)(data->player_x + hor.offset), hor.delta_y, WHITE);
 	else if (hor_no == -1)
-		draw_line(data, data->player_x, data->player_y, ver.delta_x, (int)(data->player_y + ver.offset), 0xFFFFFFFF);
+		draw_vertical_line(data, &ver);
+		//draw_line(data, data->player_x, data->player_y, ver.delta_x, (int)(data->player_y + ver.offset), GRAY);
 	else if (data->ray_ver > data->ray_hor)
-		draw_line(data, data->player_x, data->player_y, (int)(data->player_x + hor.offset), hor.delta_y, 0xFFFFFFFF);
+		draw_horizontal_line(data, &hor);
+		//draw_line(data, data->player_x, data->player_y, (int)(data->player_x + hor.offset), hor.delta_y, WHITE);
 	else
-		draw_line(data, data->player_x, data->player_y, ver.delta_x, (int)(data->player_y + ver.offset), 0xFFFFFFFF);
+		draw_vertical_line(data, &ver);
+		//draw_line(data, data->player_x, data->player_y, ver.delta_x, (int)(data->player_y + ver.offset), GRAY);
 }
