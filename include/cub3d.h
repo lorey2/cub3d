@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 20:50:57 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/07 00:47:34 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define GRAY     0x00808080  // Gray: R=128, G=128, B=128
 
 # define MALLOC_ERROR	1
-# define MV_SPD			5
+# define MV_SPD			2.0
 # define TILE_SIZE		50
 # define MAX_RAY_STEPS	20
 # define TOLERANCE		0.01
@@ -53,16 +53,30 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
+typedef struct s_key
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	q;
+	bool	e;
+}				t_key;
+
 typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
 	t_data			*raycast;
+	t_key			*key;
+	struct timeval	last_frame_time;
+	double			current_speed;
+	double			base_speed;
 	int				size_x_window;
 	int				size_y_window;
 	void			*mlx_ptr;
 	void			*win_ptr;
-	int				player_x;
-	int				player_y;
+	double			player_x;
+	double			player_y;
 	double			angle;
 	char			**grid;
 	double			ray_ver;
@@ -99,8 +113,10 @@ void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
 void			setup_grid(t_mlx_data *data);
 //hook
-int				handle_key(int keysym, t_mlx_data *data);
+int				handle_key(t_mlx_data *data);
+int				key_pressed(int keysym, t_mlx_data *data);
 int				display(t_mlx_data *data);
+int				change_angle(t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);

@@ -6,11 +6,12 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 02:22:33 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/07 00:04:54 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <bits/types/struct_timeval.h>
 #include <math.h>
 
 void	init(t_mlx_data *data)
@@ -18,8 +19,17 @@ void	init(t_mlx_data *data)
 	data->angle = M_PI / 2;
 	data->player_x = 60;
 	data->player_y = 320;
+	data->key = malloc(sizeof(t_key));
+	data->key->w = false;
+	data->key->a = false;
+	data->key->s = false;
+	data->key->d = false;
+	data->key->q = false;
+	data->key->e = false;
 	data->raycast = malloc(sizeof(t_data));
 	data->img_ptr = malloc(sizeof(t_data));
+	data->last_frame_time.tv_sec = 0;
+	data->last_frame_time.tv_usec = 0;
 	data->mlx_ptr = mlx_init();
 	data->size_x_window = 500;
 	data->size_y_window = 500;
