@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:44:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 16:29:43 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 16:45:33 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	draw_3d(t_mlx_data *data, int ray)
 	int	j;
 
 	j = -1;
-//	data->best *= cos(data->angle - data->angle_bkp);
+	data->best *= cos(data->angle - data->angle_bkp);
+	data->best /= 2;
 	square_size = S_RAY_X / RAY_NUMBER;
 	while (++j < square_size)
 	{

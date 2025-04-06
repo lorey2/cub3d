@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 16:17:07 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 16:39:45 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_mlx_data
 	int				player_y;
 	double			angle;
 	char			**grid;
-	int				ray_ver;
-	int				ray_hor;
+	double			ray_ver;
+	double			ray_hor;
 	double			best;
 	int				color;
 	int				i;
