@@ -6,19 +6,12 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:44:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 16:45:33 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 21:04:01 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-
-int	close_cross(t_mlx_data *data)
-{
-	data->player_x = 0;
-	exit (0);
-	return (0);
-}
 
 void	change_angle(int keysym, t_mlx_data *data)
 {
@@ -79,28 +72,7 @@ int	handle_key(int keysym, t_mlx_data *data)
 	return (0);
 }
 
-void	draw_3d(t_mlx_data *data, int ray)
-{
-	int	square_size;
-	int	i;
-	int	j;
-
-	j = -1;
-	data->best *= cos(data->angle - data->angle_bkp);
-	data->best /= 2;
-	square_size = S_RAY_X / RAY_NUMBER;
-	while (++j < square_size)
-	{
-		i = -1;
-		while (++i < 10000 / data->best && i + 500 < 1000 && 500 - i > 0)
-		{
-				my_mlx_pixel_put(&(*data->raycast), j + ray * square_size, i + 500, data->color);
-				my_mlx_pixel_put(&(*data->raycast), j + ray * square_size, 500 - i, data->color);
-		}
-	}
-}
-
-void	draw_lines(t_mlx_data *data)
+void	draw_rays(t_mlx_data *data)
 {
 	double	angle_bkp;
 	double	angle_delta;
@@ -127,51 +99,20 @@ void	draw_lines(t_mlx_data *data)
 
 int	display(t_mlx_data *data)
 {
-	int		x;
-	int		y;
-	t_data	*img;
-	t_data	*img_2;
+	t_data	*minimap_img;
+	t_data	*img_3d;
 
-	img = data->img_ptr;
-	img_2 = data->raycast;
-	x = -1;
-	y = -1;
-	while (++x < 500)
-	{
-		y = -1;
-		while (++y < 500)
-			my_mlx_pixel_put(&(*img), x, y, RED);
-	}
-	x = -1;
-	while (++x < 1000)
-	{
-		y = -1;
-		while (++y < 500)
-			my_mlx_pixel_put(&(*data->raycast), x, y, RED);
-	}
-	x = -1;
-	while (++x < 1000)
-	{
-		y = 499;
-		while (++y < 1000)
-			my_mlx_pixel_put(&(*data->raycast), x, y, CYAN);
-	}
-	draw_grid(img, data);
-	draw_player(img, data);
-	draw_lines(data);
+	minimap_img = data->img_ptr;
+	img_3d = data->raycast;
+	draw_minimap_background(minimap_img);
+	draw_grid(minimap_img, data);
+	draw_player(minimap_img, data);
+	draw_3d_top(img_3d);
+	draw_3d_bottom(img_3d);
+	draw_rays(data);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_2->img, 500, 0);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img->img, 0, 0);
-	return (0);
-}
-
-int	close_esc(int keysym, t_mlx_data *data)
-{
-	if (keysym == XK_Escape)
-	{
-		data->player_x = 0;
-		exit (0);
-		return (0);
-	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img, 500, 0);
+	mlx_put_image_to_window(
+		data->mlx_ptr, data->win_ptr, minimap_img->img, 0, 0);
 	return (0);
 }

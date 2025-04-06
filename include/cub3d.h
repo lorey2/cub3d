@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 16:39:45 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 20:50:57 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ void			setup_grid(t_mlx_data *data);
 //hook
 int				handle_key(int keysym, t_mlx_data *data);
 int				display(t_mlx_data *data);
-int				close_cross(t_mlx_data *data);
-int				close_esc(int keysym, t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);
@@ -113,5 +111,16 @@ void			draw_line(t_mlx_data *data,
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
+//3d
+void			draw_3d_top(t_data *img_3d);
+void			draw_3d_bottom(t_data *img_3d);
+void			draw_3d(t_mlx_data *data, int ray);
+//minimap
+void			draw_minimap_background(t_data *img);
+void			draw_player(t_data *img, t_mlx_data *data);
+void			draw_grid(t_data *img, t_mlx_data *data);
+//exit
+int				close_cross(t_mlx_data *data);
+int				close_esc(int keysym, t_mlx_data *data);
 
 #endif
