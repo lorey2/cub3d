@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:44:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 11:34:26 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 16:29:43 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,48 @@ void	change_angle(int keysym, t_mlx_data *data)
 		if (data->angle > 2 * M_PI)
 			data->angle = 0;
 	}
+	data->angle_bkp = data->angle;
+}
+
+void	set_next_pos(int next_x, int next_y, t_mlx_data *data)
+{
+	if (data->grid[next_x / TILE_SIZE][next_y / TILE_SIZE] != '1')
+	{
+		data->player_x = next_x;
+		data->player_y = next_y;
+	}
 }
 
 int	handle_key(int keysym, t_mlx_data *data)
 {
+	int	next_x;
+	int	next_y;
+
 	change_angle(keysym, data);
-	if (keysym == XK_w
-		&& data->grid[data->player_x / TILE_SIZE]
-		[(data->player_y - MV_SPD) / TILE_SIZE] != '1')
-		data->player_y -= MV_SPD;
-	if (keysym == XK_s
-		&& data->grid[data->player_x / TILE_SIZE]
-		[(data->player_y + MV_SPD) / TILE_SIZE] != '1')
-		data->player_y += MV_SPD;
-	if (keysym == XK_d
-		&& data->grid[(data->player_x + MV_SPD) / TILE_SIZE]
-		[data->player_y / TILE_SIZE] != '1')
-		data->player_x += MV_SPD;
-	if (keysym == XK_a
-		&& data->grid[(data->player_x - MV_SPD) / TILE_SIZE]
-		[data->player_y / TILE_SIZE] != '1')
-		data->player_x -= MV_SPD;
+	if (keysym == XK_w)
+	{
+		next_x = MV_SPD * cos(data->angle_bkp) + data->player_x;
+		next_y = MV_SPD * sin(data->angle_bkp) + data->player_y;
+		set_next_pos(next_x, next_y, data);
+	}
+	else if (keysym == XK_s)
+	{
+		next_x = data->player_x - MV_SPD * cos(data->angle_bkp);
+		next_y = data->player_y - MV_SPD * sin(data->angle_bkp);
+		set_next_pos(next_x, next_y, data);
+	}
+	else if (keysym == XK_d)
+	{
+		next_x = data->player_x - MV_SPD * sin(data->angle_bkp);
+		next_y = data->player_y + MV_SPD * cos(data->angle_bkp);
+		set_next_pos(next_x, next_y, data);
+	}
+	else if (keysym == XK_a)
+	{
+		next_x = data->player_x + MV_SPD * sin(data->angle_bkp);
+		next_y = data->player_y - MV_SPD * cos(data->angle_bkp);
+		set_next_pos(next_x, next_y, data);
+	}
 	return (0);
 }
 
@@ -65,19 +86,15 @@ void	draw_3d(t_mlx_data *data, int ray)
 	int	j;
 
 	j = -1;
+//	data->best *= cos(data->angle - data->angle_bkp);
 	square_size = S_RAY_X / RAY_NUMBER;
 	while (++j < square_size)
 	{
 		i = -1;
-//		data->best *= cos(data->best - data->angle_bkp);
-		while (++i < 10000 / data->best)
+		while (++i < 10000 / data->best && i + 500 < 1000 && 500 - i > 0)
 		{
-			if (10000 / data->best < 500)
-			{
-
 				my_mlx_pixel_put(&(*data->raycast), j + ray * square_size, i + 500, data->color);
 				my_mlx_pixel_put(&(*data->raycast), j + ray * square_size, 500 - i, data->color);
-			}
 		}
 	}
 }

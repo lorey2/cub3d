@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 11:30:09 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/06 16:17:07 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "../mlx_linux/mlx.h"
+# include <stdbool.h>
 # include <bits/types/struct_timeval.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
