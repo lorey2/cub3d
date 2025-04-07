@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/07 00:47:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/07 18:59:05 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@
 
 # define MALLOC_ERROR	1
 # define MV_SPD			2.0
-# define TILE_SIZE		50
-# define MAX_RAY_STEPS	20
+# define TILE_SIZE		50.0
+# define MAX_RAY_STEPS	20.0
 # define TOLERANCE		0.01
-# define FOV			60
-# define RAY_NUMBER		1000
-# define S_RAY_X		1000
-# define S_RAY_Y		1000
+# define FOV			70.0
+# define RAY_NUMBER		1000.0
+# define S_RAY_X		1000.0
+# define S_RAY_Y		1000.0
+# define FPS			60.0
 
 typedef struct s_data
 {
@@ -67,12 +68,10 @@ typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
 	t_data			*raycast;
-	t_key			*key;
 	struct timeval	last_frame_time;
-	double			current_speed;
-	double			base_speed;
-	int				size_x_window;
-	int				size_y_window;
+	t_key			*key;
+	double			size_x_window;
+	double			size_y_window;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	double			player_x;
@@ -83,17 +82,17 @@ typedef struct s_mlx_data
 	double			ray_hor;
 	double			best;
 	int				color;
-	int				i;
+	double			i;
 	double			angle_bkp;
-	int				j;
+	double			j;
 }				t_mlx_data;
 
 typedef struct s_linex
 {
 	int				x;
 	int				neg;
-	int				col_index;
-	int				row_index;
+	double			col_index;
+	double			row_index;
 	double			delta_x;
 	double			offset;
 }				t_linex;
@@ -102,8 +101,8 @@ typedef struct s_liney
 {
 	int				y;
 	int				neg;
-	int				col_index;
-	int				row_index;
+	double			col_index;
+	double			row_index;
 	double			delta_y;
 	double			offset;
 }				t_liney;
@@ -113,7 +112,7 @@ void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
 void			setup_grid(t_mlx_data *data);
 //hook
-int				handle_key(t_mlx_data *data);
+void				handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);
 int				display(t_mlx_data *data);
 int				change_angle(t_mlx_data *data);
@@ -138,5 +137,8 @@ void			draw_grid(t_data *img, t_mlx_data *data);
 //exit
 int				close_cross(t_mlx_data *data);
 int				close_esc(int keysym, t_mlx_data *data);
+//calcul_rey
+int				ver_best_line(t_mlx_data *data, t_linex *ver);
+int				hor_best_line(t_mlx_data *data, t_liney *hor);
 
 #endif
