@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/07 18:59:05 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/08 20:28:30 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,25 @@ typedef struct s_key
 	bool	e;
 }				t_key;
 
+typedef struct s_dline
+{
+	int				x1;
+	int				y1;
+	int				x2;
+	int				y2;
+	int				sx;
+	int				sy;
+	int				err;
+	int				color;
+}				t_dline;
+
 typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
 	t_data			*raycast;
 	struct timeval	last_frame_time;
 	t_key			*key;
+	t_dline			*l;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;
@@ -107,12 +120,13 @@ typedef struct s_liney
 	double			offset;
 }				t_liney;
 
+
 //init_setp
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
 void			setup_grid(t_mlx_data *data);
 //hook
-void				handle_key(t_mlx_data *data);
+void			handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);
 int				display(t_mlx_data *data);
 int				change_angle(t_mlx_data *data);
@@ -120,8 +134,7 @@ int				change_angle(t_mlx_data *data);
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);
 void			draw_grid(t_data *img, t_mlx_data *data);
-void			draw_line(t_mlx_data *data,
-					int x1, int y1, int x2, int y2, int color);
+void	draw_line(t_mlx_data *data, int x1, int y1, int x2, int y2, int color);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //draw_best_line
