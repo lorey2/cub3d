@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/08 20:31:48 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 00:34:54 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init(t_mlx_data *data)
 	data->key->e = false;
 	data->raycast = malloc(sizeof(t_data));
 	data->img_ptr = malloc(sizeof(t_data));
+	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
 	data->mlx_ptr = mlx_init();

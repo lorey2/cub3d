@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 20:03:56 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 04:17:18 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	draw_player(t_data *img, t_mlx_data *data)
 	int	x;
 	int	y;
 
-	x = -1;
-	while (++x < 10)
+	x = -6;
+	while (++x < 5)
 	{
-		y = -1;
-		while (++y < 10)
+		y = -6;
+		while (++y < 5)
 			my_mlx_pixel_put(&(*img), data->player_x + x,
 				data->player_y + y, GREEN);
 	}

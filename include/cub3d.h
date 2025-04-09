@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/08 20:28:30 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 04:43:17 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@
 # define GRAY     0x00808080  // Gray: R=128, G=128, B=128
 
 # define MALLOC_ERROR	1
-# define MV_SPD			2.0
+# define MV_SPD			1.0
+# define SAFETY			5.0
 # define TILE_SIZE		50.0
 # define MAX_RAY_STEPS	20.0
-# define TOLERANCE		0.01
+# define TOLERANCE		0.02
 # define FOV			70.0
 # define RAY_NUMBER		1000.0
 # define S_RAY_X		1000.0
@@ -70,9 +71,12 @@ typedef struct s_dline
 	int				y1;
 	int				x2;
 	int				y2;
+	int				dx;
+	int				dy;
 	int				sx;
 	int				sy;
 	int				err;
+	int				e2;
 	int				color;
 }				t_dline;
 
@@ -98,6 +102,10 @@ typedef struct s_mlx_data
 	double			i;
 	double			angle_bkp;
 	double			j;
+	double			next_x;
+	double			next_y;
+	double			next_s_x;
+	double			next_s_y;
 }				t_mlx_data;
 
 typedef struct s_linex
@@ -120,7 +128,6 @@ typedef struct s_liney
 	double			offset;
 }				t_liney;
 
-
 //init_setp
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
@@ -134,7 +141,7 @@ int				change_angle(t_mlx_data *data);
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_square(t_data *img, int x, int y, int color);
 void			draw_grid(t_data *img, t_mlx_data *data);
-void	draw_line(t_mlx_data *data, int x1, int y1, int x2, int y2, int color);
+void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //draw_best_line

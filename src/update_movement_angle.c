@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:57:24 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/07 16:05:48 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 05:00:27 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ int	change_angle(t_mlx_data *data)
 	return (0);
 }
 
-void	set_next_pos(double next_x, double next_y, t_mlx_data *data)
-{
-	if (data->grid[(int)(next_x / TILE_SIZE)][(int)(next_y / TILE_SIZE)] != '1')
-	{
-		data->player_x = next_x;
-		data->player_y = next_y;
-	}
-}
-
 int	key_pressed(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_w)
@@ -56,41 +47,76 @@ int	key_pressed(int keysym, t_mlx_data *data)
 	return (0);
 }
 
+bool	check_next(t_mlx_data *data, double x, double y)
+{
+	if (data->grid[(int)((x + SAFETY) / TILE_SIZE)]
+		[(int)(y / TILE_SIZE)] == '1')
+		return (false);
+	else if (data->grid[(int)((x - SAFETY) / TILE_SIZE)]
+			[(int)(y / TILE_SIZE)] == '1')
+		return (false);
+	else if (data->grid[(int)(x / TILE_SIZE)]
+			[(int)((y + SAFETY) / TILE_SIZE)] == '1')
+		return (false);
+	else if (data->grid[(int)(x / TILE_SIZE)]
+			[(int)((y - SAFETY) / TILE_SIZE)] == '1')
+		return (false);
+	return (true);
+}
+
 void	handle_key_2(t_mlx_data *data)
 {
-	double	next_x;
-	double	next_y;
-
 	if (data->key->d == true)
 	{
-		next_x = data->player_x + MV_SPD * cos(data->angle_bkp + M_PI_2);
-		next_y = data->player_y + MV_SPD * sin(data->angle_bkp + M_PI_2);
-		set_next_pos(next_x, next_y, data);
+		data->next_s_x = data->player_x
+			+ MV_SPD * cos(data->angle_bkp + M_PI_2);
+		data->next_s_y = data->player_y
+			+ MV_SPD * sin(data->angle_bkp + M_PI_2);
+		if (check_next(data, data->next_s_x, data->next_s_y))
+		{
+			data->player_x = data->next_s_x;
+			data->player_y = data->next_s_y;
+		}
 	}
 	if (data->key->a == true)
 	{
-		next_x = data->player_x + MV_SPD * cos(data->angle_bkp - M_PI_2);
-		next_y = data->player_y + MV_SPD * sin(data->angle_bkp - M_PI_2);
-		set_next_pos(next_x, next_y, data);
+		data->next_s_x = data->player_x
+			+ MV_SPD * cos(data->angle_bkp - M_PI_2);
+		data->next_s_y = data->player_y
+			+ MV_SPD * sin(data->angle_bkp - M_PI_2);
+		if (check_next(data, data->next_s_x, data->next_s_y))
+		{
+			data->player_x = data->next_s_x;
+			data->player_y = data->next_s_y;
+		}
 	}
 }
 
 void	handle_key(t_mlx_data *data)
 {
-	double	next_x;
-	double	next_y;
-
 	if (data->key->w == true)
 	{
-		next_x = data->player_x + MV_SPD * cos(data->angle_bkp);
-		next_y = data->player_y + MV_SPD * sin(data->angle_bkp);
-		set_next_pos(next_x, next_y, data);
+		data->next_s_x = data->player_x
+			+ MV_SPD * cos(data->angle_bkp);
+		data->next_s_y = data->player_y
+			+ MV_SPD * sin(data->angle_bkp);
+		if (check_next(data, data->next_s_x, data->next_s_y))
+		{
+			data->player_x = data->next_s_x;
+			data->player_y = data->next_s_y;
+		}
 	}
 	if (data->key->s == true)
 	{
-		next_x = data->player_x - MV_SPD * cos(data->angle_bkp);
-		next_y = data->player_y - MV_SPD * sin(data->angle_bkp);
-		set_next_pos(next_x, next_y, data);
+		data->next_s_x = data->player_x - MV_SPD
+			* cos(data->angle_bkp);
+		data->next_s_y = data->player_y - MV_SPD
+			* sin(data->angle_bkp);
+		if (check_next(data, data->next_s_x, data->next_s_y))
+		{
+			data->player_x = data->next_s_x;
+			data->player_y = data->next_s_y;
+		}
 	}
 	handle_key_2(data);
 }

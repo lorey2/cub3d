@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:48:06 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/08 20:38:22 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 00:57:31 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 
 void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 {
-	draw_line(data, data->player_x, data->player_y, ver->delta_x,
-		(int)(data->player_y + ver->offset), GRAY);
+	data->l->x1 = data->player_x;
+	data->l->y1 = data->player_y;
+	data->l->x2 = ver->delta_x;
+	data->l->y2 = (int)(data->player_y + ver->offset);
+	data->l->color = GRAY;
+	draw_line(data, data->l);
 	data->best = data->ray_ver;
 	data->color = GRAY;
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 {
-	draw_line(data, data->player_x, data->player_y,
-		(int)(data->player_x + hor->offset), hor->delta_y, WHITE);
+	data->l->x1 = data->player_x;
+	data->l->y1 = data->player_y;
+	data->l->x2 = (int)(data->player_x + hor->offset);
+	data->l->y2 = hor->delta_y;
+	data->l->color = WHITE;
+	draw_line(data, data->l);
 	data->best = data->ray_hor;
 	data->color = BLACK;
 }

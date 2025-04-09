@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/08 20:38:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 00:56:19 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,41 @@ void	draw_square(t_data *img, int x, int y, int color)
 	}
 }
 
-void	draw_line(t_mlx_data *data, int x1, int y1, int x2, int y2, int color)
+void	setup_line(t_dline *l)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		e2;
+	l->dx = abs(l->x2 - l->x1);
+	l->dy = abs(l->y2 - l->y1);
+	if (l->x1 < l->x2)
+		l->sx = 1;
+	else
+		l->sx = -1;
+	if (l->y1 < l->y2)
+		l->sy = 1;
+	else
+		l->sy = -1;
+	l->err = l->dx - l->dy;
+}
 
-	dx = abs(x2 - x1);
-	dy = abs(y2 - y1);
-	sx = (x1 < x2) ? 1 : -1;
-	sy = (y1 < y2) ? 1 : -1;
-	err = dx - dy;
-
+void	draw_line(t_mlx_data *data, t_dline *l)
+{
+	setup_line(l);
 	while (1)
 	{
-		if (x1 >= 0 && x1 < data->size_x_window && y1 >= 0 && y1 < data->size_y_window)
-			my_mlx_pixel_put(&(*data->img_ptr), x1, y1, color);
-		if (x1 == x2 && y1 == y2)
+		if (l->x1 >= 0 && l->x1 < data->size_x_window
+			&& l->y1 >= 0 && l->y1 < data->size_y_window)
+			my_mlx_pixel_put(&(*data->img_ptr), l->x1, l->y1, l->color);
+		if (l->x1 == l->x2 && l->y1 == l->y2)
 			break ;
-		e2 = 2 * err;
-		if (e2 > -dy)
+		l->e2 = 2 * l->err;
+		if (l->e2 >= -1 * l->dy)
 		{
-			err = err - dy;
-			x1 = x1 + sx;
+			l->err = l->err - l->dy;
+			l->x1 = l->x1 + l->sx;
 		}
-		if (e2 < dx)
+		if (l->e2 <= l->dx)
 		{
-			err = err + dx;
-			y1 = y1 + sy;
+			l->err = l->err + l->dx;
+			l->y1 = l->y1 + l->sy;
 		}
 	}
 }
