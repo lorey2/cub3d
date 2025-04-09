@@ -35,12 +35,12 @@
 # define GRAY     0x00808080  // Gray: R=128, G=128, B=128
 
 # define MALLOC_ERROR	1
-# define MV_SPD			1.0
+# define MV_SPD			3.0
 # define SAFETY			5.0
 # define TILE_SIZE		50.0
 # define MAX_RAY_STEPS	20.0
 # define TOLERANCE		0.02
-# define FOV			70.0
+# define FOV			50.0
 # define RAY_NUMBER		1000.0
 # define S_RAY_X		1000.0
 # define S_RAY_Y		1000.0
