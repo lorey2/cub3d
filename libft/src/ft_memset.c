@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/09 14:04:35 by maambuhl         ###   LAUSANNE.ch       */
+/*   Created: 2024/10/01 15:19:12 by maambuhl          #+#    #+#             */
+/*   Updated: 2024/10/01 15:30:33 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	check_map_file(char *map_file)
+#include "libft.h"
+
+void	*ft_memset(void *b, int c, size_t len)
 {
+	size_t	i;
 
+	i = 0;
+	while (i < len)
+		*(unsigned char *)(b + i++) = (unsigned char)c;
+	return (b);
 }
-
-void	load_map(char *map_file)
-{
-
-}
-

@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/09 14:04:35 by maambuhl         ###   LAUSANNE.ch       */
+/*   Created: 2024/10/01 14:29:34 by maambuhl          #+#    #+#             */
+/*   Updated: 2024/10/01 14:47:51 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	check_map_file(char *map_file)
+int	ft_isalpha(int c)
 {
-
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }
-
-void	load_map(char *map_file)
-{
-
-}
-

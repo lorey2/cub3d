@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/09 14:04:35 by maambuhl         ###   LAUSANNE.ch       */
+/*   Created: 2024/10/04 14:14:21 by maambuhl          #+#    #+#             */
+/*   Updated: 2024/10/04 14:15:48 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	check_map_file(char *map_file)
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
 {
-
+	write(fd, &c, 1);
 }
-
-void	load_map(char *map_file)
-{
-
-}
-

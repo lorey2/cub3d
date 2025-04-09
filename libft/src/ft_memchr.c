@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/09 14:04:35 by maambuhl         ###   LAUSANNE.ch       */
+/*   Created: 2024/10/03 13:18:08 by maambuhl          #+#    #+#             */
+/*   Updated: 2024/10/03 14:17:00 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	check_map_file(char *map_file)
+#include "libft.h"
+
+void	*ft_memchr(const void *s, int c, size_t n)
 {
+	size_t			i;
+	unsigned char	*str;
 
+	str = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (str[i] == (unsigned char)c)
+			return (str + i);
+		i++;
+	}
+	return (0);
 }
-
-void	load_map(char *map_file)
-{
-
-}
-

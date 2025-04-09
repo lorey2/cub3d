@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/09 14:04:35 by maambuhl         ###   LAUSANNE.ch       */
+/*   Created: 2024/10/03 11:59:28 by maambuhl          #+#    #+#             */
+/*   Updated: 2024/10/03 12:44:05 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	check_map_file(char *map_file)
+char	*ft_strchr(const char *str, int c)
 {
+	int	i;
 
+	i = 0;
+	while (str[i] && str[i] != (char)c)
+		i++;
+	if (str[i] == (char)c)
+		return ((char *)str + i);
+	return (0);
 }
-
-void	load_map(char *map_file)
-{
-
-}
-

@@ -8,6 +8,10 @@ INCLUDE = include/
 MLX = $(MLX_DIR)/libmlx_Linux.a
 MLX_DIR = ./mlx_linux
 
+# LIBFT
+LIBC_DIR = ./libft
+LIBC = $(LIBC_DIR)/libft.a
+
 DEF_COLOR = \033[0;39m
 GREEN     = \033[0;92m
 YELLOW    = \033[0;93m
@@ -27,8 +31,11 @@ all: $(NAME)
 # Bonus target (same as all in this case)
 bonus: all
 
+$(LIBC):
+	@make -s -C $(LIBC_DIR) all
+
 # Linking the final executable
-$(NAME): $(OBJ) $(MLX)
+$(NAME): $(LIBC) $(OBJ) $(MLX)
 	@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)cub3d compiled!$(DEF_COLOR)"
 
@@ -44,11 +51,14 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 # Cleaning up object files
 clean:
 	@rm -rf $(OBJ_DIR)
+	@make -s -C $(LIBC_DIR) clean
+	@make -C $(MLX_DIR) clean
 	@echo "$(CYAN)cub3d objet files cleaned!$(DEF_COLOR)"
 
 # Cleaning everything, including the executable
 fclean: clean
 	@rm -f $(NAME)
+	@make -s -C $(LIBC_DIR) fclean
 	@echo "$(CYAN)cub3d executables cleaned!$(DEF_COLOR)"
 
 # Rebuilding everything from scratch

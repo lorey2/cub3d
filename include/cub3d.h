@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 13:54:29 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 14:03:44 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,8 @@ int				close_esc(int keysym, t_mlx_data *data);
 //calcul_rey
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
+//parsing
+bool			check_map_file(char *map_file);
+void			load_map(char *map_file);
 
 #endif

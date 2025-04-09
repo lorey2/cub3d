@@ -6,16 +6,17 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 13:57:25 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 14:04:54 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_mlx_data	data;
 
+	check_map_file(av[1]);
 	setup_grid(&data);
 	init(&data);
 	init_img(&data);
