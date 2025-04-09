@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 14:48:06 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 00:57:31 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 16:48:36 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,19 @@ void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 	data->l->y1 = data->player_y;
 	data->l->x2 = ver->delta_x;
 	data->l->y2 = (int)(data->player_y + ver->offset);
-	data->l->color = GRAY;
+	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
+		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
+	{
+		data->color = GREEN;
+		data->l->color = GREEN;
+	}
+	else
+	{
+		data->color = GRAY;
+		data->l->color = GRAY;
+	}
 	draw_line(data, data->l);
 	data->best = data->ray_ver;
-	data->color = GRAY;
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
@@ -31,10 +40,19 @@ void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 	data->l->y1 = data->player_y;
 	data->l->x2 = (int)(data->player_x + hor->offset);
 	data->l->y2 = hor->delta_y;
-	data->l->color = WHITE;
+	if ((data->angle > 0 && data->angle < M_PI)
+		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
+	{
+		data->l->color = WHITE;
+		data->color = WHITE;
+	}
+	else
+	{
+		data->l->color = BLACK;
+		data->color = BLACK;
+	}
 	draw_line(data, data->l);
 	data->best = data->ray_hor;
-	data->color = BLACK;
 }
 
 void	draw_best_line(t_mlx_data *data)

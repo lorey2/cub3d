@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 00:34:54 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 14:59:26 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 void	init(t_mlx_data *data)
 {
-	data->angle = M_PI / 2;
-	data->player_x = 60;
-	data->player_y = 320;
+	data->angle = M_PI_2 + M_PI_4;
+	data->player_x = 100;
+	data->player_y = 400;
 	data->key = malloc(sizeof(t_key));
 	data->key->w = false;
 	data->key->a = false;
