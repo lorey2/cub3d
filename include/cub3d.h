@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 04:43:17 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/09 13:54:29 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define RAY_NUMBER		1000.0
 # define S_RAY_X		1000.0
 # define S_RAY_Y		1000.0
-# define FPS			60.0
+# define FPS			120.0
 
 typedef struct s_data
 {
