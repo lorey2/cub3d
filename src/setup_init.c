@@ -6,19 +6,17 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 14:59:26 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/10 15:52:48 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <bits/types/struct_timeval.h>
-#include <math.h>
 
 void	init(t_mlx_data *data)
 {
-	data->angle = M_PI_2 + M_PI_4;
-	data->player_x = 100;
-	data->player_y = 400;
+	data->angle = INIT_ANGLE;
+	data->player_x = PLAYER_INIT_X;
+	data->player_y = PLAYER_INIT_Y;
 	data->key = malloc(sizeof(t_key));
 	data->key->w = false;
 	data->key->a = false;
@@ -40,11 +38,12 @@ void	init(t_mlx_data *data)
 
 void	init_img(t_mlx_data *data)
 {
-	data->img_ptr->img = mlx_new_image(data->mlx_ptr, 500, 500);
+	data->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
 	data->img_ptr->addr = mlx_get_data_addr(data->img_ptr->img,
 			&data->img_ptr->bits_per_pixel, &data->img_ptr->line_length,
 			&data->img_ptr->endian);
-	data->raycast->img = mlx_new_image(data->mlx_ptr, S_RAY_X, S_RAY_Y);
+	data->raycast->img = mlx_new_image(
+			data->mlx_ptr, SIZE_3D_IMG_X, SIZE_3D_IMG_Y);
 	data->raycast->addr = mlx_get_data_addr(data->raycast->img,
 			&data->raycast->bits_per_pixel, &data->raycast->line_length,
 			&data->raycast->endian);

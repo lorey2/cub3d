@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 16:49:33 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/10 16:13:38 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,39 @@
 # define MAGENTA  0x00FF00FF  // Magenta: R=255, G=0, B=255
 # define GRAY     0x00808080  // Gray: R=128, G=128, B=128
 
-# define MALLOC_ERROR	1
-# define MV_SPD			3.0
-# define SAFETY			5.0
-# define TILE_SIZE		50.0
-# define MAX_RAY_STEPS	20.0
-# define TOLERANCE		0.02
-# define FOV			50.0
-# define RAY_NUMBER		1000.0
-# define S_RAY_X		1000.0
-# define S_RAY_Y		1000.0
-# define FPS			60.0
+// TODO: WHEN I SAY WILL CHANGE I MEAN THAT WONT BE A DEFINE BUT A PARSED VALUE
+
+//////////////////
+//player related//
+//////////////////
+# define MV_SPD			3.0		//nbr of pxl moved each frame
+# define SAFETY			5.0		//in colision a margin between player and wall
+# define INIT_ANGLE		M_PI_4	//initial angle of player      TODO: WILL CHANGE
+# define PLAYER_INIT_X	100		//position initial of player   TODO: WILL CHANGE
+# define PLAYER_INIT_Y	400     //                             TODO: WILL CHANGE
+///////////////////
+//minimap related//
+///////////////////
+# define SIZE_MAP_X		500		//size of minimap img
+# define SIZE_MAP_Y		500		//
+# define POS_MAP_X		0		//position of minimap
+# define POS_MAP_Y		0		//
+//////////////
+//3d related//
+//////////////
+# define SIZE_3D_IMG_X	1000.0	//size of the 3d img
+# define SIZE_3D_IMG_Y	1000.0	//
+# define POS_3D_X		500		//position of the map img in screen
+# define POS_3D_Y		0		//
+/////////////////
+//general/other//
+/////////////////
+# define TILE_SIZE		50.0	//real size of a minimap tile
+# define MAX_RAY_STEPS	20.0	//nbr of intersection max with grid
+# define TOLERANCE		0.02	//to avoid infinity in trigo
+# define FOV			50.0	//in degree field of wiew
+# define RAY_NUMBER		1000.0	//number of rays. Best equal to SIZE_3D_IMG_X
+# define FPS			60.0	//to avoid framerate jump the fps is capped
 
 typedef struct s_data
 {
