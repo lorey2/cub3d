@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:59:34 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 17:31:16 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 18:24:05 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,3 @@ void	safe_free(void **ptr)
 	}
 }
 
-bool	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v')
-		return (true);
-	return (false);
-}
-
-char	*get_texture_value(char *line)
-{
-	int		i;
-	int		j;
-	char	*value;
-
-	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
-	j = 0;
-	while (line[i + j] != '\n')
-		j++;
-	value = malloc(sizeof(char) * (j + 1));
-	if (!value)
-		err("Cannot allocate memory for texture value\n");
-	j = 0;
-	while (line[i + j] != '\n')
-	{
-		value[j] = line[i + j];
-		j++;
-	}
-	value[j] = '\0';
-	return (value);
-}
