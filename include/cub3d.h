@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 17:37:37 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 18:34:23 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ typedef struct s_liney
 	double			offset;
 }				t_liney;
 
-
 //init_setp
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
@@ -193,8 +192,10 @@ void			draw_line(t_mlx_data *data, t_dline *l);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			err(char *str);
 void			safe_free(void **ptr);
+//parsing utils
 bool			ft_isspace(char c);
 char			*get_texture_value(char *line);
+void			check_texture(char **map, t_mlx_data *data);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
