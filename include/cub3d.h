@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 18:34:23 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 18:44:02 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
 
@@ -107,18 +106,9 @@ typedef struct s_dline
 	int				color;
 }				t_dline;
 
-typedef struct s_texture
-{
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*floor;
-	char	*ceiling;
-}				t_texture;
-
 typedef struct s_mlx_data
 {
+	int				frame_nbr;
 	t_data			*img_ptr;
 	t_data			*raycast;
 	t_data			*dirt;
@@ -140,7 +130,6 @@ typedef struct s_mlx_data
 	double			player_y;
 	double			angle;
 	char			**grid;
-	t_texture		*texture;
 	double			ray_ver;
 	double			ray_hor;
 	double			best;
@@ -192,10 +181,6 @@ void			draw_line(t_mlx_data *data, t_dline *l);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			err(char *str);
 void			safe_free(void **ptr);
-//parsing utils
-bool			ft_isspace(char c);
-char			*get_texture_value(char *line);
-void			check_texture(char **map, t_mlx_data *data);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d

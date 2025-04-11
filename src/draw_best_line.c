@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_best_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
+/*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/05 14:48:06 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 04:23:00 by lorey            ###   LAUSANNE.ch       */
+/*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
+/*   Updated: 2025/04/11 17:00:55 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,49 @@
 
 int get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
 {
-    int      x;
-    int      y;
-    int      pixel_index;
-    int      color;
-    double   p_s_g;
+	int		x;
+	int		y;
+	int		pixel_index;
+	int		color;
+	double	p_s_g;
 
-    if (!img || !img->addr) {
-        return (0);
-    }
-    if (TILE_SIZE <= 0 || img->width <= 0 || img->height <= 0 || img->bits_per_pixel <= 0) {
-        return (0);
-	}
-
-    p_s_g = offset - (TILE_SIZE - fmod(player_pos, TILE_SIZE));
-    p_s_g = fmod(p_s_g, TILE_SIZE);
-
-    if (p_s_g < 0) {
-        p_s_g += TILE_SIZE;
-    }
-
-    p_s_g *= ((double)img->width / TILE_SIZE);
-
-    x = (int)p_s_g;
-    y = 200;
-
-    if (x < 0) {
-        x = 0;
-    } else if (x >= img->width) {
-        x = img->width - 1;
-    }
-
-    if (y < 0) {
-        y = 0;
-    } else if (y >= img->height) {
-        y = img->height - 1;
-    }
+	if (!img || !img->addr)
+		return (0);
+	if (TILE_SIZE <= 0 || img->width <= 0 || img->height <= 0 || img->bits_per_pixel <= 0)
+		return (0);
+	p_s_g = offset - (TILE_SIZE - fmod(player_pos, TILE_SIZE));
+	p_s_g = fmod(p_s_g, TILE_SIZE);
+	if (p_s_g < 0)
+		p_s_g += TILE_SIZE;
+	p_s_g *= ((double)img->width / TILE_SIZE);
+	x = (int)p_s_g;
+	y = 200;
+	if (x < 0)
+		x = 0;
+	else if (x >= img->width)
+		x = img->width - 1;
+	if (y < 0)
+		y = 0;
+	else if (y >= img->height)
+		y = img->height - 1;
 	data->textu_x = x;
-    pixel_index = y * img->line_length + x * (img->bits_per_pixel / 8);
+	pixel_index = y * img->line_length + x * (img->bits_per_pixel / 8);
+	color = *(int *)(img->addr + pixel_index);
+	(void)data;
+	return (color);
+}
 
-    color = *(int *)(img->addr + pixel_index);
-
-    (void)data;
-
-    return (color);
+void	set_ver_selected(t_mlx_data *data)
+{
+	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
+		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
+	{
+		data->selected = data->diam;
+	}
+	else
+	{
+		data->selected = data->wood;
+	}
 }
 
 void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
@@ -67,25 +66,27 @@ void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 	data->l->y1 = data->player_y;
 	data->l->x2 = ver->delta_x;
 	data->l->y2 = (int)(data->player_y + ver->offset);
-	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
-		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
-	{
-		data->color = get_color(
-				data->player_y, data, ver->offset, data->diam);
-		data->l->color = get_color(
-				data->player_y, data, ver->offset, data->diam);
-		data->selected = data->diam;
-	}
-	else
-	{
-		data->color = get_color(
-				data->player_y, data, ver->offset, data->wood);
-		data->l->color = get_color(
-				data->player_y, data, ver->offset, data->wood);
-		data->selected = data->wood;
-	}
+	set_ver_selected(data);
+	data->color = get_color(
+			data->player_y, data, ver->offset, data->selected);
+	data->l->color = get_color(
+			data->player_y, data, ver->offset, data->selected);
 	draw_line(data, data->l);
 	data->best = data->ray_ver;
+}
+
+void	set_hor_selected(t_mlx_data *data)
+{
+	if ((data->angle > 0 && data->angle < M_PI)
+		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
+	{
+		if (data->frame_nbr > FPS / 2)
+			data->selected = data->dirt;
+		else
+			data->selected = data->wood;
+	}
+	else
+		data->selected = data->cobble;
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
@@ -94,23 +95,11 @@ void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 	data->l->y1 = data->player_y;
 	data->l->x2 = (int)(data->player_x + hor->offset);
 	data->l->y2 = hor->delta_y;
-	if ((data->angle > 0 && data->angle < M_PI)
-		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
-	{
-		data->l->color = get_color(
-				data->player_x, data, hor->offset, data->dirt);
-		data->color = get_color(
-				data->player_x, data, hor->offset, data->dirt);
-		data->selected = data->dirt;
-	}
-	else
-	{
-		data->l->color = get_color(
-				data->player_x, data, hor->offset, data->cobble);
-		data->color = get_color(
-				data->player_x, data, hor->offset, data->cobble);
-		data->selected = data->cobble;
-	}
+	set_hor_selected(data);
+	data->l->color = get_color(
+			data->player_x, data, hor->offset, data->selected);
+	data->color = get_color(
+			data->player_x, data, hor->offset, data->selected);
 	draw_line(data, data->l);
 	data->best = data->ray_hor;
 }

@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/11 18:38:33 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 15:32:10 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ int	count_map_line(int fd)
 	i = 0;
 	line = get_next_line(fd);
 	if (!line)
-		return (safe_free((void **)&line), i);
+		err("Cannot get line");
 	++i;
 	while (line)
 	{
-		safe_free((void **)&line);
+		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			err("Cannot get line");
 		i++;
 	}
-	return (safe_free((void **)&line), i);
+	return(free(line), i);
+	
 }
 
 void	check_map(char *map_file, t_mlx_data *data)
@@ -56,42 +59,15 @@ void	check_map(char *map_file, t_mlx_data *data)
 	load_map(map_file, data);
 }
 
-void	collect_texture(char **map, t_mlx_data *data)
-{
-	t_texture	*texture;
-
-	texture = malloc(sizeof(t_texture));
-	if (!texture)
-		err("Cannot allocate memory for texture\n");
-	data->texture = texture;
-	check_texture(map, data);
-	if (!texture->ceiling ||!texture->floor || !texture->east
-		|| !texture->north || !texture->south || !texture->west)
-	{
-		err("You should provide NO, SO, WE, EA, F and C texture\n");
-	}
-}
-
 void	load_map(char *map_file, t_mlx_data *data)
 {
-	int		fd;
-	int		nb_line;
-	char	**grid;
-	int		i;
+	int	fd;
+	int	nb_line;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
-		err("Cannot open map file\n");
+		err("Cannot open map file");
 	nb_line = count_map_line(fd);
-	close(fd);
-	grid = malloc(sizeof(char *) * nb_line);
-	if (!grid)
-		err("Cannot allocate memory for map\n");
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		err("Cannot open map file\n");
-	i = 0;
-	while (i < nb_line)
-		grid[i++] = get_next_line(fd);
-	collect_texture(grid, data);
+	printf("NB LINE = %d\n", nb_line);
 }
+

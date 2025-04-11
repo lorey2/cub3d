@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 03:49:47 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 16:42:51 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init(t_mlx_data *data)
 {
+	data->frame_nbr = 0;
 	data->angle = INIT_ANGLE;
 	data->player_x = PLAYER_INIT_X;
 	data->player_y = PLAYER_INIT_Y;
