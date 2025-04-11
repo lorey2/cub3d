@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 19:09:21 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 23:08:24 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	display(t_mlx_data *data)
 	draw_minimap_background(minimap_img);
 	draw_grid(minimap_img, data);
 	draw_player(minimap_img, data);
-	draw_3d_top(img_3d);
-	draw_3d_bottom(img_3d);
+//	draw_3d_top(img_3d);
+//	draw_3d_bottom(img_3d);
 	draw_rays(data);
 	wait_for_next_frame();
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img,
