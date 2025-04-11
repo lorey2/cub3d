@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 15:30:38 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 17:37:37 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
 
@@ -106,6 +107,16 @@ typedef struct s_dline
 	int				color;
 }				t_dline;
 
+typedef struct s_texture
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*floor;
+	char	*ceiling;
+}				t_texture;
+
 typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
@@ -129,6 +140,7 @@ typedef struct s_mlx_data
 	double			player_y;
 	double			angle;
 	char			**grid;
+	t_texture		*texture;
 	double			ray_ver;
 	double			ray_hor;
 	double			best;
@@ -162,6 +174,7 @@ typedef struct s_liney
 	double			offset;
 }				t_liney;
 
+
 //init_setp
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data);
@@ -180,6 +193,8 @@ void			draw_line(t_mlx_data *data, t_dline *l);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			err(char *str);
 void			safe_free(void **ptr);
+bool			ft_isspace(char c);
+char			*get_texture_value(char *line);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
