@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/10 16:13:38 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 05:34:30 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }				t_data;
 
 typedef struct s_key
@@ -106,6 +108,14 @@ typedef struct s_mlx_data
 {
 	t_data			*img_ptr;
 	t_data			*raycast;
+	t_data			*dirt;
+	t_data			*cobble;
+	t_data			*diam;
+	t_data			*wood;
+	t_data			*selected;
+	int				textu_x;
+	int				diff;
+	int				start;
 	struct timeval	last_frame_time;
 	t_key			*key;
 	t_dline			*l;
