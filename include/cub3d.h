@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 05:34:30 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 15:30:38 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define CUB3D_H
 
 # include "../mlx_linux/mlx.h"
+# include "../libft/include/libft.h"
 # include <stdbool.h>
 # include <bits/types/struct_timeval.h>
 # include <X11/keysym.h>
 # include <sys/time.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
@@ -176,6 +178,8 @@ void			draw_grid(t_data *img, t_mlx_data *data);
 void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			err(char *str);
+void			safe_free(void **ptr);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
@@ -192,5 +196,8 @@ int				close_esc(int keysym, t_mlx_data *data);
 //calcul_rey
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
+//parsing
+void			load_map(char *map_file, t_mlx_data *data);
+void			check_map(char *map_file, t_mlx_data *data);
 
 #endif
