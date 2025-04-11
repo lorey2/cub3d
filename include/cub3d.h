@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 18:44:02 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 19:16:17 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,8 @@ typedef struct s_dline
 	int				color;
 }				t_dline;
 
-typedef struct s_mlx_data
+typedef struct s_img_ptr
 {
-	int				frame_nbr;
 	t_data			*img_ptr;
 	t_data			*raycast;
 	t_data			*dirt;
@@ -116,12 +115,22 @@ typedef struct s_mlx_data
 	t_data			*diam;
 	t_data			*wood;
 	t_data			*selected;
+	t_data			*frame1;
+	t_data			*frame2;
+	t_data			*frame3;
+	t_data			*frame4;
+}				t_img_ptr;
+
+typedef struct s_mlx_data
+{
+	int				frame_nbr;
 	int				textu_x;
 	int				diff;
 	int				start;
 	struct timeval	last_frame_time;
 	t_key			*key;
 	t_dline			*l;
+	t_img_ptr		*img_ptr;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;
@@ -165,7 +174,7 @@ typedef struct s_liney
 
 //init_setp
 void			init(t_mlx_data *data);
-void			init_img(t_mlx_data *data);
+void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
 //hook
 void			handle_key(t_mlx_data *data);

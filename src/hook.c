@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 18:23:36 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 19:09:21 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	display(t_mlx_data *data)
 	t_data					*minimap_img;
 	t_data					*img_3d;
 
-	minimap_img = data->img_ptr;
-	img_3d = data->raycast;
+	minimap_img = data->img_ptr->img_ptr;
+	img_3d = data->img_ptr->raycast;
 	handle_key(data);
 	change_angle(data);
 	draw_minimap_background(minimap_img);
@@ -73,7 +73,6 @@ int	display(t_mlx_data *data)
 	draw_3d_bottom(img_3d);
 	draw_rays(data);
 	wait_for_next_frame();
-
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img,
 		POS_3D_X, POS_3D_Y);
 	mlx_put_image_to_window(

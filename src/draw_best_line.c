@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 17:00:55 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 19:59:14 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,21 @@ void	set_ver_selected(t_mlx_data *data)
 	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
 		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
 	{
-		data->selected = data->diam;
+//		data->img_ptr->selected = data->img_ptr->frame4;
+		if (data->frame_nbr >= 0 && data->frame_nbr < FPS / 4)
+			data->img_ptr->selected = data->img_ptr->frame1;
+		else if (data->frame_nbr >= FPS / 4 && data->frame_nbr < 2 * FPS / 4)
+			data->img_ptr->selected = data->img_ptr->frame2;
+		else if (data->frame_nbr >= 2 * FPS / 4 && data->frame_nbr < 3 * FPS / 4)
+			data->img_ptr->selected = data->img_ptr->frame3;
+		else if (data->frame_nbr >= 3 * FPS / 4 && data->frame_nbr <= FPS)
+			data->img_ptr->selected = data->img_ptr->frame4;
+		else
+			data->img_ptr->selected = data->img_ptr->frame1;
 	}
 	else
 	{
-		data->selected = data->wood;
+		data->img_ptr->selected = data->img_ptr->wood;
 	}
 }
 
@@ -68,9 +78,9 @@ void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 	data->l->y2 = (int)(data->player_y + ver->offset);
 	set_ver_selected(data);
 	data->color = get_color(
-			data->player_y, data, ver->offset, data->selected);
+			data->player_y, data, ver->offset, data->img_ptr->selected);
 	data->l->color = get_color(
-			data->player_y, data, ver->offset, data->selected);
+			data->player_y, data, ver->offset, data->img_ptr->selected);
 	draw_line(data, data->l);
 	data->best = data->ray_ver;
 }
@@ -81,12 +91,12 @@ void	set_hor_selected(t_mlx_data *data)
 		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
 	{
 		if (data->frame_nbr > FPS / 2)
-			data->selected = data->dirt;
+			data->img_ptr->selected = data->img_ptr->dirt;
 		else
-			data->selected = data->wood;
+			data->img_ptr->selected = data->img_ptr->wood;
 	}
 	else
-		data->selected = data->cobble;
+		data->img_ptr->selected = data->img_ptr->cobble;
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
@@ -97,9 +107,9 @@ void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 	data->l->y2 = hor->delta_y;
 	set_hor_selected(data);
 	data->l->color = get_color(
-			data->player_x, data, hor->offset, data->selected);
+			data->player_x, data, hor->offset, data->img_ptr->selected);
 	data->color = get_color(
-			data->player_x, data, hor->offset, data->selected);
+			data->player_x, data, hor->offset, data->img_ptr->selected);
 	draw_line(data, data->l);
 	data->best = data->ray_hor;
 }

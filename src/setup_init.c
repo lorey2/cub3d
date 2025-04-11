@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 16:42:51 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 19:52:49 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ void	init(t_mlx_data *data)
 	data->key->d = false;
 	data->key->q = false;
 	data->key->e = false;
-	data->raycast = malloc(sizeof(t_data));
-	data->img_ptr = malloc(sizeof(t_data));
-	data->dirt = malloc(sizeof(t_data));
-	data->cobble = malloc(sizeof(t_data));
-	data->diam = malloc(sizeof(t_data));
-	data->wood = malloc(sizeof(t_data));
+	data->img_ptr = malloc(sizeof(t_img_ptr));
+	data->img_ptr->raycast = malloc(sizeof(t_data));
+	data->img_ptr->img_ptr = malloc(sizeof(t_data));
+	data->img_ptr->dirt = malloc(sizeof(t_data));
+	data->img_ptr->cobble = malloc(sizeof(t_data));
+	data->img_ptr->diam = malloc(sizeof(t_data));
+	data->img_ptr->wood = malloc(sizeof(t_data));
+	data->img_ptr->frame1 = malloc(sizeof(t_data));
+	data->img_ptr->frame2 = malloc(sizeof(t_data));
+	data->img_ptr->frame3 = malloc(sizeof(t_data));
+	data->img_ptr->frame4 = malloc(sizeof(t_data));
 	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
@@ -41,50 +46,78 @@ void	init(t_mlx_data *data)
 		(data->mlx_ptr, 1500, 1000, "SO_LONG");
 }
 
-void	init_texture(t_mlx_data *data)
+void	init_texture(t_img_ptr *img, t_mlx_data *data)
 {
-	data->dirt->height = 512;
-	data->dirt->width = 512;
-	data->cobble->height = 512;
-	data->cobble->width = 512;
-	data->diam->height = 1920;
-	data->diam->width = 1920;
-	data->wood->width = 1280;
-	data->wood->height = 1280;
-	data->dirt->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/dirt.xpm",
-			&data->dirt->width, &data->dirt->height);
-	data->dirt->addr = mlx_get_data_addr(data->dirt->img,
-			&data->dirt->bits_per_pixel, &data->dirt->line_length,
-			&data->dirt->endian);
-	data->cobble->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/cobble.xpm",
-			&data->cobble->width, &data->cobble->height);
-	data->cobble->addr = mlx_get_data_addr(data->cobble->img,
-			&data->cobble->bits_per_pixel, &data->cobble->line_length,
-			&data->cobble->endian);
-	data->diam->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/diam.xpm",
-			&data->diam->width, &data->diam->height);
-	data->diam->addr = mlx_get_data_addr(data->diam->img,
-			&data->diam->bits_per_pixel, &data->diam->line_length,
-			&data->diam->endian);
-	data->wood->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/wood.xpm",
-			&data->wood->width, &data->wood->height);
-	data->wood->addr = mlx_get_data_addr(data->wood->img,
-			&data->wood->bits_per_pixel, &data->wood->line_length,
-			&data->wood->endian);
+	img->dirt->height = 512;
+	img->dirt->width = 512;
+	img->cobble->height = 512;
+	img->cobble->width = 512;
+	img->diam->height = 1920;
+	img->diam->width = 1920;
+	img->wood->width = 1280;
+	img->wood->height = 1280;
+	img->frame1->width = 64;
+	img->frame1->height = 64;
+	img->frame2->width = 64;
+	img->frame2->height = 64;
+	img->frame3->width = 64;
+	img->frame3->height = 64;
+	img->frame4->width = 64;
+	img->frame4->height = 64;
+	img->dirt->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/dirt.xpm",
+			&img->dirt->width, &img->dirt->height);
+	img->dirt->addr = mlx_get_data_addr(img->dirt->img,
+			&img->dirt->bits_per_pixel, &img->dirt->line_length,
+			&img->dirt->endian);
+	img->cobble->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/cobble.xpm",
+			&img->cobble->width, &img->cobble->height);
+	img->cobble->addr = mlx_get_data_addr(img->cobble->img,
+			&img->cobble->bits_per_pixel, &img->cobble->line_length,
+			&img->cobble->endian);
+	img->diam->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/diam.xpm",
+			&img->diam->width, &img->diam->height);
+	img->diam->addr = mlx_get_data_addr(img->diam->img,
+			&img->diam->bits_per_pixel, &img->diam->line_length,
+			&img->diam->endian);
+	img->wood->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/wood.xpm",
+			&img->wood->width, &img->wood->height);
+	img->wood->addr = mlx_get_data_addr(img->wood->img,
+			&img->wood->bits_per_pixel, &img->wood->line_length,
+			&img->wood->endian);
+	img->frame1->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame1.xpm",
+			&img->frame1->width, &img->frame1->height);
+	img->frame1->addr = mlx_get_data_addr(img->frame1->img,
+			&img->frame1->bits_per_pixel, &img->frame1->line_length,
+			&img->frame1->endian);
+	img->frame2->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame2.xpm",
+			&img->frame2->width, &img->frame2->height);
+	img->frame2->addr = mlx_get_data_addr(img->frame2->img,
+			&img->frame2->bits_per_pixel, &img->frame2->line_length,
+			&img->frame2->endian);
+	img->frame3->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame3.xpm",
+			&img->frame3->width, &img->frame3->height);
+	img->frame3->addr = mlx_get_data_addr(img->frame3->img,
+			&img->frame3->bits_per_pixel, &img->frame3->line_length,
+			&img->frame3->endian);
+	img->frame4->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame4.xpm",
+			&img->frame4->width, &img->frame4->height);
+	img->frame4->addr = mlx_get_data_addr(img->frame4->img,
+			&img->frame4->bits_per_pixel, &img->frame4->line_length,
+			&img->frame4->endian);
 }
 
-void	init_img(t_mlx_data *data)
+void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
-	init_texture(data);
-	data->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
-	data->img_ptr->addr = mlx_get_data_addr(data->img_ptr->img,
-			&data->img_ptr->bits_per_pixel, &data->img_ptr->line_length,
-			&data->img_ptr->endian);
-	data->raycast->img = mlx_new_image(
+	init_texture(img, data);
+	img->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
+	img->img_ptr->addr = mlx_get_data_addr(img->img_ptr->img,
+			&img->img_ptr->bits_per_pixel, &img->img_ptr->line_length,
+			&img->img_ptr->endian);
+	img->raycast->img = mlx_new_image(
 			data->mlx_ptr, SIZE_3D_IMG_X, SIZE_3D_IMG_Y);
-	data->raycast->addr = mlx_get_data_addr(data->raycast->img,
-			&data->raycast->bits_per_pixel, &data->raycast->line_length,
-			&data->raycast->endian);
+	img->raycast->addr = mlx_get_data_addr(img->raycast->img,
+			&img->raycast->bits_per_pixel, &img->raycast->line_length,
+			&img->raycast->endian);
 }
 
 void	setup_grid(t_mlx_data *data)

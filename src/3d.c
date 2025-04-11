@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:41:56 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 05:28:08 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 19:43:42 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ int	color_y(t_mlx_data *data, int index, double proj_slice_height)
 	int		pixel_index;
 	double	ratio;
 
+	if (!data->img_ptr->selected)
+		return (0);
 	x = data->textu_x;
 	ratio = (double)(index - data->start) / proj_slice_height;
-	y = ratio * data->selected->height;
+	y = ratio * data->img_ptr->selected->height;
 	if (y < 0)
 		y = 0;
-	if (y >= data->selected->height)
-		y = data->selected->height - 1;
-	pixel_index = y * data->selected->line_length + x
-		* (data->selected->bits_per_pixel / 8);
-	color = *(int *)(data->selected->addr + pixel_index);
+	if (y >= data->img_ptr->selected->height)
+		y = data->img_ptr->selected->height - 1;
+	pixel_index = y * data->img_ptr->selected->line_length + x
+		* (data->img_ptr->selected->bits_per_pixel / 8);
+	color = *(int *)(data->img_ptr->selected->addr + pixel_index);
 	return (color);
 }
 
@@ -92,7 +94,7 @@ void	draw_3d(t_mlx_data *data, int ray_index)
 		while (draw_start_y < draw_end_y)
 		{
 			data->color = color_y(data, draw_start_y, proj_slice_height);
-			my_mlx_pixel_put(&(*data->raycast), ray_index, draw_start_y, data->color);
+			my_mlx_pixel_put(&(*data->img_ptr->raycast), ray_index, draw_start_y, data->color);
 			draw_start_y++;
 		}
 }
