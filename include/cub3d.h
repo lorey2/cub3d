@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 17:04:40 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 15:30:38 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			err(char *str);
+void			safe_free(void **ptr);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d

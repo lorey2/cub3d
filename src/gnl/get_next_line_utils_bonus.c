@@ -6,12 +6,12 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 11:12:39 by lorey             #+#    #+#             */
-/*   Updated: 2025/02/11 16:09:49 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 15:53:45 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "get_next_line_bonus.h"
-#include "minishell.h"
 
 int	ft_strchr_gnl(const char *s, int c)
 {

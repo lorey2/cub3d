@@ -6,11 +6,11 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 11:12:19 by lorey             #+#    #+#             */
-/*   Updated: 2025/03/26 20:51:55 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 15:28:56 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "cub3d.h"
 #include "get_next_line_bonus.h"
 
 static char	*handle_rest(char **rest)

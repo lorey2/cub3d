@@ -7,7 +7,8 @@ LDFLAGS = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -
 INCLUDE = include/
 MLX = $(MLX_DIR)/libmlx_Linux.a
 MLX_DIR = ./mlx_linux
-GNL_DIR = ./gnl
+GNL_DIR = src/gnl/
+MLX_TAR = minilibx-linux.tgz
 
 # LIBFT
 LIBC_DIR = ./libft
@@ -26,8 +27,8 @@ SRC_FILES = cub3d draw_utils hook setup_init utils draw_best_line 3d minimap exi
 GNL_FILES = get_next_line_bonus get_next_line_utils_bonus
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
-OBJ_GNL = $(addprefix $(OBJ_DIR)/gnl/, $(addsuffix .o, $(GNL_FILES)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES))) $(addprefix $(OBJ_DIR)/gnl/, $(addsuffix .o, $(GNL_FILES)))
+# OBJ_GNL = 
 
 # Default target
 all: $(NAME)
@@ -38,13 +39,19 @@ bonus: all
 $(LIBC):
 	@make -s -C $(LIBC_DIR) all
 
+$(MLX):
+	@wget -q https://cdn.intra.42.fr/document/document/31540/minilibx-linux.tgz
+	@tar xf minilibx-linux.tgz
+	@rm minilibx-linux.tgz
+	@mv minilibx-linux mlx_linux
+	@sed -i -E 's|^\t(\./configure.*)|\t@\1 > /dev/null 2>\&1|' mlx_linux/Makefile
+	@make -C $(MLX_DIR) all
+	@echo "$(GREEN)MLX combiled !$<$(DEF_COLOR)"
+
 # Linking the final executable
-$(NAME): $(LIBC) $(OBJ) $(MLX) $(OBJ_GNL)
+$(NAME): $(MLX) $(LIBC) $(OBJ)
 	@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)cub3d compiled!$(DEF_COLOR)"
-
-$(MLX):
-	@make -C $(MLX_DIR) all
 
 # Rule for creating object files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
@@ -61,7 +68,8 @@ $(OBJ_DIR)/gnl/%.o: $(GNL_DIR)%.c
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make -s -C $(LIBC_DIR) clean
-	@make -C $(MLX_DIR) clean
+	@[ -d "$(MLX_DIR)" ] && make -C $(MLX_DIR) clean || true
+	@rm -rf mlx_linux 2>/dev/null
 	@echo "$(CYAN)cub3d objet files cleaned!$(DEF_COLOR)"
 
 # Cleaning everything, including the executable

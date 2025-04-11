@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 16:52:08 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 16:00:43 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		err("You should provide only one argument");
-	check_map(av[1], &data);
+	// check_map(av[1], &data);
 	setup_grid(&data);
 	init(&data);
 	init_img(&data);

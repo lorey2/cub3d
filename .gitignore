@@ -49,3 +49,7 @@ cub3d
 ###############
 obj/
 libft/obj/
+
+# MLX #
+#######
+mlx_linux
