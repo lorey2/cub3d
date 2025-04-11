@@ -6,11 +6,12 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/08 20:34:33 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/11 05:28:27 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 void	draw_rays(t_mlx_data *data)
 {
@@ -22,10 +23,14 @@ void	draw_rays(t_mlx_data *data)
 	angle_bkp = data->angle;
 	angle_delta = (FOV / RAY_NUMBER) * 2 * M_PI / 360;
 	left_most_ray_angle = data->angle - ((FOV / 2) * ((2 * M_PI) / 360));
-	i = 0;
+	i = -1;
 	data->angle = left_most_ray_angle;
 	while (++i < RAY_NUMBER)
 	{
+		if (data->angle > 2 * M_PI)
+			data->angle -= 2 * M_PI;
+		if (data->angle < -2 * M_PI)
+			data->angle += 2 * M_PI;
 		draw_best_line(data);
 		draw_3d(data, i);
 		data->angle += angle_delta;
@@ -69,8 +74,9 @@ int	display(t_mlx_data *data)
 	draw_3d_bottom(img_3d);
 	draw_rays(data);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img, 500, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img,
+		POS_3D_X, POS_3D_Y);
 	mlx_put_image_to_window(
-		data->mlx_ptr, data->win_ptr, minimap_img->img, 0, 0);
+		data->mlx_ptr, data->win_ptr, minimap_img->img, POS_MAP_X, POS_MAP_Y);
 	return (0);
 }

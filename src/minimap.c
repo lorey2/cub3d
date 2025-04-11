@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/09 04:17:18 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/10 15:41:00 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	draw_minimap_background(t_data *img)
 	int	y;
 
 	x = -1;
-	while (++x < 500)
+	while (++x < SIZE_MAP_X)
 	{
 		y = -1;
-		while (++y < 500)
+		while (++y < SIZE_MAP_Y)
 			my_mlx_pixel_put(&(*img), x, y, RED);
 	}
 }
