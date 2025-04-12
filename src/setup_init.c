@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 19:52:49 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/12 16:25:23 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ void	init(t_mlx_data *data)
 	data->img_ptr = malloc(sizeof(t_img_ptr));
 	data->img_ptr->raycast = malloc(sizeof(t_data));
 	data->img_ptr->img_ptr = malloc(sizeof(t_data));
-	data->img_ptr->dirt = malloc(sizeof(t_data));
-	data->img_ptr->cobble = malloc(sizeof(t_data));
-	data->img_ptr->diam = malloc(sizeof(t_data));
-	data->img_ptr->wood = malloc(sizeof(t_data));
-	data->img_ptr->frame1 = malloc(sizeof(t_data));
-	data->img_ptr->frame2 = malloc(sizeof(t_data));
-	data->img_ptr->frame3 = malloc(sizeof(t_data));
-	data->img_ptr->frame4 = malloc(sizeof(t_data));
 	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
@@ -46,64 +38,90 @@ void	init(t_mlx_data *data)
 		(data->mlx_ptr, 1500, 1000, "SO_LONG");
 }
 
-void	init_texture(t_img_ptr *img, t_mlx_data *data)
+void	init_a_texture(t_mlx_data *data, t_data **img, char *path)
 {
+	(*img)->img = mlx_xpm_file_to_image(data->mlx_ptr, path,
+			&(*img)->width, &(*img)->height);
+	(*img)->addr = mlx_get_data_addr((*img)->img,
+			&(*img)->bits_per_pixel, &(*img)->line_length,
+			&(*img)->endian);
+}
+
+void	init_minecraft_texture(t_img_ptr *img, t_mlx_data *data)
+{
+	img->dirt = malloc(sizeof(t_data));
 	img->dirt->height = 512;
 	img->dirt->width = 512;
+	init_a_texture(data, &img->dirt, "./img/dirt.xpm");
+	img->cobble = malloc(sizeof(t_data));
 	img->cobble->height = 512;
 	img->cobble->width = 512;
+	init_a_texture(data, &img->cobble, "./img/cobble.xpm");
+	img->diam = malloc(sizeof(t_data));
 	img->diam->height = 1920;
 	img->diam->width = 1920;
+	init_a_texture(data, &img->diam, "./img/diam.xpm");
+	img->wood = malloc(sizeof(t_data));
 	img->wood->width = 1280;
 	img->wood->height = 1280;
+	init_a_texture(data, &img->wood, "./img/wood.xpm");
+}
+
+void	init_sky_texture(t_img_ptr *img, t_mlx_data *data)
+{
+	img->skyframe1 = malloc(sizeof(t_data));
+	img->skyframe1->width = 64;
+	img->skyframe1->height = 64;
+	init_a_texture(data, &img->skyframe1, "./img/skyframe1.xpm");
+	img->skyframe2 = malloc(sizeof(t_data));
+	img->skyframe2->width = 64;
+	img->skyframe2->height = 64;
+	init_a_texture(data, &img->skyframe2, "./img/skyframe2.xpm");
+	img->skyframe3 = malloc(sizeof(t_data));
+	img->skyframe3->width = 64;
+	img->skyframe3->height = 64;
+	init_a_texture(data, &img->skyframe3, "./img/skyframe3.xpm");
+	img->skyframe4 = malloc(sizeof(t_data));
+	img->skyframe4->width = 64;
+	img->skyframe4->height = 64;
+	init_a_texture(data, &img->skyframe4, "./img/skyframe4.xpm");
+	img->skyframe5 = malloc(sizeof(t_data));
+	img->skyframe5->width = 64;
+	img->skyframe5->height = 64;
+	init_a_texture(data, &img->skyframe5, "./img/skyframe5.xpm");
+	img->skyframe6 = malloc(sizeof(t_data));
+	img->skyframe6->width = 64;
+	img->skyframe6->height = 64;
+	init_a_texture(data, &img->skyframe6, "./img/skyframe6.xpm");
+	img->skyframe7 = malloc(sizeof(t_data));
+	img->skyframe7->width = 64;
+	img->skyframe7->height = 64;
+	init_a_texture(data, &img->skyframe7, "./img/skyframe7.xpm");
+	img->skyframe8 = malloc(sizeof(t_data));
+	img->skyframe8->width = 64;
+	img->skyframe8->height = 64;
+	init_a_texture(data, &img->skyframe8, "./img/skyframe8.xpm");
+}
+void	init_texture(t_img_ptr *img, t_mlx_data *data)
+{
+	init_minecraft_texture(img, data);
+	init_sky_texture(img, data);
+	img->frame1 = malloc(sizeof(t_data));
 	img->frame1->width = 64;
 	img->frame1->height = 64;
+	init_a_texture(data, &img->frame1, "./img/frame1.xpm");
+	img->frame2 = malloc(sizeof(t_data));
 	img->frame2->width = 64;
 	img->frame2->height = 64;
+	init_a_texture(data, &img->frame2, "./img/frame2.xpm");
+	img->frame3 = malloc(sizeof(t_data));
 	img->frame3->width = 64;
 	img->frame3->height = 64;
+	init_a_texture(data, &img->frame3, "./img/frame3.xpm");
+	img->frame4 = malloc(sizeof(t_data));
 	img->frame4->width = 64;
 	img->frame4->height = 64;
-	img->dirt->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/dirt.xpm",
-			&img->dirt->width, &img->dirt->height);
-	img->dirt->addr = mlx_get_data_addr(img->dirt->img,
-			&img->dirt->bits_per_pixel, &img->dirt->line_length,
-			&img->dirt->endian);
-	img->cobble->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/cobble.xpm",
-			&img->cobble->width, &img->cobble->height);
-	img->cobble->addr = mlx_get_data_addr(img->cobble->img,
-			&img->cobble->bits_per_pixel, &img->cobble->line_length,
-			&img->cobble->endian);
-	img->diam->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/diam.xpm",
-			&img->diam->width, &img->diam->height);
-	img->diam->addr = mlx_get_data_addr(img->diam->img,
-			&img->diam->bits_per_pixel, &img->diam->line_length,
-			&img->diam->endian);
-	img->wood->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/wood.xpm",
-			&img->wood->width, &img->wood->height);
-	img->wood->addr = mlx_get_data_addr(img->wood->img,
-			&img->wood->bits_per_pixel, &img->wood->line_length,
-			&img->wood->endian);
-	img->frame1->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame1.xpm",
-			&img->frame1->width, &img->frame1->height);
-	img->frame1->addr = mlx_get_data_addr(img->frame1->img,
-			&img->frame1->bits_per_pixel, &img->frame1->line_length,
-			&img->frame1->endian);
-	img->frame2->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame2.xpm",
-			&img->frame2->width, &img->frame2->height);
-	img->frame2->addr = mlx_get_data_addr(img->frame2->img,
-			&img->frame2->bits_per_pixel, &img->frame2->line_length,
-			&img->frame2->endian);
-	img->frame3->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame3.xpm",
-			&img->frame3->width, &img->frame3->height);
-	img->frame3->addr = mlx_get_data_addr(img->frame3->img,
-			&img->frame3->bits_per_pixel, &img->frame3->line_length,
-			&img->frame3->endian);
-	img->frame4->img = mlx_xpm_file_to_image(data->mlx_ptr, "./img/frame4.xpm",
-			&img->frame4->width, &img->frame4->height);
-	img->frame4->addr = mlx_get_data_addr(img->frame4->img,
-			&img->frame4->bits_per_pixel, &img->frame4->line_length,
-			&img->frame4->endian);
+	init_a_texture(data, &img->frame4, "./img/frame4.xpm");
 }
 
 void	init_img(t_mlx_data *data, t_img_ptr *img)

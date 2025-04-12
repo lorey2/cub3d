@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 19:16:17 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/12 16:18:34 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,14 @@ typedef struct s_img_ptr
 	t_data			*frame2;
 	t_data			*frame3;
 	t_data			*frame4;
+	t_data			*skyframe1;
+	t_data			*skyframe2;
+	t_data			*skyframe3;
+	t_data			*skyframe4;
+	t_data			*skyframe5;
+	t_data			*skyframe6;
+	t_data			*skyframe7;
+	t_data			*skyframe8;
 }				t_img_ptr;
 
 typedef struct s_mlx_data

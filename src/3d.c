@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 18:41:56 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/12 01:58:03 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/12 16:41:32 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,9 +341,28 @@ static void draw_ceiling_slice(t_mlx_data *data, int x, int ds_clamped, \
     int      tex_x;        // Texture x-coordinate
     int      tex_y;        // Texture y-coordinate
     int      ceil_color;
+	t_data	 *selected;
 
+	if (data->frame_nbr >= 0 && data->frame_nbr < FPS / 8)
+		selected = data->img_ptr->skyframe1;
+	else if (data->frame_nbr >= FPS / 8 && data->frame_nbr < 2 * FPS / 8)
+		selected = data->img_ptr->skyframe2;
+	else if (data->frame_nbr >= 2 * FPS / 8 && data->frame_nbr < 3 * FPS / 8)
+		selected = data->img_ptr->skyframe3;
+	else if (data->frame_nbr >= 3 * FPS / 8 && data->frame_nbr < 4 * FPS / 8)
+		selected = data->img_ptr->skyframe4;
+	else if (data->frame_nbr >= 4 * FPS / 8 && data->frame_nbr < 5 * FPS / 8)
+		selected = data->img_ptr->skyframe5;
+	else if (data->frame_nbr >= 5 * FPS / 8 && data->frame_nbr < 6 * FPS / 8)
+		selected = data->img_ptr->skyframe6;
+	else if (data->frame_nbr >= 6 * FPS / 8 && data->frame_nbr < 7 * FPS / 8)
+		selected = data->img_ptr->skyframe7;
+	else if (data->frame_nbr >= 7 * FPS / 8 && data->frame_nbr <= FPS)
+		selected = data->img_ptr->skyframe8;
+	else
+		selected = data->img_ptr->dirt;
     // Check if ceiling texture is valid
-    if (!data->img_ptr->diam || !data->img_ptr->diam->addr)
+    if (!selected || !selected->addr)
         return; // Or draw solid color fallback
 
     y = 0; // Start drawing from the top of the screen
@@ -359,12 +378,12 @@ static void draw_ceiling_slice(t_mlx_data *data, int x, int ds_clamped, \
 
         // Calculate texture coordinates (with tiling)
         tex_x = (int)((ceil_x / TILE_SIZE - floor(ceil_x / TILE_SIZE)) * \
-                      data->img_ptr->diam->width);
+                      selected->width);
         tex_y = (int)((ceil_y / TILE_SIZE - floor(ceil_y / TILE_SIZE)) * \
-                      data->img_ptr->diam->height);
+                      selected->height);
 
         // Get the color from the ceiling texture
-        ceil_color = get_texture_pixel(data->img_ptr->diam, tex_x, tex_y);
+        ceil_color = get_texture_pixel(selected, tex_x, tex_y);
 
         // Draw the ceiling pixel
         my_mlx_pixel_put(data->img_ptr->raycast, x, y, ceil_color);
