@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 19:56:02 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 21:02:34 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ void	set_ver_selected(t_mlx_data *data)
 	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
 		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
 	{
-		if (data->frame_nbr >= 0 && data->frame_nbr < FPS / 4)
+		data->img_ptr->selected = data->img_arr->west_img[(int)(((long long)data->frame_nbr * data->img_arr->west_img[0]->frame_nbr) / FPS)];	
+/* 		if (data->frame_nbr >= 0 && data->frame_nbr < FPS / 4)
 			data->img_ptr->selected = data->img_ptr->frame1;
 		else if (data->frame_nbr >= FPS / 4 && data->frame_nbr < 2 * FPS / 4)
 			data->img_ptr->selected = data->img_ptr->frame2;
 		else if (data->frame_nbr >= 2 * FPS / 4 && data->frame_nbr < 3 * FPS / 4)
 			data->img_ptr->selected = data->img_ptr->frame3;
 		else
-			data->img_ptr->selected = data->img_ptr->frame4;
+			data->img_ptr->selected = data->img_ptr->frame4; */
 	}
 	else
 	{

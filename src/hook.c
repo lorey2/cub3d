@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 19:55:09 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 21:04:43 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	display(t_mlx_data *data)
 	mlx_put_image_to_window(
 		data->mlx_ptr, data->win_ptr, minimap_img->img, POS_MAP_X, POS_MAP_Y);
 	data->frame_nbr++;
-	if (data->frame_nbr > FPS)
+	if (data->frame_nbr == FPS)
 		data->frame_nbr -= FPS;
 	return (0);
 }
