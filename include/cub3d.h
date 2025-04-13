@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 19:55:29 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 20:30:49 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_data
 	int		endian;
 	int		width;
 	int		height;
+	int		frame_nbr;
 }				t_data;
 
 typedef struct s_tex_name

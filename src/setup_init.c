@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 20:05:45 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 20:42:24 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	set_name(t_tex_name *text_arr)
 	text_arr->west_tex_width = 64;
 }
 
-void	set_img(t_tex_name *text_arr, t_tex_img_array *img_arr, t_mlx_data *data)
+void	set_img(t_tex_name *text_arr, t_data ***img, t_mlx_data *data, int tex_size)
 {
 	int	nbr_frame;
 	int	i;
@@ -82,24 +82,24 @@ void	set_img(t_tex_name *text_arr, t_tex_img_array *img_arr, t_mlx_data *data)
 	nbr_frame = -1;
 	while (text_arr->ceiling_tex_name[++nbr_frame])
 		;
-	img_arr->ceiling_img = malloc(sizeof(t_data *) * (nbr_frame + 1));
+	*img = malloc(sizeof(t_data *) * (nbr_frame + 1));
 	i = -1;
 	while (++i < nbr_frame)
 	{
-		img_arr->ceiling_img[i] = malloc(sizeof(t_data));
-		img_arr->ceiling_img[i]->width = text_arr->ceiling_tex_width;
-		img_arr->ceiling_img[i]->height = text_arr->ceiling_tex_height;
-		img_arr->ceiling_img[i]->img = mlx_xpm_file_to_image(data->mlx_ptr,
+		(*img)[i] = malloc(sizeof(t_data));
+		(*img)[i]->width = tex_size;
+		(*img)[i]->height = tex_size;
+		(*img)[i]->img = mlx_xpm_file_to_image(data->mlx_ptr,
 				text_arr->ceiling_tex_name[i],
-				&img_arr->ceiling_img[i]->width,
-				&img_arr->ceiling_img[i]->height);
-		img_arr->ceiling_img[i]->addr = mlx_get_data_addr(img_arr->ceiling_img[i]->img,
-				&img_arr->ceiling_img[i]->bits_per_pixel,
-				&img_arr->ceiling_img[i]->line_length,
-				&img_arr->ceiling_img[i]->endian);
+				&(*img)[i]->width,
+				&(*img)[i]->height);
+		(*img)[i]->addr = mlx_get_data_addr((*img)[i]->img,
+				&(*img)[i]->bits_per_pixel,
+				&(*img)[i]->line_length,
+				&(*img)[i]->endian);
 	}
-	img_arr->nbr_ceiling_frame = nbr_frame;
-	img_arr->ceiling_img[i] = NULL;
+	(*img)[0]->frame_nbr = nbr_frame;
+	(*img)[i] = NULL;
 }
 
 void	init_minecraft_texture(t_img_ptr *img, t_mlx_data *data)
@@ -146,7 +146,7 @@ void	init_texture(t_img_ptr *img, t_mlx_data *data)
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	set_name(data->text_arr);
-	set_img(data->text_arr, data->img_arr, data);
+	set_img(data->text_arr, &data->img_arr->ceiling_img, data, 64);
 	init_texture(img, data);
 	img->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
 	img->img_ptr->addr = mlx_get_data_addr(img->img_ptr->img,

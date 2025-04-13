@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:37:19 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 19:54:17 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 20:46:47 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,11 +291,7 @@ static void	draw_ceiling_slice(t_mlx_data *data, int x, int ds_clamped, \
 	int		ceil_color;
 	t_data	*selected;
 
-	int frame_index = ((long long)data->frame_nbr * data->img_arr->nbr_ceiling_frame) / FPS;
-	if (frame_index >= data->img_arr->nbr_ceiling_frame)
-		frame_index = data->img_arr->nbr_ceiling_frame - 1;
-	if (frame_index < 0)
-		frame_index = 0;
+	int frame_index = ((long long)data->frame_nbr * data->img_arr->ceiling_img[0]->frame_nbr) / FPS;
 	selected = data->img_arr->ceiling_img[frame_index];
 	if (!selected || !selected->addr)
 		return ;
