@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
+/*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 13:45:15 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/12 16:25:23 by lorey            ###   LAUSANNE.ch       */
+/*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
+/*   Updated: 2025/04/13 20:05:45 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	init(t_mlx_data *data)
 	data->key->d = false;
 	data->key->q = false;
 	data->key->e = false;
+	data->img_arr = malloc(sizeof(t_tex_img_array));
+	data->text_arr = malloc(sizeof(t_tex_name));
 	data->img_ptr = malloc(sizeof(t_img_ptr));
 	data->img_ptr->raycast = malloc(sizeof(t_data));
 	data->img_ptr->img_ptr = malloc(sizeof(t_data));
@@ -47,6 +49,59 @@ void	init_a_texture(t_mlx_data *data, t_data **img, char *path)
 			&(*img)->endian);
 }
 
+void	set_name(t_tex_name *text_arr)
+{
+	text_arr->ceiling_tex_name = malloc(sizeof(char *) * 9);
+	text_arr->ceiling_tex_name[0] = ft_strdup("./img/skyframe1.xpm");
+	text_arr->ceiling_tex_name[1] = ft_strdup("./img/skyframe2.xpm");
+	text_arr->ceiling_tex_name[2] = ft_strdup("./img/skyframe3.xpm");
+	text_arr->ceiling_tex_name[3] = ft_strdup("./img/skyframe4.xpm");
+	text_arr->ceiling_tex_name[4] = ft_strdup("./img/skyframe5.xpm");
+	text_arr->ceiling_tex_name[5] = ft_strdup("./img/skyframe6.xpm");
+	text_arr->ceiling_tex_name[6] = ft_strdup("./img/skyframe7.xpm");
+	text_arr->ceiling_tex_name[7] = ft_strdup("./img/skyframe8.xpm");
+	text_arr->ceiling_tex_name[8] = NULL;
+	text_arr->ceiling_tex_height = 64;
+	text_arr->ceiling_tex_width = 64;
+	text_arr->west_tex_name = malloc(sizeof(char *) * 5);
+	text_arr->west_tex_name[0] = ft_strdup("./img/frame1");
+	text_arr->west_tex_name[1] = ft_strdup("./img/frame2");
+	text_arr->west_tex_name[2] = ft_strdup("./img/frame3");
+	text_arr->west_tex_name[3] = ft_strdup("./img/frame4");
+	text_arr->west_tex_name[3] = NULL;
+	text_arr->west_tex_height = 64;
+	text_arr->west_tex_width = 64;
+}
+
+void	set_img(t_tex_name *text_arr, t_tex_img_array *img_arr, t_mlx_data *data)
+{
+	int	nbr_frame;
+	int	i;
+
+	i = -1;
+	nbr_frame = -1;
+	while (text_arr->ceiling_tex_name[++nbr_frame])
+		;
+	img_arr->ceiling_img = malloc(sizeof(t_data *) * (nbr_frame + 1));
+	i = -1;
+	while (++i < nbr_frame)
+	{
+		img_arr->ceiling_img[i] = malloc(sizeof(t_data));
+		img_arr->ceiling_img[i]->width = text_arr->ceiling_tex_width;
+		img_arr->ceiling_img[i]->height = text_arr->ceiling_tex_height;
+		img_arr->ceiling_img[i]->img = mlx_xpm_file_to_image(data->mlx_ptr,
+				text_arr->ceiling_tex_name[i],
+				&img_arr->ceiling_img[i]->width,
+				&img_arr->ceiling_img[i]->height);
+		img_arr->ceiling_img[i]->addr = mlx_get_data_addr(img_arr->ceiling_img[i]->img,
+				&img_arr->ceiling_img[i]->bits_per_pixel,
+				&img_arr->ceiling_img[i]->line_length,
+				&img_arr->ceiling_img[i]->endian);
+	}
+	img_arr->nbr_ceiling_frame = nbr_frame;
+	img_arr->ceiling_img[i] = NULL;
+}
+
 void	init_minecraft_texture(t_img_ptr *img, t_mlx_data *data)
 {
 	img->dirt = malloc(sizeof(t_data));
@@ -67,45 +122,9 @@ void	init_minecraft_texture(t_img_ptr *img, t_mlx_data *data)
 	init_a_texture(data, &img->wood, "./img/wood.xpm");
 }
 
-void	init_sky_texture(t_img_ptr *img, t_mlx_data *data)
-{
-	img->skyframe1 = malloc(sizeof(t_data));
-	img->skyframe1->width = 64;
-	img->skyframe1->height = 64;
-	init_a_texture(data, &img->skyframe1, "./img/skyframe1.xpm");
-	img->skyframe2 = malloc(sizeof(t_data));
-	img->skyframe2->width = 64;
-	img->skyframe2->height = 64;
-	init_a_texture(data, &img->skyframe2, "./img/skyframe2.xpm");
-	img->skyframe3 = malloc(sizeof(t_data));
-	img->skyframe3->width = 64;
-	img->skyframe3->height = 64;
-	init_a_texture(data, &img->skyframe3, "./img/skyframe3.xpm");
-	img->skyframe4 = malloc(sizeof(t_data));
-	img->skyframe4->width = 64;
-	img->skyframe4->height = 64;
-	init_a_texture(data, &img->skyframe4, "./img/skyframe4.xpm");
-	img->skyframe5 = malloc(sizeof(t_data));
-	img->skyframe5->width = 64;
-	img->skyframe5->height = 64;
-	init_a_texture(data, &img->skyframe5, "./img/skyframe5.xpm");
-	img->skyframe6 = malloc(sizeof(t_data));
-	img->skyframe6->width = 64;
-	img->skyframe6->height = 64;
-	init_a_texture(data, &img->skyframe6, "./img/skyframe6.xpm");
-	img->skyframe7 = malloc(sizeof(t_data));
-	img->skyframe7->width = 64;
-	img->skyframe7->height = 64;
-	init_a_texture(data, &img->skyframe7, "./img/skyframe7.xpm");
-	img->skyframe8 = malloc(sizeof(t_data));
-	img->skyframe8->width = 64;
-	img->skyframe8->height = 64;
-	init_a_texture(data, &img->skyframe8, "./img/skyframe8.xpm");
-}
 void	init_texture(t_img_ptr *img, t_mlx_data *data)
 {
 	init_minecraft_texture(img, data);
-	init_sky_texture(img, data);
 	img->frame1 = malloc(sizeof(t_data));
 	img->frame1->width = 64;
 	img->frame1->height = 64;
@@ -126,6 +145,8 @@ void	init_texture(t_img_ptr *img, t_mlx_data *data)
 
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
+	set_name(data->text_arr);
+	set_img(data->text_arr, data->img_arr, data);
 	init_texture(img, data);
 	img->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
 	img->img_ptr->addr = mlx_get_data_addr(img->img_ptr->img,

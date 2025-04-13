@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/12 16:18:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 19:55:29 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,44 @@ typedef struct s_data
 	int		height;
 }				t_data;
 
+typedef struct s_tex_name
+{
+	char	**north_tex_name;
+	int		nort_tex_width;
+	int		north_tex_height;
+	char	**south_tex_name;
+	int		south_tex_width;
+	int		south_tex_height;
+	char	**west_tex_name;
+	int		west_tex_width;
+	int		west_tex_height;
+	char	**east_tex_name;
+	int		east_tex_width;
+	int		east_tex_height;
+	char	**floor_tex_name;
+	int		floor_tex_width;
+	int		floor_tex_height;
+	char	**ceiling_tex_name;
+	int		ceiling_tex_width;
+	int		ceiling_tex_height;
+}				t_tex_name;
+
+typedef struct s_tex_img_array
+{
+	t_data	**north_img;
+	int		north_nbr_frame;
+	t_data	**south_img;
+	int		south_nbr_frame;
+	t_data	**west_img;
+	int		west_nbr_frame;
+	t_data	**east_img;
+	int		east_nbr_frame;
+	t_data	**floor_img;
+	int		floor_nbr_frame;
+	t_data	**ceiling_img;
+	int		nbr_ceiling_frame;
+}				t_tex_img_array;
+
 typedef struct s_key
 {
 	bool	w;
@@ -136,6 +174,8 @@ typedef struct s_mlx_data
 	int				diff;
 	int				start;
 	struct timeval	last_frame_time;
+	t_tex_img_array	*img_arr;
+	t_tex_name		*text_arr;
 	t_key			*key;
 	t_dline			*l;
 	t_img_ptr		*img_ptr;
@@ -201,8 +241,6 @@ void			safe_free(void **ptr);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
-void			draw_3d_top(t_data *img_3d);
-void			draw_3d_bottom(t_data *img_3d);
 void			draw_3d(t_mlx_data *data, int ray);
 //minimap
 void			draw_minimap_background(t_data *img);

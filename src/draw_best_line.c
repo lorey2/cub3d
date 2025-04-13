@@ -6,14 +6,14 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/12 15:34:31 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 19:56:02 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
 
-int get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
+int	get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
 {
 	int		x;
 	int		y;
