@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 04:08:04 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 15:15:00 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,34 @@
 # include <stdio.h>
 # include <string.h>
 
-# define RED      0x00FF0000  // Red: R=255, G=0, B=0
-# define GREEN    0x0000FF00  // Green: R=0, G=255, B=0
-# define BLUE     0x000000FF  // Blue: R=0, G=0, B=255
-# define WHITE    0x00FFFFFF  // White: R=255, G=255, B=255
-# define BLACK    0x00000000  // Black: R=0, G=0, B=0
-# define YELLOW   0x00FFFF00  // Yellow: R=255, G=255, B=0
-# define CYAN     0x0000FFFF  // Cyan: R=0, G=255, B=255
-# define MAGENTA  0x00FF00FF  // Magenta: R=255, G=0, B=255
-# define GRAY     0x00808080  // Gray: R=128, G=128, B=128
+# define RED          0x00FF0000  // Red: R=255, G=0, B=0
+# define GREEN        0x0000FF00  // Green: R=0, G=255, B=0
+# define BLUE         0x000000FF  // Blue: R=0, G=0, B=255
+# define WHITE        0x00FFFFFF  // White: R=255, G=255, B=255
+# define BLACK        0x00000000  // Black: R=0, G=0, B=0
+# define YELLOW       0x00FFFF00  // Yellow: R=255, G=255, B=0
+# define CYAN         0x0000FFFF  // Cyan: R=0, G=255, B=255
+# define MAGENTA      0x00FF00FF  // Magenta: R=255, G=0, B=255
+# define GRAY         0x00808080  // Gray: R=128, G=128, B=128
+# define DARK_GRAY    0x00404040  // Gray: R=64, G=64, B=64
+# define BROWN        0x00A52A2A  // Brown: R=165, G=42, B=42
+# define SADDLE_BROWN 0x008B4513 // R=139, G=69, B=19
+# define SIENNA       0x00A0522D // R=160, G=82, B=45
+# define MAROON       0x00800000 // R=128, G=0, B=0
+# define ORANGE       0x00FFA500  // Orange: R=255, G=165, B=0
+# define PURPLE       0x00800080  // Purple: R=128, G=0, B=128
+# define PINK         0x00FFC0CB  // Pink: R=255, G=192, B=203
+# define LIME         0x0000FF00  // Lime: R=0, G=255, B=0  (Note: Same as your GREEN definition)
+# define TEAL         0x00008080  // Teal: R=0, G=128, B=128
+# define OLIVE        0x00808000  // Olive: R=128, G=128, B=0
+# define NAVY         0x00000080  // Navy: R=0, G=0, B=128
+# define SILVER       0x00C0C0C0  // Silver: R=192, G=192, B=192 (Lighter than GRAY)
+# define GOLD         0x00FFD700  // Gold: R=255, G=215, B=0
+# define SKYBLUE      0x0087CEEB  // Sky Blue: R=135, G=206, B=235
+# define VIOLET       0x00EE82EE  // Violet: R=238, G=130, B=238
+# define DARKGREEN    0x00006400  // Dark Green: R=0, G=100, B=0
+# define INDIGO       0x004B0082  // Indigo: R=75, G=0, B=130
+# define BEIGE        0x00F5F5DC  // Beige: R=245, G=245, B=220
 
 // TODO: WHEN I SAY WILL CHANGE I MEAN THAT WONT BE A DEFINE BUT A PARSED VALUE
 

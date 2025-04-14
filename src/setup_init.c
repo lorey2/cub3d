@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 04:10:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 15:07:51 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[3] = strdup("1000001001");
 	data->grid[4] = strdup("1000001001");
 	data->grid[5] = strdup("1010001001");
-	data->grid[6] = strdup("1000001001");
+	data->grid[6] = strdup("100000D001");
 	data->grid[7] = strdup("1000001001");
 	data->grid[8] = strdup("1000001001");
 	data->grid[9] = strdup("1111111111");
