@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 21:06:20 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 04:10:34 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init(t_mlx_data *data)
 	data->img_arr = malloc(sizeof(t_tex_img_array));
 	data->text_arr = malloc(sizeof(t_tex_name));
 	data->img_ptr = malloc(sizeof(t_img_ptr));
-	data->img_ptr->raycast = malloc(sizeof(t_data));
-	data->img_ptr->img_ptr = malloc(sizeof(t_data));
+	data->img_ptr->game = malloc(sizeof(t_data));
+	data->img_ptr->minimap = malloc(sizeof(t_data));
 	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
@@ -38,15 +38,6 @@ void	init(t_mlx_data *data)
 	data->size_y_window = 500;
 	data->win_ptr = mlx_new_window
 		(data->mlx_ptr, 1500, 1000, "SO_LONG");
-}
-
-void	init_a_texture(t_mlx_data *data, t_data **img, char *path)
-{
-	(*img)->img = mlx_xpm_file_to_image(data->mlx_ptr, path,
-			&(*img)->width, &(*img)->height);
-	(*img)->addr = mlx_get_data_addr((*img)->img,
-			&(*img)->bits_per_pixel, &(*img)->line_length,
-			&(*img)->endian);
 }
 
 void	set_name(t_tex_name *text_arr)
@@ -61,16 +52,24 @@ void	set_name(t_tex_name *text_arr)
 	text_arr->ceiling_tex_name[6] = ft_strdup("./img/skyframe7.xpm");
 	text_arr->ceiling_tex_name[7] = ft_strdup("./img/skyframe8.xpm");
 	text_arr->ceiling_tex_name[8] = NULL;
-	text_arr->ceiling_tex_height = 64;
-	text_arr->ceiling_tex_width = 64;
+	text_arr->floor_tex_name = malloc(sizeof(char *) * 2);
+	text_arr->floor_tex_name[0] = ft_strdup("./img/dirt.xpm");
+	text_arr->floor_tex_name[1] = NULL;
+	text_arr->north_tex_name = malloc(sizeof(char *) * 2);
+	text_arr->north_tex_name[0] = ft_strdup("./img/diam.xpm");
+	text_arr->north_tex_name[1] = NULL;
+	text_arr->south_tex_name = malloc(sizeof(char *) * 2);
+	text_arr->south_tex_name[0] = ft_strdup("./img/cobble.xpm");
+	text_arr->south_tex_name[1] = NULL;
+	text_arr->east_tex_name = malloc(sizeof(char *) * 2);
+	text_arr->east_tex_name[0] = ft_strdup("./img/wood.xpm");
+	text_arr->east_tex_name[1] = NULL;
 	text_arr->west_tex_name = malloc(sizeof(char *) * 5);
 	text_arr->west_tex_name[0] = ft_strdup("./img/frame1.xpm");
 	text_arr->west_tex_name[1] = ft_strdup("./img/frame2.xpm");
 	text_arr->west_tex_name[2] = ft_strdup("./img/frame3.xpm");
 	text_arr->west_tex_name[3] = ft_strdup("./img/frame4.xpm");
 	text_arr->west_tex_name[4] = NULL;
-	text_arr->west_tex_height = 64;
-	text_arr->west_tex_width = 64;
 }
 
 void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
@@ -102,41 +101,24 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
 	(*img)[i] = NULL;
 }
 
-void	init_texture(t_img_ptr *img, t_mlx_data *data)
-{
-	img->dirt = malloc(sizeof(t_data));
-	img->dirt->height = 512;
-	img->dirt->width = 512;
-	init_a_texture(data, &img->dirt, "./img/dirt.xpm");
-	img->cobble = malloc(sizeof(t_data));
-	img->cobble->height = 512;
-	img->cobble->width = 512;
-	init_a_texture(data, &img->cobble, "./img/cobble.xpm");
-	img->diam = malloc(sizeof(t_data));
-	img->diam->height = 1920;
-	img->diam->width = 1920;
-	init_a_texture(data, &img->diam, "./img/diam.xpm");
-	img->wood = malloc(sizeof(t_data));
-	img->wood->width = 1280;
-	img->wood->height = 1280;
-	init_a_texture(data, &img->wood, "./img/wood.xpm");
-}
-
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	set_name(data->text_arr);
 	set_img(data->text_arr->ceiling_tex_name, &data->img_arr->ceiling_img, data, 64);
 	set_img(data->text_arr->west_tex_name, &data->img_arr->west_img, data, 64);
-	init_texture(img, data);
-	img->img_ptr->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
-	img->img_ptr->addr = mlx_get_data_addr(img->img_ptr->img,
-			&img->img_ptr->bits_per_pixel, &img->img_ptr->line_length,
-			&img->img_ptr->endian);
-	img->raycast->img = mlx_new_image(
+	set_img(data->text_arr->floor_tex_name, &data->img_arr->floor_img, data, 1920);
+	set_img(data->text_arr->east_tex_name, &data->img_arr->east_img, data, 1280);
+	set_img(data->text_arr->north_tex_name, &data->img_arr->north_img, data, 1920);
+	set_img(data->text_arr->south_tex_name, &data->img_arr->south_img, data, 512);
+	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
+	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
+			&img->minimap->bits_per_pixel, &img->minimap->line_length,
+			&img->minimap->endian);
+	img->game->img = mlx_new_image(
 			data->mlx_ptr, SIZE_3D_IMG_X, SIZE_3D_IMG_Y);
-	img->raycast->addr = mlx_get_data_addr(img->raycast->img,
-			&img->raycast->bits_per_pixel, &img->raycast->line_length,
-			&img->raycast->endian);
+	img->game->addr = mlx_get_data_addr(img->game->img,
+			&img->game->bits_per_pixel, &img->game->line_length,
+			&img->game->endian);
 }
 
 void	setup_grid(t_mlx_data *data)

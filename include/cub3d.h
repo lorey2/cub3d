@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 20:30:49 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 04:08:04 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,39 +85,21 @@ typedef struct s_data
 typedef struct s_tex_name
 {
 	char	**north_tex_name;
-	int		nort_tex_width;
-	int		north_tex_height;
 	char	**south_tex_name;
-	int		south_tex_width;
-	int		south_tex_height;
 	char	**west_tex_name;
-	int		west_tex_width;
-	int		west_tex_height;
 	char	**east_tex_name;
-	int		east_tex_width;
-	int		east_tex_height;
 	char	**floor_tex_name;
-	int		floor_tex_width;
-	int		floor_tex_height;
 	char	**ceiling_tex_name;
-	int		ceiling_tex_width;
-	int		ceiling_tex_height;
 }				t_tex_name;
 
 typedef struct s_tex_img_array
 {
 	t_data	**north_img;
-	int		north_nbr_frame;
 	t_data	**south_img;
-	int		south_nbr_frame;
 	t_data	**west_img;
-	int		west_nbr_frame;
 	t_data	**east_img;
-	int		east_nbr_frame;
 	t_data	**floor_img;
-	int		floor_nbr_frame;
 	t_data	**ceiling_img;
-	int		nbr_ceiling_frame;
 }				t_tex_img_array;
 
 typedef struct s_key
@@ -147,25 +129,9 @@ typedef struct s_dline
 
 typedef struct s_img_ptr
 {
-	t_data			*img_ptr;
-	t_data			*raycast;
-	t_data			*dirt;
-	t_data			*cobble;
-	t_data			*diam;
-	t_data			*wood;
+	t_data			*minimap;
+	t_data			*game;
 	t_data			*selected;
-	t_data			*frame1;
-	t_data			*frame2;
-	t_data			*frame3;
-	t_data			*frame4;
-	t_data			*skyframe1;
-	t_data			*skyframe2;
-	t_data			*skyframe3;
-	t_data			*skyframe4;
-	t_data			*skyframe5;
-	t_data			*skyframe6;
-	t_data			*skyframe7;
-	t_data			*skyframe8;
 }				t_img_ptr;
 
 typedef struct s_mlx_data

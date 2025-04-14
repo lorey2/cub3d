@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 21:02:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 03:40:27 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,9 @@ void	set_ver_selected(t_mlx_data *data)
 {
 	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
 		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
-	{
 		data->img_ptr->selected = data->img_arr->west_img[(int)(((long long)data->frame_nbr * data->img_arr->west_img[0]->frame_nbr) / FPS)];	
-/* 		if (data->frame_nbr >= 0 && data->frame_nbr < FPS / 4)
-			data->img_ptr->selected = data->img_ptr->frame1;
-		else if (data->frame_nbr >= FPS / 4 && data->frame_nbr < 2 * FPS / 4)
-			data->img_ptr->selected = data->img_ptr->frame2;
-		else if (data->frame_nbr >= 2 * FPS / 4 && data->frame_nbr < 3 * FPS / 4)
-			data->img_ptr->selected = data->img_ptr->frame3;
-		else
-			data->img_ptr->selected = data->img_ptr->frame4; */
-	}
 	else
-	{
-		data->img_ptr->selected = data->img_ptr->wood;
-	}
+		data->img_ptr->selected = data->img_arr->east_img[(int)(((long long)data->frame_nbr * data->img_arr->east_img[0]->frame_nbr) / FPS)];	
 }
 
 void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
@@ -87,14 +75,9 @@ void	set_hor_selected(t_mlx_data *data)
 {
 	if ((data->angle > 0 && data->angle < M_PI)
 		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
-	{
-		if (data->frame_nbr > FPS / 2)
-			data->img_ptr->selected = data->img_ptr->dirt;
-		else
-			data->img_ptr->selected = data->img_ptr->wood;
-	}
+		data->img_ptr->selected = data->img_arr->north_img[(int)(((long long)data->frame_nbr * data->img_arr->north_img[0]->frame_nbr) / FPS)];	
 	else
-		data->img_ptr->selected = data->img_ptr->cobble;
+		data->img_ptr->selected = data->img_arr->south_img[(int)(((long long)data->frame_nbr * data->img_arr->south_img[0]->frame_nbr) / FPS)];	
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)

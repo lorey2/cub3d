@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 21:04:43 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 04:04:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	display(t_mlx_data *data)
 	t_data					*minimap_img;
 	t_data					*img_3d;
 
-	minimap_img = data->img_ptr->img_ptr;
-	img_3d = data->img_ptr->raycast;
+	minimap_img = data->img_ptr->minimap;
+	img_3d = data->img_ptr->game;
 	handle_key(data);
 	change_angle(data);
 	draw_minimap_background(minimap_img);

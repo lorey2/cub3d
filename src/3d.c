@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:37:19 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/13 20:46:47 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 04:05:53 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ static void	draw_wall_slice(t_mlx_data *data, int x, int ds_clamped, \
 	while (y < de_clamped)
 	{
 		color = color_y(data, y, p_height);
-		my_mlx_pixel_put(data->img_ptr->raycast, x, y, color);
+		my_mlx_pixel_put(data->img_ptr->game, x, y, color);
 		y++;
 	}
 }
@@ -242,8 +242,10 @@ static void	draw_floor_slice(t_mlx_data *data, int x, int de_clamped, \
 	int		tex_x;
 	int		tex_y;
 	int		floor_color;
+	t_data	*selected;
 
-	if (!data->img_ptr->dirt || !data->img_ptr->dirt->addr)
+	selected = data->img_arr->floor_img[(int)(((long long)data->frame_nbr * data->img_arr->floor_img[0]->frame_nbr) / FPS)];
+	if (!selected || !selected->addr)
 		return ;
 	y = de_clamped;
 	while (y < (int)SIZE_3D_IMG_Y)
@@ -252,11 +254,11 @@ static void	draw_floor_slice(t_mlx_data *data, int x, int de_clamped, \
 		floor_x = data->player_x + ray_dx * current_dist;
 		floor_y = data->player_y + ray_dy * current_dist;
 		tex_x = (int)((floor_x / TILE_SIZE - floor(floor_x / TILE_SIZE)) * \
-				data->img_ptr->dirt->width);
+				selected->width);
 		tex_y = (int)((floor_y / TILE_SIZE - floor(floor_y / TILE_SIZE)) * \
-				data->img_ptr->dirt->height);
-		floor_color = get_texture_pixel(data->img_ptr->dirt, tex_x, tex_y);
-		my_mlx_pixel_put(data->img_ptr->raycast, x, y, floor_color);
+				selected->height);
+		floor_color = get_texture_pixel(selected, tex_x, tex_y);
+		my_mlx_pixel_put(data->img_ptr->game, x, y, floor_color);
 		y++;
 	}
 }
@@ -291,8 +293,7 @@ static void	draw_ceiling_slice(t_mlx_data *data, int x, int ds_clamped, \
 	int		ceil_color;
 	t_data	*selected;
 
-	int frame_index = ((long long)data->frame_nbr * data->img_arr->ceiling_img[0]->frame_nbr) / FPS;
-	selected = data->img_arr->ceiling_img[frame_index];
+	selected = data->img_arr->ceiling_img[(int)(((long long)data->frame_nbr * data->img_arr->ceiling_img[0]->frame_nbr) / FPS)];
 	if (!selected || !selected->addr)
 		return ;
 	y = 0;
@@ -306,7 +307,7 @@ static void	draw_ceiling_slice(t_mlx_data *data, int x, int ds_clamped, \
 		tex_y = (int)((ceil_y / TILE_SIZE - floor(ceil_y / TILE_SIZE)) * \
 				selected->height);
 		ceil_color = get_texture_pixel(selected, tex_x, tex_y);
-		my_mlx_pixel_put(data->img_ptr->raycast, x, y, ceil_color);
+		my_mlx_pixel_put(data->img_ptr->game, x, y, ceil_color);
 		y++;
 	}
 }
