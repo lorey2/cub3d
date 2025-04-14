@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 03:40:27 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:35:44 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,21 @@ int	get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
 
 void	set_ver_selected(t_mlx_data *data)
 {
-	if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
-		|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
-		data->img_ptr->selected = data->img_arr->west_img[(int)(((long long)data->frame_nbr * data->img_arr->west_img[0]->frame_nbr) / FPS)];	
+	if (data->is_door_ver)
+	{
+		if (data->is_open == false)
+			data->img_ptr->selected = data->img_arr->door_img[0];
+		else
+			data->img_ptr->selected = data->img_arr->door_img[1];
+	}
 	else
-		data->img_ptr->selected = data->img_arr->east_img[(int)(((long long)data->frame_nbr * data->img_arr->east_img[0]->frame_nbr) / FPS)];	
+	{
+		if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
+			|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
+			data->img_ptr->selected = data->img_arr->west_img[(int)(((long long)data->frame_nbr * data->img_arr->west_img[0]->frame_nbr) / FPS)];	
+		else
+			data->img_ptr->selected = data->img_arr->east_img[(int)(((long long)data->frame_nbr * data->img_arr->east_img[0]->frame_nbr) / FPS)];	
+	}
 }
 
 void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
@@ -73,11 +83,21 @@ void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 
 void	set_hor_selected(t_mlx_data *data)
 {
-	if ((data->angle > 0 && data->angle < M_PI)
-		|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
-		data->img_ptr->selected = data->img_arr->north_img[(int)(((long long)data->frame_nbr * data->img_arr->north_img[0]->frame_nbr) / FPS)];	
+	if (data->is_door_hor)
+	{
+		if (data->is_open == false)
+			data->img_ptr->selected = data->img_arr->door_img[0];
+		else
+			data->img_ptr->selected = data->img_arr->door_img[1];
+	}
 	else
-		data->img_ptr->selected = data->img_arr->south_img[(int)(((long long)data->frame_nbr * data->img_arr->south_img[0]->frame_nbr) / FPS)];	
+	{
+		if ((data->angle > 0 && data->angle < M_PI)
+			|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
+			data->img_ptr->selected = data->img_arr->north_img[(int)(((long long)data->frame_nbr * data->img_arr->north_img[0]->frame_nbr) / FPS)];
+		else
+			data->img_ptr->selected = data->img_arr->south_img[(int)(((long long)data->frame_nbr * data->img_arr->south_img[0]->frame_nbr) / FPS)];
+	}
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)

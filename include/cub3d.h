@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 15:15:00 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:31:51 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@
 # define ORANGE       0x00FFA500  // Orange: R=255, G=165, B=0
 # define PURPLE       0x00800080  // Purple: R=128, G=0, B=128
 # define PINK         0x00FFC0CB  // Pink: R=255, G=192, B=203
-# define LIME         0x0000FF00  // Lime: R=0, G=255, B=0  (Note: Same as your GREEN definition)
 # define TEAL         0x00008080  // Teal: R=0, G=128, B=128
 # define OLIVE        0x00808000  // Olive: R=128, G=128, B=0
 # define NAVY         0x00000080  // Navy: R=0, G=0, B=128
-# define SILVER       0x00C0C0C0  // Silver: R=192, G=192, B=192 (Lighter than GRAY)
+# define SILVER       0x00C0C0C0  // Silver: R=192, G=192, B=192
 # define GOLD         0x00FFD700  // Gold: R=255, G=215, B=0
 # define SKYBLUE      0x0087CEEB  // Sky Blue: R=135, G=206, B=235
 # define VIOLET       0x00EE82EE  // Violet: R=238, G=130, B=238
@@ -109,6 +108,7 @@ typedef struct s_tex_name
 	char	**east_tex_name;
 	char	**floor_tex_name;
 	char	**ceiling_tex_name;
+	char	**door_tex_name;
 }				t_tex_name;
 
 typedef struct s_tex_img_array
@@ -119,6 +119,7 @@ typedef struct s_tex_img_array
 	t_data	**east_img;
 	t_data	**floor_img;
 	t_data	**ceiling_img;
+	t_data	**door_img;
 }				t_tex_img_array;
 
 typedef struct s_key
@@ -155,6 +156,9 @@ typedef struct s_img_ptr
 
 typedef struct s_mlx_data
 {
+	bool			is_open;
+	bool			is_door_hor;
+	bool			is_door_ver;
 	int				frame_nbr;
 	int				textu_x;
 	int				diff;

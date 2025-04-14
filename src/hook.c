@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 04:04:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:14:23 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	draw_rays(t_mlx_data *data)
 	data->angle = left_most_ray_angle;
 	while (++i < RAY_NUMBER)
 	{
+		data->is_door_hor = false;
+		data->is_door_ver = false;
 		if (data->angle > 2 * M_PI)
 			data->angle -= 2 * M_PI;
 		if (data->angle < -2 * M_PI)

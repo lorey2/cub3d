@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 15:07:51 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:43:29 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init(t_mlx_data *data)
 	data->key->d = false;
 	data->key->q = false;
 	data->key->e = false;
+	data->is_open = false;
 	data->img_arr = malloc(sizeof(t_tex_img_array));
 	data->text_arr = malloc(sizeof(t_tex_name));
 	data->img_ptr = malloc(sizeof(t_img_ptr));
@@ -70,6 +71,10 @@ void	set_name(t_tex_name *text_arr)
 	text_arr->west_tex_name[2] = ft_strdup("./img/frame3.xpm");
 	text_arr->west_tex_name[3] = ft_strdup("./img/frame4.xpm");
 	text_arr->west_tex_name[4] = NULL;
+	text_arr->door_tex_name = malloc(sizeof(char *) * 3);
+	text_arr->door_tex_name[0] = ft_strdup("./img/door.xpm");
+	text_arr->door_tex_name[1] = ft_strdup("./img/opendoor.xpm");
+	text_arr->door_tex_name[2] = NULL;
 }
 
 void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
@@ -104,6 +109,7 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	set_name(data->text_arr);
+	set_img(data->text_arr->door_tex_name, &data->img_arr->door_img, data, 50);
 	set_img(data->text_arr->ceiling_tex_name, &data->img_arr->ceiling_img, data, 64);
 	set_img(data->text_arr->west_tex_name, &data->img_arr->west_img, data, 64);
 	set_img(data->text_arr->floor_tex_name, &data->img_arr->floor_img, data, 1920);

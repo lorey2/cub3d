@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:57:24 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 17:55:24 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:42:41 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,24 @@ int	key_pressed(int keysym, t_mlx_data *data)
 bool	check_next(t_mlx_data *data, double x, double y)
 {
 	if (data->grid[(int)((x + SAFETY) / TILE_SIZE)]
-		[(int)(y / TILE_SIZE)] == '1')
+		[(int)(y / TILE_SIZE)] == '1' ||
+		(!data->is_open && data->grid[(int)((x + SAFETY) / TILE_SIZE)]
+		[(int)(y / TILE_SIZE)] == 'D' ))
 		return (false);
 	else if (data->grid[(int)((x - SAFETY) / TILE_SIZE)]
-			[(int)(y / TILE_SIZE)] == '1')
+		[(int)(y / TILE_SIZE)] == '1' ||
+		(!data->is_open && data->grid[(int)((x - SAFETY) / TILE_SIZE)]
+		[(int)(y / TILE_SIZE)] == 'D'))
 		return (false);
 	else if (data->grid[(int)(x / TILE_SIZE)]
-			[(int)((y + SAFETY) / TILE_SIZE)] == '1')
+			[(int)((y + SAFETY) / TILE_SIZE)] == '1' ||
+		(!data->is_open && data->grid[(int)(x / TILE_SIZE)]
+			[(int)((y + SAFETY) / TILE_SIZE)] == 'D'))
 		return (false);
 	else if (data->grid[(int)(x / TILE_SIZE)]
-			[(int)((y - SAFETY) / TILE_SIZE)] == '1')
+			[(int)((y - SAFETY) / TILE_SIZE)] == '1' ||
+		(!data->is_open && data->grid[(int)(x / TILE_SIZE)]
+			[(int)((y - SAFETY) / TILE_SIZE)] == 'D'))
 		return (false);
 	return (true);
 }
