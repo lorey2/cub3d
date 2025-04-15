@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:46:50 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/06 23:05:20 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 17:33:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,12 @@ int	close_esc(int keysym, t_mlx_data *data)
 		data->key->q = false;
 	if (keysym == XK_e)
 		data->key->e = false;
+	if (keysym == XK_l)
+	{
+		if (data->is_open == true)
+			data->is_open = false;
+		else
+			data->is_open = true;
+	}
 	return (0);
 }

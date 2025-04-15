@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/10 15:41:00 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 15:16:53 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_minimap_background(t_data *img)
 	{
 		y = -1;
 		while (++y < SIZE_MAP_Y)
-			my_mlx_pixel_put(&(*img), x, y, RED);
+			my_mlx_pixel_put(&(*img), x, y, BLACK);
 	}
 }
 
@@ -53,9 +53,11 @@ void	draw_grid(t_data *img, t_mlx_data *data)
 		while (data->grid[x][++y])
 		{
 			if (data->grid[x][y] == '1')
-				draw_square(img, x, y, BLUE);
+				draw_square(img, x, y, DARK_GRAY);
 			else if (data->grid[x][y] == '0')
-				draw_square(img, x, y, BLACK);
+				draw_square(img, x, y, BEIGE);
+			else if (data->grid[x][y] == 'D')
+				draw_square(img, x, y, SADDLE_BROWN);
 		}
 	}
 }

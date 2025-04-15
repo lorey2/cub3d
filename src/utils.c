@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:59:34 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 18:24:05 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/13 19:56:43 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	safe_free(void **ptr)
 		*ptr = NULL;
 	}
 }
-

@@ -6,11 +6,22 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:37:51 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/07 19:43:41 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/14 19:26:58 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	is_door_wall(t_mlx_data *data, int x, int y, bool is_hor)
+{
+	if (data->grid[x][y] == 'D' && is_hor)
+		data->is_door_hor = true;
+	if (data->grid[x][y] == 'D' && !is_hor)
+		data->is_door_ver = true;
+	if (data->grid[x][y] == '1' || data->grid[x][y] == 'D')
+		return (1);
+	return (0);
+}
 
 int	setup_hor(t_mlx_data *data, t_liney *hor)
 {
@@ -53,8 +64,7 @@ int	hor_best_line(t_mlx_data *data, t_liney *hor)
 		hor->row_index = (int)(hor->delta_y / TILE_SIZE);
 		hor->col_index = (int)(floor((data->player_x + hor->offset)
 					/ TILE_SIZE));
-		if (data->grid[(int)hor->col_index]
-			[(int)(hor->row_index + hor->neg)] == '1')
+		if (is_door_wall(data, hor->col_index, hor->row_index + hor->neg, true))
 			break ;
 		hor->y++;
 	}
@@ -100,8 +110,7 @@ int	ver_best_line(t_mlx_data *data, t_linex *ver)
 		ver->col_index = (int)(ver->delta_x / TILE_SIZE);
 		ver->row_index = (int)(floor((data->player_y + ver->offset)
 					/ TILE_SIZE));
-		if (data->grid[(int)(ver->col_index + ver->neg)]
-			[(int)ver->row_index] == '1')
+		if (is_door_wall(data, ver->col_index + ver->neg, ver->row_index, false))
 			break ;
 		ver->x++;
 	}
