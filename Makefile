@@ -2,7 +2,7 @@
 CC = cc
 SRC_DIR = src/
 OBJ_DIR = obj/
-CFLAGS = -g -I/usr/include -Imlx_linux -O3  -I$(INCLUDE) # -Wall -Wextra -Werror
+CFLAGS = -g -I/usr/include -Imlx_linux -I$(INCLUDE) # -Wall -Wextra -Werror
 LDFLAGS = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Wall -Wextra -Werror
 INCLUDE = include/
 MLX = $(MLX_DIR)/libmlx_Linux.a
@@ -23,7 +23,7 @@ CYAN      = \033[0;96m
 NAME = cub3d
 
 # Source and object files
-SRC_FILES = cub3d draw_utils hook setup_init utils draw_best_line 3d minimap exit calcul_ray update_movement_angle parsing
+SRC_FILES = cub3d draw_utils hook setup_init utils draw_best_line 3d minimap exit calcul_ray update_movement_angle parsing parsing_utils
 GNL_FILES = get_next_line_bonus get_next_line_utils_bonus
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

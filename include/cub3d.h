@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 02:25:46 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/15 16:45:13 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,19 @@ typedef struct s_data
 typedef struct s_tex_name
 {
 	char	**north_tex_name;
+	int		n_size;
 	char	**south_tex_name;
+	int		s_size;
 	char	**west_tex_name;
+	int		w_size;
 	char	**east_tex_name;
+	int		e_size;
 	char	**floor_tex_name;
+	int		f_size;
 	char	**ceiling_tex_name;
+	int		c_size;
 	char	**door_tex_name;
+	int		d_size;
 }				t_tex_name;
 
 typedef struct s_tex_img_array
@@ -252,5 +259,8 @@ int				hor_best_line(t_mlx_data *data, t_liney *hor);
 //parsing
 void			load_map(char *map_file, t_mlx_data *data);
 void			check_map(char *map_file, t_mlx_data *data);
+//parsing utils
+void			check_texture(char **map, t_mlx_data *data);
+char			*remove_line_return(char *line);
 
 #endif
