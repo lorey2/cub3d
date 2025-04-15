@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/11 19:07:59 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/15 02:19:59 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	main(int ac, char **av)
 	setup_grid(&data);
 	init(&data);
 	init_img(&data, data.img_ptr);
+	mlx_mouse_move(data.mlx_ptr, data.win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
+	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 	mlx_loop_hook(data.mlx_ptr, display, &data);
+	mlx_hook(data.win_ptr, 6, (1L << 6), mouse_move, &data);
 	mlx_hook(data.win_ptr, 17, 0, close_cross, &data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_pressed, &data);
 	mlx_key_hook(data.win_ptr, close_esc, &data);

@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:57:24 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 17:42:41 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/15 02:27:32 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 int	change_angle(t_mlx_data *data)
 {
+	data->angle += ((double)WIN_SIZE_X / 2
+			- (double)data->key->mouse_x) * MOUSE_SENSI;
 	if (data->key->q == true)
-	{
 		data->angle -= (M_PI / 180);
-		if (data->angle < 0)
-			data->angle += 2 * M_PI;
-	}
 	if (data->key->e == true)
-	{
 		data->angle += (M_PI / 180);
-		if (data->angle >= 2 * M_PI)
-			data->angle -= 2 * M_PI;
-	}
+	if (data->angle >= 2 * M_PI)
+		data->angle -= 2 * M_PI;
+	if (data->angle < 0)
+		data->angle += 2 * M_PI;
 	data->angle_bkp = data->angle;
 	return (0);
 }

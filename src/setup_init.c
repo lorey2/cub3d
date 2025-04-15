@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 17:43:29 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/15 01:56:20 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init(t_mlx_data *data)
 	data->key->d = false;
 	data->key->q = false;
 	data->key->e = false;
+	data->key->mouse_x = WIN_SIZE_X / 2;
 	data->is_open = false;
 	data->img_arr = malloc(sizeof(t_tex_img_array));
 	data->text_arr = malloc(sizeof(t_tex_name));
@@ -38,7 +39,7 @@ void	init(t_mlx_data *data)
 	data->size_x_window = 500;
 	data->size_y_window = 500;
 	data->win_ptr = mlx_new_window
-		(data->mlx_ptr, 1500, 1000, "SO_LONG");
+		(data->mlx_ptr, WIN_SIZE_X, WIN_SIZE_Y, "CUB3D");
 }
 
 void	set_name(t_tex_name *text_arr)
