@@ -6,11 +6,6 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:22:56 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/17 14:23:34 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/17 14:32:37 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
-
-void	access_texture(t_mlx_data *data)
-{
-
-}

@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:46:50 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 17:33:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/17 14:59:28 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	close_esc(int keysym, t_mlx_data *data)
 	if (keysym == XK_Escape)
 	{
 		data->player_x = 0;
+		free_everything(data);
 		exit (0);
 		return (0);
 	}

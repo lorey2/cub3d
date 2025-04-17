@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:59:34 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/17 14:26:09 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/17 14:33:24 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	err(char *str, t_mlx_data *data)
 		perror(str);
 	else
 		ft_putstr_fd(str, STDERR_FILENO);
-	free_everything(data);
+	if (data)
+		free_everything(data);
 	exit(1);
 }
 
