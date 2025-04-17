@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/15 17:14:39 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/17 14:28:38 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	ft_isspace(char c)
 	return (false);
 }
 
-char	*get_texture_value(char *line)
+char	*get_texture_value(char *line, t_mlx_data *data)
 {
 	int		i;
 	int		j;
@@ -33,7 +33,7 @@ char	*get_texture_value(char *line)
 		j++;
 	value = malloc(sizeof(char) * (j + 1));
 	if (!value)
-		err("Cannot allocate memory for texture value\n");
+		err("Cannot allocate memory for texture value\n", data);
 	j = 0;
 	while (line[i + j] != '\n')
 	{
@@ -56,14 +56,6 @@ char	*remove_line_return(char *line)
 		return (line);
 	}
 	return (line);
-}
-
-void	checktext_file(t_mlx_data *data)
-{
-	int	i;
-
-	i = 0;
-	
 }
 
 void	check_texture(char **map, t_mlx_data *data)
