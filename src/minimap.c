@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 15:16:53 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 02:51:18 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	draw_player(t_data *img, t_mlx_data *data)
 	{
 		y = -6;
 		while (++y < 5)
-			my_mlx_pixel_put(&(*img), data->player_x + x,
-				data->player_y + y, GREEN);
+			my_mlx_pixel_put(&(*img), (data->player_x + x) * data->mm_ratio,
+				data->player_y * data->mm_ratio + y, GREEN);
 	}
 }
 
@@ -53,11 +53,38 @@ void	draw_grid(t_data *img, t_mlx_data *data)
 		while (data->grid[x][++y])
 		{
 			if (data->grid[x][y] == '1')
-				draw_square(img, x, y, DARK_GRAY);
+				draw_square(img, x, y, DARK_GRAY, data);
 			else if (data->grid[x][y] == '0')
-				draw_square(img, x, y, BEIGE);
+				draw_square(img, x, y, BEIGE, data);
 			else if (data->grid[x][y] == 'D')
-				draw_square(img, x, y, SADDLE_BROWN);
+				draw_square(img, x, y, SADDLE_BROWN, data);
 		}
 	}
+}
+
+void	size_array(t_mlx_data *data)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = -1;
+	j = 0;
+	tmp = 0;
+	while (data->grid[++i])
+	{
+		tmp = ft_strlen(data->grid[i]);
+		if (tmp > j)
+			j = tmp;
+	}
+	data->tile_x_nbr = i;
+	data->tile_y_nbr = j;
+	if (i > j)
+		data->tile_max_nbr = i;
+	else
+		data->tile_max_nbr = j;
+	if (i >= 10 || j >= 10)
+		data->mm_ratio = 500 / (data->tile_max_nbr * TILE_SIZE);
+	else
+		data->mm_ratio = 1;
 }

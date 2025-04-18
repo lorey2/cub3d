@@ -6,24 +6,26 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 04:12:05 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 03:20:16 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_square(t_data *img, int x, int y, int color)
+void	draw_square(t_data *img, int x, int y, int color, t_mlx_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (++i < TILE_SIZE - 1)
+	while (++i < TILE_SIZE - 2)
 	{
 		j = 1;
-		while (++j < TILE_SIZE - 1)
+		while (++j < TILE_SIZE - 2)
 			my_mlx_pixel_put(
-				&(*img), x * TILE_SIZE + i, y * TILE_SIZE + j, color);
+				&(*img),
+				(x * TILE_SIZE + i) * data->mm_ratio,
+				(y * TILE_SIZE + j) * data->mm_ratio, color);
 	}
 }
 

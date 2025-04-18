@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 02:25:46 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 02:27:29 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@
 # define MOUSE_SENSI	-0.003	//mouse sensi
 # define SAFETY			5.0		//in colision a margin between player and wall
 # define INIT_ANGLE		M_PI_4	//initial angle of player      TODO: WILL CHANGE
-# define PLAYER_INIT_X	100		//position initial of player   TODO: WILL CHANGE
-# define PLAYER_INIT_Y	400     //                             TODO: WILL CHANGE
+# define PLAYER_INIT_X	75		//position initial of player   TODO: WILL CHANGE
+# define PLAYER_INIT_Y	75     //                             TODO: WILL CHANGE
 ///////////////////
 //minimap related//
 ///////////////////
@@ -162,6 +162,10 @@ typedef struct s_img_ptr
 
 typedef struct s_mlx_data
 {
+	double			mm_ratio;
+	int				tile_x_nbr;
+	int				tile_y_nbr;
+	int				tile_max_nbr;
 	bool			is_open;
 	bool			is_door_hor;
 	bool			is_door_ver;
@@ -228,7 +232,7 @@ int				change_angle(t_mlx_data *data);
 int				mouse_move(int x, int y, t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
-void			draw_square(t_data *img, int x, int y, int color);
+void			draw_square(t_data *img, int x, int y, int color, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);
 void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
@@ -240,6 +244,7 @@ void			draw_best_line(t_mlx_data *data);
 //3d
 void			draw_3d(t_mlx_data *data, int ray);
 //minimap
+void			size_array(t_mlx_data *data);
 void			draw_minimap_background(t_data *img);
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);

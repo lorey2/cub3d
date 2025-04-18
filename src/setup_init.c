@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 01:56:20 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 03:23:13 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,13 +110,20 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	set_name(data->text_arr);
-	set_img(data->text_arr->door_tex_name, &data->img_arr->door_img, data, 50);
-	set_img(data->text_arr->ceiling_tex_name, &data->img_arr->ceiling_img, data, 64);
-	set_img(data->text_arr->west_tex_name, &data->img_arr->west_img, data, 64);
-	set_img(data->text_arr->floor_tex_name, &data->img_arr->floor_img, data, 1920);
-	set_img(data->text_arr->east_tex_name, &data->img_arr->east_img, data, 1280);
-	set_img(data->text_arr->north_tex_name, &data->img_arr->north_img, data, 1920);
-	set_img(data->text_arr->south_tex_name, &data->img_arr->south_img, data, 512);
+	set_img(data->text_arr->door_tex_name,
+		&data->img_arr->door_img, data, 50);
+	set_img(data->text_arr->ceiling_tex_name,
+		&data->img_arr->ceiling_img, data, 64);
+	set_img(data->text_arr->west_tex_name,
+		&data->img_arr->west_img, data, 64);
+	set_img(data->text_arr->floor_tex_name,
+		&data->img_arr->floor_img, data, 1920);
+	set_img(data->text_arr->east_tex_name,
+		&data->img_arr->east_img, data, 1280);
+	set_img(data->text_arr->north_tex_name,
+		&data->img_arr->north_img, data, 1920);
+	set_img(data->text_arr->south_tex_name,
+		&data->img_arr->south_img, data, 512);
 	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
 	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
 			&img->minimap->bits_per_pixel, &img->minimap->line_length,
@@ -132,7 +139,32 @@ void	setup_grid(t_mlx_data *data)
 {
 	int	y;
 
-	y = 11;
+	y = 21;
+	data->grid = malloc(sizeof(char *) * y);
+	data->grid[0] = strdup("11111111111111111111");
+	data->grid[1] = strdup("10000000000000000001");
+	data->grid[2] = strdup("10000000000000000001");
+	data->grid[3] = strdup("10000000000000000001");
+	data->grid[4] = strdup("10000000000000000001");
+	data->grid[5] = strdup("10000000000000000001");
+	data->grid[6] = strdup("10000000000000000001");
+	data->grid[7] = strdup("10000000000000000001");
+	data->grid[8] = strdup("10000000000000000001");
+	data->grid[9] = strdup("10000000000000000001");
+	data->grid[10] = strdup("10000000000000000001");
+	data->grid[11] = strdup("10000000000000000001");
+	data->grid[12] = strdup("10000000000000000001");
+	data->grid[13] = strdup("10000000000000000001");
+	data->grid[14] = strdup("10000000000000000001");
+	data->grid[15] = strdup("10000000000000000001");
+	data->grid[16] = strdup("10000000000000000001");
+	data->grid[17] = strdup("10000000000000000001");
+	data->grid[18] = strdup("10000000000000000001");
+	data->grid[19] = strdup("11111111111111111111");
+	data->grid[20] = NULL;
+
+
+/* 	y = 12;
 	data->grid = malloc(sizeof(char *) * y);
 	data->grid[0] = strdup("1111111111");
 	data->grid[1] = strdup("1000000001");
@@ -142,7 +174,8 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[5] = strdup("1010001001");
 	data->grid[6] = strdup("100000D001");
 	data->grid[7] = strdup("1000001001");
-	data->grid[8] = strdup("1000001001");
+	data->grid[8] = strdup("1111111111");
 	data->grid[9] = strdup("1111111111");
-	data->grid[10] = NULL;
+	data->grid[10] = strdup("1111111111");
+	data->grid[11] = NULL; */
 }

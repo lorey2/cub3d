@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 17:35:44 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 03:19:36 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
 
 	if (!img || !img->addr)
 		return (0);
-	if (TILE_SIZE <= 0 || img->width <= 0 || img->height <= 0 || img->bits_per_pixel <= 0)
+	if (TILE_SIZE <= 0 || img->width <= 0
+		|| img->height <= 0 || img->bits_per_pixel <= 0)
 		return (0);
 	p_s_g = offset - (TILE_SIZE - fmod(player_pos, TILE_SIZE));
 	p_s_g = fmod(p_s_g, TILE_SIZE);
@@ -60,18 +61,22 @@ void	set_ver_selected(t_mlx_data *data)
 	{
 		if ((data->angle > M_PI_2 && data->angle < 3 * M_PI_2)
 			|| (data->angle < -1 * M_PI_2 && data->angle > -3 * M_PI_2))
-			data->img_ptr->selected = data->img_arr->west_img[(int)(((long long)data->frame_nbr * data->img_arr->west_img[0]->frame_nbr) / FPS)];	
+			data->img_ptr->selected = data->img_arr->west_img[
+				(int)(((long long)data->frame_nbr
+						* data->img_arr->west_img[0]->frame_nbr) / FPS)];
 		else
-			data->img_ptr->selected = data->img_arr->east_img[(int)(((long long)data->frame_nbr * data->img_arr->east_img[0]->frame_nbr) / FPS)];	
+			data->img_ptr->selected = data->img_arr->east_img[
+				(int)(((long long)data->frame_nbr
+						* data->img_arr->east_img[0]->frame_nbr) / FPS)];
 	}
 }
 
 void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 {
-	data->l->x1 = data->player_x;
-	data->l->y1 = data->player_y;
-	data->l->x2 = ver->delta_x;
-	data->l->y2 = (int)(data->player_y + ver->offset);
+	data->l->x1 = data->player_x * data->mm_ratio;
+	data->l->y1 = data->player_y * data->mm_ratio;
+	data->l->x2 = ver->delta_x * data->mm_ratio;
+	data->l->y2 = (data->player_y + ver->offset) * data->mm_ratio;
 	set_ver_selected(data);
 	data->color = get_color(
 			data->player_y, data, ver->offset, data->img_ptr->selected);
@@ -94,18 +99,22 @@ void	set_hor_selected(t_mlx_data *data)
 	{
 		if ((data->angle > 0 && data->angle < M_PI)
 			|| (data->angle < -1 * M_PI && data->angle > -2 * M_PI))
-			data->img_ptr->selected = data->img_arr->north_img[(int)(((long long)data->frame_nbr * data->img_arr->north_img[0]->frame_nbr) / FPS)];
+			data->img_ptr->selected = data->img_arr->north_img[
+				(int)(((long long)data->frame_nbr
+						* data->img_arr->north_img[0]->frame_nbr) / FPS)];
 		else
-			data->img_ptr->selected = data->img_arr->south_img[(int)(((long long)data->frame_nbr * data->img_arr->south_img[0]->frame_nbr) / FPS)];
+			data->img_ptr->selected = data->img_arr->south_img[
+				(int)(((long long)data->frame_nbr
+						* data->img_arr->south_img[0]->frame_nbr) / FPS)];
 	}
 }
 
 void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 {
-	data->l->x1 = data->player_x;
-	data->l->y1 = data->player_y;
-	data->l->x2 = (int)(data->player_x + hor->offset);
-	data->l->y2 = hor->delta_y;
+	data->l->x1 = data->player_x * data->mm_ratio;
+	data->l->y1 = data->player_y * data->mm_ratio;
+	data->l->x2 = (data->player_x + hor->offset) * data->mm_ratio;
+	data->l->y2 = hor->delta_y * data->mm_ratio;
 	set_hor_selected(data);
 	data->l->color = get_color(
 			data->player_x, data, hor->offset, data->img_ptr->selected);

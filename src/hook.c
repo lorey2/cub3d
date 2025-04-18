@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 02:08:47 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 03:21:08 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	display(t_mlx_data *data)
 	img_3d = data->img_ptr->game;
 	handle_key(data);
 	change_angle(data);
-	mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
+	mlx_mouse_move(data->mlx_ptr,
+		data->win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	draw_minimap_background(minimap_img);
 	draw_grid(minimap_img, data);
 	draw_player(minimap_img, data);

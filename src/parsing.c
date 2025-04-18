@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:10 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 03:21:34 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	count_map_line(int fd)
 			err("Cannot get line");
 		i++;
 	}
-	return(free(line), i);
-	
+	return (free(line), i);
 }
 
 void	check_map(char *map_file, t_mlx_data *data)

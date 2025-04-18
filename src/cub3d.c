@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 02:19:59 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/18 01:31:46 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int ac, char **av)
 	//	err("You should provide only one argument");
 	// check_map(av[1], &data);
 	setup_grid(&data);
+	size_array(&data);
 	init(&data);
 	init_img(&data, data.img_ptr);
 	mlx_mouse_move(data.mlx_ptr, data.win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
