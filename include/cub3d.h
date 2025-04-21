@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 20:38:55 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 23:00:37 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define INDIGO       0x004B0082  // Indigo: R=75, G=0, B=130
 # define BEIGE        0x00F5F5DC  // Beige: R=245, G=245, B=220
 
-// TODO: WHEN I SAY WILL CHANGE I MEAN THAT WONT BE A DEFINE BUT A PARSED VALUE
+// WARNING: IF NO NSEO (for debug cause it is checked in parsing) :)
 
 //////////////////
 //player related//
@@ -62,9 +62,9 @@
 # define MV_SPD			3.0		//nbr of pxl moved each frame
 # define MOUSE_SENSI	-0.003	//mouse sensi
 # define SAFETY			5.0		//in colision a margin between player and wall
-# define INIT_ANGLE		M_PI_4	//initial angle of player      TODO: WILL CHANGE
-# define PLAYER_INIT_X	75		//position initial of player   TODO: WILL CHANGE
-# define PLAYER_INIT_Y	75     //                             TODO: WILL CHANGE
+# define INIT_ANGLE		M_PI_4	//initial angle of player    WARNING: IF NO NSEO
+# define PLAYER_INIT_X	500		//init pos of player         WARNING: IF NO NSEO
+# define PLAYER_INIT_Y	500     //                           WARNING: IF NO NSEO
 ///////////////////
 //minimap related//
 ///////////////////
@@ -233,6 +233,7 @@ typedef struct s_liney
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
+void			setup_player_pos_angle(t_mlx_data *data);
 //hook
 void			handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);

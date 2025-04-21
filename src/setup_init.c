@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 19:20:05 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 22:53:45 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,7 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 	data->grid[10] = strdup("1111111111");
 	data->grid[11] = NULL; */
 
-void	setup_grid(t_mlx_data *data)
-{
-	int	y;
-
-	y = 21;
+/* 	y = 21;
 	data->grid = malloc(sizeof(char *) * y);
 	data->grid[0] = strdup("11111111111111111111");
 	data->grid[1] = strdup("10000000000001000001");
@@ -177,5 +173,66 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[17] = strdup("10000000000010000001");
 	data->grid[18] = strdup("10000000000010000001");
 	data->grid[19] = strdup("11111111111111111111");
-	data->grid[20] = NULL;
+	data->grid[20] = NULL; */
+
+void	setup_grid(t_mlx_data *data)
+{
+	int	y;
+
+ 	y = 15;
+	data->grid = malloc(sizeof(char *) * y);
+	data->grid[0] = strdup("        1111111111111111111111111");
+	data->grid[1] = strdup("        100000000011000E000000001");
+	data->grid[2] = strdup("        1011000001110000000000001");
+	data->grid[3] = strdup("        1001000000000000000000001");
+	data->grid[4] = strdup("111111111011000001110000000000001");
+	data->grid[5] = strdup("100000000011000001110111111111111");
+	data->grid[6] = strdup("11110111111111011100000010001    ");
+	data->grid[7] = strdup("11110111111111011101010010001    ");
+	data->grid[8] = strdup("11000000110101011100000010001    ");
+	data->grid[9] = strdup("10000000000000001100000010001    ");
+	data->grid[10] = strdup("10000000000000001101010010001    ");
+	data->grid[11] = strdup("1100000111010101111101111000111  ");
+	data->grid[12] = strdup("11110111 1110101 101111010001    ");
+	data->grid[13] = strdup("11111111 1111111 111111111111    ");
+	data->grid[14] = NULL;
+}
+
+void	setup_angle(char a, t_mlx_data *data)
+{
+	if (a == 'N')
+		data->angle = 3 * M_PI_2;
+	if (a == 'S')
+		data->angle = M_PI_2;
+	if (a == 'E')
+		data->angle = 0;
+	if (a == 'W')
+		data->angle = M_PI;
+}
+
+void	setup_player_pos_angle(t_mlx_data *data)
+{
+	double	i;
+	double	j;
+
+	i = -1;
+	j = -1;
+	while (data->grid[(int)(++i)])
+	{
+		j = -1;
+		while (data->grid[(int)i][(int)(++j)])
+		{
+			if (data->grid[(int)i][(int)j] == 'N'
+				|| data->grid[(int)i][(int)j] == 'S'
+				|| data->grid[(int)i][(int)j] == 'E'
+				|| data->grid[(int)i][(int)j] == 'W')
+			{
+				data->player_x = (i + 0.5) * TILE_SIZE;
+				data->player_y = (j + 0.5) * TILE_SIZE;
+				setup_angle(data->grid[(int)i][(int)j], data);
+				data->grid[(int)i][(int)j] = '0';
+				return ;
+			}
+		}
+	}
 }

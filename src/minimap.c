@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:09:32 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 21:10:55 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	select_tile_and_draw(int x, int y, t_mlx_data *data, t_data *img)
 	else if (data->grid[x][y] == 'D')
 	{
 		data->color = SADDLE_BROWN;
+		draw_square(img, x, y, data);
+	}
+	else if (data->grid[x][y] == ' ')
+	{
+		data->color = VIOLET;
 		draw_square(img, x, y, data);
 	}
 }
