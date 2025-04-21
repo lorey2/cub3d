@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 03:23:13 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:35:09 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,35 +135,6 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 			&img->game->endian);
 }
 
-void	setup_grid(t_mlx_data *data)
-{
-	int	y;
-
-	y = 21;
-	data->grid = malloc(sizeof(char *) * y);
-	data->grid[0] = strdup("11111111111111111111");
-	data->grid[1] = strdup("10000000000000000001");
-	data->grid[2] = strdup("10000000000000000001");
-	data->grid[3] = strdup("10000000000000000001");
-	data->grid[4] = strdup("10000000000000000001");
-	data->grid[5] = strdup("10000000000000000001");
-	data->grid[6] = strdup("10000000000000000001");
-	data->grid[7] = strdup("10000000000000000001");
-	data->grid[8] = strdup("10000000000000000001");
-	data->grid[9] = strdup("10000000000000000001");
-	data->grid[10] = strdup("10000000000000000001");
-	data->grid[11] = strdup("10000000000000000001");
-	data->grid[12] = strdup("10000000000000000001");
-	data->grid[13] = strdup("10000000000000000001");
-	data->grid[14] = strdup("10000000000000000001");
-	data->grid[15] = strdup("10000000000000000001");
-	data->grid[16] = strdup("10000000000000000001");
-	data->grid[17] = strdup("10000000000000000001");
-	data->grid[18] = strdup("10000000000000000001");
-	data->grid[19] = strdup("11111111111111111111");
-	data->grid[20] = NULL;
-
-
 /* 	y = 12;
 	data->grid = malloc(sizeof(char *) * y);
 	data->grid[0] = strdup("1111111111");
@@ -178,4 +149,32 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[9] = strdup("1111111111");
 	data->grid[10] = strdup("1111111111");
 	data->grid[11] = NULL; */
+
+void	setup_grid(t_mlx_data *data)
+{
+	int	y;
+
+	y = 21;
+	data->grid = malloc(sizeof(char *) * y);
+	data->grid[0] = strdup("11111111111111111111");
+	data->grid[1] = strdup("10000000000001000001");
+	data->grid[2] = strdup("10000000000001000001");
+	data->grid[3] = strdup("10000000000001000001");
+	data->grid[4] = strdup("10000000000001000001");
+	data->grid[5] = strdup("10000000000001000001");
+	data->grid[6] = strdup("10000000000001000001");
+	data->grid[7] = strdup("10000000000001000001");
+	data->grid[8] = strdup("10000000000001000001");
+	data->grid[9] = strdup("10000000000001000001");
+	data->grid[10] = strdup("10000000000010000001");
+	data->grid[11] = strdup("10000000000010000001");
+	data->grid[12] = strdup("100000000000D0000001");
+	data->grid[13] = strdup("10000000000010000001");
+	data->grid[14] = strdup("10000000000010000001");
+	data->grid[15] = strdup("10000000000010000001");
+	data->grid[16] = strdup("10000000000010000001");
+	data->grid[17] = strdup("10000000000010000001");
+	data->grid[18] = strdup("10000000000010000001");
+	data->grid[19] = strdup("11111111111111111111");
+	data->grid[20] = NULL;
 }

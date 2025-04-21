@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/18 03:21:34 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:20:30 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,3 @@ void	load_map(char *map_file, t_mlx_data *data)
 	nb_line = count_map_line(fd);
 	printf("NB LINE = %d\n", nb_line);
 }
-

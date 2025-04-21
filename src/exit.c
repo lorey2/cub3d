@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:46:50 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 17:33:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:14:54 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,8 @@ int	close_cross(t_mlx_data *data)
 	return (0);
 }
 
-int	close_esc(int keysym, t_mlx_data *data)
+void	check_door_player_key(int keysym, t_mlx_data *data)
 {
-	if (keysym == XK_Escape)
-	{
-		data->player_x = 0;
-		exit (0);
-		return (0);
-	}
 	if (keysym == XK_w)
 		data->key->w = false;
 	if (keysym == XK_a)
@@ -46,5 +40,16 @@ int	close_esc(int keysym, t_mlx_data *data)
 		else
 			data->is_open = true;
 	}
+}
+
+int	key_released(int keysym, t_mlx_data *data)
+{
+	if (keysym == XK_Escape)
+	{
+		data->player_x = 0;
+		exit (0);
+		return (0);
+	}
+	check_door_player_key(keysym, data);
 	return (0);
 }

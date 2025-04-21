@@ -6,47 +6,12 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 03:19:36 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:23:38 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <math.h>
-
-int	get_color(double player_pos, t_mlx_data *data, double offset, t_data *img)
-{
-	int		x;
-	int		y;
-	int		pixel_index;
-	int		color;
-	double	p_s_g;
-
-	if (!img || !img->addr)
-		return (0);
-	if (TILE_SIZE <= 0 || img->width <= 0
-		|| img->height <= 0 || img->bits_per_pixel <= 0)
-		return (0);
-	p_s_g = offset - (TILE_SIZE - fmod(player_pos, TILE_SIZE));
-	p_s_g = fmod(p_s_g, TILE_SIZE);
-	if (p_s_g < 0)
-		p_s_g += TILE_SIZE;
-	p_s_g *= ((double)img->width / TILE_SIZE);
-	x = (int)p_s_g;
-	y = 200;
-	if (x < 0)
-		x = 0;
-	else if (x >= img->width)
-		x = img->width - 1;
-	if (y < 0)
-		y = 0;
-	else if (y >= img->height)
-		y = img->height - 1;
-	data->textu_x = x;
-	pixel_index = y * img->line_length + x * (img->bits_per_pixel / 8);
-	color = *(int *)(img->addr + pixel_index);
-	(void)data;
-	return (color);
-}
 
 void	set_ver_selected(t_mlx_data *data)
 {
@@ -78,8 +43,6 @@ void	draw_vertical_line(t_mlx_data *data, t_linex *ver)
 	data->l->x2 = ver->delta_x * data->mm_ratio;
 	data->l->y2 = (data->player_y + ver->offset) * data->mm_ratio;
 	set_ver_selected(data);
-	data->color = get_color(
-			data->player_y, data, ver->offset, data->img_ptr->selected);
 	data->l->color = get_color(
 			data->player_y, data, ver->offset, data->img_ptr->selected);
 	draw_line(data, data->l);
@@ -117,8 +80,6 @@ void	draw_horizontal_line(t_mlx_data *data, t_liney *hor)
 	data->l->y2 = hor->delta_y * data->mm_ratio;
 	set_hor_selected(data);
 	data->l->color = get_color(
-			data->player_x, data, hor->offset, data->img_ptr->selected);
-	data->color = get_color(
 			data->player_x, data, hor->offset, data->img_ptr->selected);
 	draw_line(data, data->l);
 	data->best = data->ray_hor;

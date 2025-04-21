@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 02:27:29 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:24:21 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@
 # define RAY_NUMBER		1000.0	//number of rays. Best equal to SIZE_3D_IMG_X
 # define FPS			60.0	//to avoid framerate jump the fps is capped
 
-# define WIN_SIZE_X	1500	// TODO: CHANGE THAT
-# define WIN_SIZE_Y	1000	// TODO: CHANGE THAT
+# define WIN_SIZE_X	1500	// TODO: CHANGE THAT (OR MAYBE NOT)
+# define WIN_SIZE_Y	1000	// TODO: CHANGE THAT (OR MAYBE NOT)
 
 typedef struct s_data
 {
@@ -171,7 +171,6 @@ typedef struct s_mlx_data
 	bool			is_door_ver;
 	int				frame_nbr;
 	int				textu_x;
-	int				diff;
 	int				start;
 	struct timeval	last_frame_time;
 	t_tex_img_array	*img_arr;
@@ -190,14 +189,10 @@ typedef struct s_mlx_data
 	double			ray_ver;
 	double			ray_hor;
 	double			best;
-	int				color;
-	double			i;
 	double			angle_bkp;
-	double			j;
-	double			next_x;
-	double			next_y;
 	double			next_s_x;
 	double			next_s_y;
+	int				color;
 }				t_mlx_data;
 
 typedef struct s_linex
@@ -232,7 +227,7 @@ int				change_angle(t_mlx_data *data);
 int				mouse_move(int x, int y, t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
-void			draw_square(t_data *img, int x, int y, int color, t_mlx_data *data);
+void			draw_square(t_data *img, int x, int y, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);
 void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
@@ -250,12 +245,15 @@ void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);
 //exit
 int				close_cross(t_mlx_data *data);
-int				close_esc(int keysym, t_mlx_data *data);
+int				key_released(int keysym, t_mlx_data *data);
 //calcul_rey
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
 //parsing
 void			load_map(char *map_file, t_mlx_data *data);
 void			check_map(char *map_file, t_mlx_data *data);
+//get_color
+int				get_color(double player_pos, t_mlx_data *data,
+					double offset, t_data *img);
 
 #endif

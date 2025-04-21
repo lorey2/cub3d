@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 02:51:18 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:09:32 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ void	draw_player(t_data *img, t_mlx_data *data)
 	}
 }
 
+void	select_tile_and_draw(int x, int y, t_mlx_data *data, t_data *img)
+{
+	if (data->grid[x][y] == '1')
+	{
+		data->color = DARK_GRAY;
+		draw_square(img, x, y, data);
+	}
+	else if (data->grid[x][y] == '0')
+	{
+		data->color = BEIGE;
+		draw_square(img, x, y, data);
+	}
+	else if (data->grid[x][y] == 'D')
+	{
+		data->color = SADDLE_BROWN;
+		draw_square(img, x, y, data);
+	}
+}
+
 void	draw_grid(t_data *img, t_mlx_data *data)
 {
 	int	x;
@@ -52,39 +71,7 @@ void	draw_grid(t_data *img, t_mlx_data *data)
 		y = -1;
 		while (data->grid[x][++y])
 		{
-			if (data->grid[x][y] == '1')
-				draw_square(img, x, y, DARK_GRAY, data);
-			else if (data->grid[x][y] == '0')
-				draw_square(img, x, y, BEIGE, data);
-			else if (data->grid[x][y] == 'D')
-				draw_square(img, x, y, SADDLE_BROWN, data);
+			select_tile_and_draw(x, y, data, img);
 		}
 	}
-}
-
-void	size_array(t_mlx_data *data)
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = -1;
-	j = 0;
-	tmp = 0;
-	while (data->grid[++i])
-	{
-		tmp = ft_strlen(data->grid[i]);
-		if (tmp > j)
-			j = tmp;
-	}
-	data->tile_x_nbr = i;
-	data->tile_y_nbr = j;
-	if (i > j)
-		data->tile_max_nbr = i;
-	else
-		data->tile_max_nbr = j;
-	if (i >= 10 || j >= 10)
-		data->mm_ratio = 500 / (data->tile_max_nbr * TILE_SIZE);
-	else
-		data->mm_ratio = 1;
 }

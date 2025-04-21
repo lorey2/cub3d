@@ -6,13 +6,13 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 03:20:16 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 18:05:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_square(t_data *img, int x, int y, int color, t_mlx_data *data)
+void	draw_square(t_data *img, int x, int y, t_mlx_data *data)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,7 @@ void	draw_square(t_data *img, int x, int y, int color, t_mlx_data *data)
 			my_mlx_pixel_put(
 				&(*img),
 				(x * TILE_SIZE + i) * data->mm_ratio,
-				(y * TILE_SIZE + j) * data->mm_ratio, color);
+				(y * TILE_SIZE + j) * data->mm_ratio, data->color);
 	}
 }
 
@@ -67,4 +67,31 @@ void	draw_line(t_mlx_data *data, t_dline *l)
 			l->y1 = l->y1 + l->sy;
 		}
 	}
+}
+
+void	size_array(t_mlx_data *data)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = -1;
+	j = 0;
+	tmp = 0;
+	while (data->grid[++i])
+	{
+		tmp = ft_strlen(data->grid[i]);
+		if (tmp > j)
+			j = tmp;
+	}
+	data->tile_x_nbr = i;
+	data->tile_y_nbr = j;
+	if (i > j)
+		data->tile_max_nbr = i;
+	else
+		data->tile_max_nbr = j;
+	if (i >= 10 || j >= 10)
+		data->mm_ratio = 500 / (data->tile_max_nbr * TILE_SIZE);
+	else
+		data->mm_ratio = 1;
 }
