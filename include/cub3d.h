@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:24:21 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 19:12:49 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,19 @@ typedef struct s_img_ptr
 	t_data			*selected;
 }				t_img_ptr;
 
+typedef struct s_3d_data
+{
+	double	perp_dist;
+	double	dist_to_proj_plane;
+	double	proj_slice_height;
+	int		draw_start_y_clamped;
+	int		draw_end_y_clamped;
+	int		true_draw_start_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	fov_rad_half;
+}				t_3d_data;
+
 typedef struct s_mlx_data
 {
 	double			mm_ratio;
@@ -178,6 +191,7 @@ typedef struct s_mlx_data
 	t_key			*key;
 	t_dline			*l;
 	t_img_ptr		*img_ptr;
+	t_3d_data		*data_3d;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;

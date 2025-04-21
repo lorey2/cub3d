@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:35:09 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 19:20:05 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init(t_mlx_data *data)
 	data->img_ptr = malloc(sizeof(t_img_ptr));
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
+	data->data_3d = malloc(sizeof(t_3d_data));
 	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
