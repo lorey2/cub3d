@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 22:53:45 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 23:08:30 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	setup_grid(t_mlx_data *data)
 {
 	int	y;
 
- 	y = 15;
+	y = 15;
 	data->grid = malloc(sizeof(char *) * y);
 	data->grid[0] = strdup("        1111111111111111111111111");
 	data->grid[1] = strdup("        100000000011000E000000001");
