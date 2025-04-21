@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 19:12:49 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 20:38:55 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,13 @@ void			safe_free(void **ptr);
 void			draw_best_line(t_mlx_data *data);
 //3d
 void			draw_3d(t_mlx_data *data, int ray);
+//3d_utils
+int				color_y(t_mlx_data *data, int index, double proj_slice_height);
+int				get_texture_pixel(t_data *texture, int tex_x, int tex_y);
+void			calculate_wall_params(t_mlx_data *data, t_3d_data *data_3d);
+void			calculate_draw_limits(t_3d_data *data);
+void			calculate_fc_ray_params(t_mlx_data *data,
+					int x, t_3d_data *data_3d);
 //minimap
 void			size_array(t_mlx_data *data);
 void			draw_minimap_background(t_data *img);
