@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 20:34:53 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 20:39:01 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 05:31:17 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	get_texture_pixel(t_data *texture, int tex_x, int tex_y)
 		tex_x += texture->width;
 	if (tex_y < 0)
 		tex_y += texture->height;
-	if (tex_x < 0 || tex_x >= texture->width || \
-		tex_y < 0 || tex_y >= texture->height)
+	if (tex_x < 0 || tex_x >= texture->width
+		|| tex_y < 0 || tex_y >= texture->height)
 		return (BLACK);
-	pixel_addr = texture->addr + (tex_y * texture->line_length + \
-		tex_x * (texture->bits_per_pixel / 8));
+	pixel_addr = texture->addr + (tex_y * texture->line_length
+			+ tex_x * (texture->bits_per_pixel / 8));
 	color = *(int *)pixel_addr;
 	return (color);
 }

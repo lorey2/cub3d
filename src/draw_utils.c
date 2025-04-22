@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:05:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 04:18:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_line(t_mlx_data *data, t_dline *l)
 		if (l->x1 >= 0 && l->x1 < data->size_x_window
 			&& l->y1 >= 0 && l->y1 < data->size_y_window)
 			my_mlx_pixel_put(&(*data->img_ptr->minimap),
-				l->x1, l->y1, l->color);
+				l->y1, l->x1, l->color);
 		if (l->x1 == l->x2 && l->y1 == l->y2)
 			break ;
 		l->e2 = 2 * l->err;
