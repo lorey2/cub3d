@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/17 14:47:56 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 15:45:16 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ typedef struct s_liney
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
+void			init_texture(t_tex_name *tex);
 //hook
 void			handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);
@@ -259,9 +260,13 @@ int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
 //parsing
 void			load_map(char *map_file, t_mlx_data *data);
-void			check_map(char *map_file, t_mlx_data *data);
+void			parsing(char *map_file, t_mlx_data *data);
+void			check_map(t_mlx_data *data);
+
 //parsing utils
-void			check_texture(char **map, t_mlx_data *data);
+int				check_texture(char **map, t_mlx_data *data);
 char			*remove_line_return(char *line);
+bool			check_all_texture(t_mlx_data *data);
+void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
 
 #endif

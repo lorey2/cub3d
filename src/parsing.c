@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/17 14:27:53 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 15:44:47 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	count_map_line(int fd, t_mlx_data *data)
 	return (free(line), i);
 }
 
-void	check_map(char *map_file, t_mlx_data *data)
+void	parsing(char *map_file, t_mlx_data *data)
 {
 	check_extension(map_file, data);
 	load_map(map_file, data);
@@ -59,15 +59,17 @@ void	check_map(char *map_file, t_mlx_data *data)
 void	collect_texture(char **map, t_mlx_data *data)
 {
 	t_tex_name	*tex;
+	int			line_to_remove;
 
 	tex = malloc(sizeof(t_tex_name));
 	if (!tex)
 		err("Cannot allocate memory for texture\n", data);
 	data->text_arr = tex;
-	check_texture(map, data);
-	if (!tex->ceiling_tex_name || !tex->floor_tex_name || !tex->east_tex_name
-		|| !tex->north_tex_name || !tex->south_tex_name || !tex->west_tex_name)
+	init_texture(tex);
+	line_to_remove = check_texture(map, data);
+	if (!check_all_texture(data))
 		err("You should provide NO, SO, WE, EA, F and C texture\n", data);
+	remove_texture_from_map(map, line_to_remove, data);
 }
 
 void	load_map(char *map_file, t_mlx_data *data)
