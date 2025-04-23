@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:46:50 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:14:54 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/17 14:59:28 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	close_cross(t_mlx_data *data)
 
 void	check_door_player_key(int keysym, t_mlx_data *data)
 {
+	if (keysym == XK_Escape)
+	{
+		data->player_x = 0;
+		free_everything(data);
+		exit (0);
+		return (0);
+	}
 	if (keysym == XK_w)
 		data->key->w = false;
 	if (keysym == XK_a)

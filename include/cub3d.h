@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 23:00:37 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 17:59:14 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,19 @@ typedef struct s_data
 typedef struct s_tex_name
 {
 	char	**north_tex_name;
+	int		n_size;
 	char	**south_tex_name;
+	int		s_size;
 	char	**west_tex_name;
+	int		w_size;
 	char	**east_tex_name;
+	int		e_size;
 	char	**floor_tex_name;
+	int		f_size;
 	char	**ceiling_tex_name;
+	int		c_size;
 	char	**door_tex_name;
+	int		d_size;
 }				t_tex_name;
 
 typedef struct s_tex_img_array
@@ -233,6 +240,7 @@ typedef struct s_liney
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
+void			init_texture(t_tex_name *tex);
 void			setup_player_pos_angle(t_mlx_data *data);
 //hook
 void			handle_key(t_mlx_data *data);
@@ -247,8 +255,11 @@ void			draw_grid(t_data *img, t_mlx_data *data);
 void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			err(char *str);
+void			err(char *str, t_mlx_data *data);
 void			safe_free(void **ptr);
+void			free_everything(t_mlx_data *data);
+void			multi_free(char ***point);
+int				open_helper(char *map_file, t_mlx_data *data);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
@@ -272,10 +283,18 @@ int				key_released(int keysym, t_mlx_data *data);
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
 //parsing
-void			load_map(char *map_file, t_mlx_data *data);
-void			check_map(char *map_file, t_mlx_data *data);
+char			**load_map(char *map_file, t_mlx_data *data, int line_to_rm);
+void			parsing(char *map_file, t_mlx_data *data);
+void			check_map(t_mlx_data *data);
+//parsing utils
+int				check_texture(char **map, t_mlx_data *data);
+char			*remove_line_return(char *line);
+bool			check_all_texture(t_mlx_data *data);
+void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
+bool			ft_strisspace(char *str);
+bool			check_line_sanity(char *line);
+void			remove_last_map_line(t_mlx_data *data);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,
 					double offset, t_data *img);
-
 #endif

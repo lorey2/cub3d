@@ -1,12 +1,7 @@
-NO textures/simonkraft/wet_sponge.xpm
+NO textures/simonkraft/wet_sponge.xpm textures/simonkraft/wet_sponge1.xpm textures/simonksdlkddslksdjraft/wet_spongetxpm
 SO textures/simonkraft/wet_sponge.xpm
-WE textures/simonkraft/wet_sponge.xpm
-EA textures/simonkraft/wet_sponge.xpm
-
-
-
-
-
+WE textures/simonkraft/wet_sponge.xpm textures/simonkraft/wet_sponge2.xpm
+EA textures/simonkraft/wet_sponge.xpm textures/simAAAAAAAAAAAonkraft/wet_sponge1.xpm textures/simonkraft/wetOOOOOOOOOOOOOOOOOOOOOO_sponge1.xpm
 
 F 164,169,20
 C 153,204,255
@@ -32,13 +27,4 @@ C 153,204,255
 101010111011111111101
 1N1000001000000000001
 111111111111111111111
-
-
-
-
-
-
-
-
-
 

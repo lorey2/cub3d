@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/22 04:08:46 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 15:10:19 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,24 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 	img->game->addr = mlx_get_data_addr(img->game->img,
 			&img->game->bits_per_pixel, &img->game->line_length,
 			&img->game->endian);
+}
+
+void	init_texture(t_tex_name *tex)
+{
+	tex->ceiling_tex_name = NULL;
+	tex->door_tex_name = NULL;
+	tex->east_tex_name = NULL;
+	tex->floor_tex_name = NULL;
+	tex->north_tex_name = NULL;
+	tex->south_tex_name = NULL;
+	tex->west_tex_name = NULL;
+	tex->c_size = 50;
+	tex->d_size = 50;
+	tex->e_size = 50;
+	tex->f_size = 50;
+	tex->n_size = 50;
+	tex->s_size = 50;
+	tex->w_size = 50;
 }
 
 /* 	y = 12;
