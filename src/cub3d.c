@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/23 18:22:20 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 18:51:50 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		err("You should provide only one argument", NULL);
 	parsing(av[1], &data);
-	free_everything(&data);
-	setup_grid(&data);
+//	free_everything(&data);
+	// setup_grid(&data);
 	size_array(&data);
 	init(&data);
 	init_img(&data, data.img_ptr);
