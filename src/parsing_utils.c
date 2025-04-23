@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/22 17:01:16 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 18:14:59 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,53 +28,12 @@ bool	ft_strisspace(char *str)
 	{
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\v')
 			i++;
+		else
+			break ;
 	}
 	if (str[i] == '\0')
 		return (true);
 	return (false);
-}
-
-// char	*get_texture_value(char *line, t_mlx_data *data)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*value;
-//
-// 	i = 0;
-// 	while (ft_isspace(line[i]))
-// 		i++;
-// 	j = 0;
-// 	while (line[i + j] != '\n')
-// 		j++;
-// 	value = malloc(sizeof(char) * (j + 1));
-// 	if (!value)
-// 		err("Cannot allocate memory for texture value\n", data);
-// 	j = 0;
-// 	while (line[i + j] != '\n')
-// 	{
-// 		value[j] = line[i + j];
-// 		j++;
-// 	}
-// 	value[j] = '\0';
-// 	return (value);
-// }
-
-void	remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < line_to_rm)
-		safe_free((void **)&map[i++]);
-	// while (map[i])
-	// {
-	// 	if (*map[i])
-	// 		safe_free((void **)&map[i]);
-	// 	else if (ft_strisspace(map[i]))
-	// 		safe_free((void **)&map[i]);
-	// 	i++;
-	// }
-	data->grid = map + i;
 }
 
 char	*remove_line_return(char *line)

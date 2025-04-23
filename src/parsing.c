@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/22 15:44:47 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 17:59:47 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,7 @@ int	count_map_line(int fd, t_mlx_data *data)
 	return (free(line), i);
 }
 
-void	parsing(char *map_file, t_mlx_data *data)
-{
-	check_extension(map_file, data);
-	load_map(map_file, data);
-}
-
-void	collect_texture(char **map, t_mlx_data *data)
+int	collect_texture(char **map, t_mlx_data *data)
 {
 	t_tex_name	*tex;
 	int			line_to_remove;
@@ -69,29 +63,51 @@ void	collect_texture(char **map, t_mlx_data *data)
 	line_to_remove = check_texture(map, data);
 	if (!check_all_texture(data))
 		err("You should provide NO, SO, WE, EA, F and C texture\n", data);
-	remove_texture_from_map(map, line_to_remove, data);
+	while (map[line_to_remove])
+	{
+		if (!check_line_sanity(map[line_to_remove]))
+			line_to_remove++;
+		break ;
+	}
+	multi_free(&map);
+	return (line_to_remove);
 }
 
-void	load_map(char *map_file, t_mlx_data *data)
+void	parsing(char *map_file, t_mlx_data *data)
+{
+	char	**map;
+	int		line;
+
+	check_extension(map_file, data);
+	map = load_map(map_file, data, 0);
+	line = collect_texture(map, data);
+	data->grid = load_map(map_file, data, line);
+	remove_last_map_line(data);
+}
+
+char	**load_map(char *map_file, t_mlx_data *data, int line_to_rm)
 {
 	int		fd;
 	int		nb_line;
 	char	**grid;
 	int		i;
+	char	*line;
 
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		err("Cannot open map file\n", data);
+	fd = open_helper(map_file, data);
 	nb_line = count_map_line(fd, data);
 	close(fd);
 	grid = malloc(sizeof(char *) * nb_line);
 	if (!grid)
 		err("Cannot allocate memory for map\n", data);
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		err("Cannot open map file\n", data);
+	fd = open_helper(map_file, data);
 	i = 0;
+	while (i < line_to_rm)
+	{
+		free(get_next_line(fd));
+		line_to_rm--;
+	}
 	while (i < nb_line)
 		grid[i++] = remove_line_return(get_next_line(fd));
-	collect_texture(grid, data);
+	close(fd);
+	return (grid);
 }

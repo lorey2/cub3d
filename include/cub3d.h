@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/22 15:45:16 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 17:59:14 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,8 @@ void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			err(char *str, t_mlx_data *data);
 void			safe_free(void **ptr);
 void			free_everything(t_mlx_data *data);
+void			multi_free(char ***point);
+int				open_helper(char *map_file, t_mlx_data *data);
 //draw_best_line
 void			draw_best_line(t_mlx_data *data);
 //3d
@@ -259,14 +261,15 @@ int				close_esc(int keysym, t_mlx_data *data);
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
 //parsing
-void			load_map(char *map_file, t_mlx_data *data);
+char			**load_map(char *map_file, t_mlx_data *data, int line_to_rm);
 void			parsing(char *map_file, t_mlx_data *data);
 void			check_map(t_mlx_data *data);
-
 //parsing utils
 int				check_texture(char **map, t_mlx_data *data);
 char			*remove_line_return(char *line);
 bool			check_all_texture(t_mlx_data *data);
 void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
-
+bool			ft_strisspace(char *str);
+bool			check_line_sanity(char *line);
+void			remove_last_map_line(t_mlx_data *data);
 #endif
