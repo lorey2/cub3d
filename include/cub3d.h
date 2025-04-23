@@ -54,7 +54,7 @@
 # define INDIGO       0x004B0082  // Indigo: R=75, G=0, B=130
 # define BEIGE        0x00F5F5DC  // Beige: R=245, G=245, B=220
 
-// TODO: WHEN I SAY WILL CHANGE I MEAN THAT WONT BE A DEFINE BUT A PARSED VALUE
+// WARNING: IF NO NSEO (for debug cause it is checked in parsing) :)
 
 //////////////////
 //player related//
@@ -62,9 +62,9 @@
 # define MV_SPD			3.0		//nbr of pxl moved each frame
 # define MOUSE_SENSI	-0.003	//mouse sensi
 # define SAFETY			5.0		//in colision a margin between player and wall
-# define INIT_ANGLE		M_PI_4	//initial angle of player      TODO: WILL CHANGE
-# define PLAYER_INIT_X	100		//position initial of player   TODO: WILL CHANGE
-# define PLAYER_INIT_Y	400     //                             TODO: WILL CHANGE
+# define INIT_ANGLE		M_PI_4	//initial angle of player    WARNING: IF NO NSEO
+# define PLAYER_INIT_X	500		//init pos of player         WARNING: IF NO NSEO
+# define PLAYER_INIT_Y	500     //                           WARNING: IF NO NSEO
 ///////////////////
 //minimap related//
 ///////////////////
@@ -89,8 +89,8 @@
 # define RAY_NUMBER		1000.0	//number of rays. Best equal to SIZE_3D_IMG_X
 # define FPS			60.0	//to avoid framerate jump the fps is capped
 
-# define WIN_SIZE_X	1500	// TODO: CHANGE THAT
-# define WIN_SIZE_Y	1000	// TODO: CHANGE THAT
+# define WIN_SIZE_X	1500	// TODO: CHANGE THAT (OR MAYBE NOT)
+# define WIN_SIZE_Y	1000	// TODO: CHANGE THAT (OR MAYBE NOT)
 
 typedef struct s_data
 {
@@ -167,14 +167,30 @@ typedef struct s_img_ptr
 	t_data			*selected;
 }				t_img_ptr;
 
+typedef struct s_3d_data
+{
+	double	perp_dist;
+	double	dist_to_proj_plane;
+	double	proj_slice_height;
+	int		draw_start_y_clamped;
+	int		draw_end_y_clamped;
+	int		true_draw_start_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	fov_rad_half;
+}				t_3d_data;
+
 typedef struct s_mlx_data
 {
+	double			mm_ratio;
+	int				tile_x_nbr;
+	int				tile_y_nbr;
+	int				tile_max_nbr;
 	bool			is_open;
 	bool			is_door_hor;
 	bool			is_door_ver;
 	int				frame_nbr;
 	int				textu_x;
-	int				diff;
 	int				start;
 	struct timeval	last_frame_time;
 	t_tex_img_array	*img_arr;
@@ -182,6 +198,7 @@ typedef struct s_mlx_data
 	t_key			*key;
 	t_dline			*l;
 	t_img_ptr		*img_ptr;
+	t_3d_data		*data_3d;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;
@@ -193,14 +210,10 @@ typedef struct s_mlx_data
 	double			ray_ver;
 	double			ray_hor;
 	double			best;
-	int				color;
-	double			i;
 	double			angle_bkp;
-	double			j;
-	double			next_x;
-	double			next_y;
 	double			next_s_x;
 	double			next_s_y;
+	int				color;
 }				t_mlx_data;
 
 typedef struct s_linex
@@ -228,6 +241,7 @@ void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
 void			init_texture(t_tex_name *tex);
+void			setup_player_pos_angle(t_mlx_data *data);
 //hook
 void			handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);
@@ -236,7 +250,7 @@ int				change_angle(t_mlx_data *data);
 int				mouse_move(int x, int y, t_mlx_data *data);
 //draw
 void			draw_player(t_data *img, t_mlx_data *data);
-void			draw_square(t_data *img, int x, int y, int color);
+void			draw_square(t_data *img, int x, int y, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);
 void			draw_line(t_mlx_data *data, t_dline *l);
 //utils
@@ -250,13 +264,21 @@ int				open_helper(char *map_file, t_mlx_data *data);
 void			draw_best_line(t_mlx_data *data);
 //3d
 void			draw_3d(t_mlx_data *data, int ray);
+//3d_utils
+int				color_y(t_mlx_data *data, int index, double proj_slice_height);
+int				get_texture_pixel(t_data *texture, int tex_x, int tex_y);
+void			calculate_wall_params(t_mlx_data *data, t_3d_data *data_3d);
+void			calculate_draw_limits(t_3d_data *data);
+void			calculate_fc_ray_params(t_mlx_data *data,
+					int x, t_3d_data *data_3d);
 //minimap
+void			size_array(t_mlx_data *data);
 void			draw_minimap_background(t_data *img);
 void			draw_player(t_data *img, t_mlx_data *data);
 void			draw_grid(t_data *img, t_mlx_data *data);
 //exit
 int				close_cross(t_mlx_data *data);
-int				close_esc(int keysym, t_mlx_data *data);
+int				key_released(int keysym, t_mlx_data *data);
 //calcul_rey
 int				ver_best_line(t_mlx_data *data, t_linex *ver);
 int				hor_best_line(t_mlx_data *data, t_liney *hor);
@@ -272,4 +294,7 @@ void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
 bool			ft_strisspace(char *str);
 bool			check_line_sanity(char *line);
 void			remove_last_map_line(t_mlx_data *data);
+//get_color
+int				get_color(double player_pos, t_mlx_data *data,
+					double offset, t_data *img);
 #endif

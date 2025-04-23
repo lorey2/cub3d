@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:37:51 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/14 19:26:58 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 23:07:28 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ bool	is_door_wall(t_mlx_data *data, int x, int y, bool is_hor)
 		data->is_door_hor = true;
 	if (data->grid[x][y] == 'D' && !is_hor)
 		data->is_door_ver = true;
-	if (data->grid[x][y] == '1' || data->grid[x][y] == 'D')
+	if (data->grid[x][y] == '1'
+		|| data->grid[x][y] == 'D' || data->grid[x][y] == ' ')
 		return (1);
 	return (0);
 }
@@ -58,7 +59,7 @@ int	hor_best_line(t_mlx_data *data, t_liney *hor)
 			hor->delta_y = floor((double)data->player_y
 					/ TILE_SIZE - hor->y) * TILE_SIZE;
 		hor->offset = (hor->delta_y - data->player_y) / tan(data->angle);
-		if (data->player_x + hor->offset > data->size_x_window
+		if (data->player_x + hor->offset > data->tile_x_nbr * TILE_SIZE
 			|| data->player_x + hor->offset < 0)
 			break ;
 		hor->row_index = (int)(hor->delta_y / TILE_SIZE);
@@ -104,13 +105,14 @@ int	ver_best_line(t_mlx_data *data, t_linex *ver)
 			ver->delta_x = floor((double)data->player_x
 					/ TILE_SIZE - ver->x) * TILE_SIZE;
 		ver->offset = tan(data->angle) * (ver->delta_x - data->player_x);
-		if (data->player_y + ver->offset > data->size_y_window
+		if (data->player_y + ver->offset > data->tile_y_nbr * TILE_SIZE
 			|| data->player_y + ver->offset < 0)
 			break ;
 		ver->col_index = (int)(ver->delta_x / TILE_SIZE);
 		ver->row_index = (int)(floor((data->player_y + ver->offset)
 					/ TILE_SIZE));
-		if (is_door_wall(data, ver->col_index + ver->neg, ver->row_index, false))
+		if (is_door_wall(data, ver->col_index + ver->neg,
+				ver->row_index, false))
 			break ;
 		ver->x++;
 	}

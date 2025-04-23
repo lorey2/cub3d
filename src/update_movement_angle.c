@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:57:24 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/15 02:27:32 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/22 05:15:44 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	change_angle(t_mlx_data *data)
 {
-	data->angle += ((double)WIN_SIZE_X / 2
+	data->angle -= ((double)WIN_SIZE_X / 2
 			- (double)data->key->mouse_x) * MOUSE_SENSI;
 	if (data->key->q == true)
-		data->angle -= (M_PI / 180);
-	if (data->key->e == true)
 		data->angle += (M_PI / 180);
+	if (data->key->e == true)
+		data->angle -= (M_PI / 180);
 	if (data->angle >= 2 * M_PI)
 		data->angle -= 2 * M_PI;
 	if (data->angle < 0)
@@ -75,9 +75,9 @@ void	handle_key_2(t_mlx_data *data)
 	if (data->key->d == true)
 	{
 		data->next_s_x = data->player_x
-			+ MV_SPD * cos(data->angle_bkp + M_PI_2);
+			- MV_SPD * cos(data->angle_bkp + M_PI_2);
 		data->next_s_y = data->player_y
-			+ MV_SPD * sin(data->angle_bkp + M_PI_2);
+			- MV_SPD * sin(data->angle_bkp + M_PI_2);
 		if (check_next(data, data->next_s_x, data->next_s_y))
 		{
 			data->player_x = data->next_s_x;
@@ -87,9 +87,9 @@ void	handle_key_2(t_mlx_data *data)
 	if (data->key->a == true)
 	{
 		data->next_s_x = data->player_x
-			+ MV_SPD * cos(data->angle_bkp - M_PI_2);
+			- MV_SPD * cos(data->angle_bkp - M_PI_2);
 		data->next_s_y = data->player_y
-			+ MV_SPD * sin(data->angle_bkp - M_PI_2);
+			- MV_SPD * sin(data->angle_bkp - M_PI_2);
 		if (check_next(data, data->next_s_x, data->next_s_y))
 		{
 			data->player_x = data->next_s_x;

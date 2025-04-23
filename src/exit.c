@@ -19,7 +19,7 @@ int	close_cross(t_mlx_data *data)
 	return (0);
 }
 
-int	close_esc(int keysym, t_mlx_data *data)
+void	check_door_player_key(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_Escape)
 	{
@@ -47,5 +47,16 @@ int	close_esc(int keysym, t_mlx_data *data)
 		else
 			data->is_open = true;
 	}
+}
+
+int	key_released(int keysym, t_mlx_data *data)
+{
+	if (keysym == XK_Escape)
+	{
+		data->player_x = 0;
+		exit (0);
+		return (0);
+	}
+	check_door_player_key(keysym, data);
 	return (0);
 }

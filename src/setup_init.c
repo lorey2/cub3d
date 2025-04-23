@@ -32,6 +32,7 @@ void	init(t_mlx_data *data)
 	data->img_ptr = malloc(sizeof(t_img_ptr));
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
+	data->data_3d = malloc(sizeof(t_3d_data));
 	data->l = malloc(sizeof(t_dline));
 	data->last_frame_time.tv_sec = 0;
 	data->last_frame_time.tv_usec = 0;
@@ -110,13 +111,20 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	set_name(data->text_arr);
-	set_img(data->text_arr->door_tex_name, &data->img_arr->door_img, data, 50);
-	set_img(data->text_arr->ceiling_tex_name, &data->img_arr->ceiling_img, data, 64);
-	set_img(data->text_arr->west_tex_name, &data->img_arr->west_img, data, 64);
-	set_img(data->text_arr->floor_tex_name, &data->img_arr->floor_img, data, 1920);
-	set_img(data->text_arr->east_tex_name, &data->img_arr->east_img, data, 1280);
-	set_img(data->text_arr->north_tex_name, &data->img_arr->north_img, data, 1920);
-	set_img(data->text_arr->south_tex_name, &data->img_arr->south_img, data, 512);
+	set_img(data->text_arr->door_tex_name,
+		&data->img_arr->door_img, data, 50);
+	set_img(data->text_arr->ceiling_tex_name,
+		&data->img_arr->ceiling_img, data, 64);
+	set_img(data->text_arr->west_tex_name,
+		&data->img_arr->west_img, data, 64);
+	set_img(data->text_arr->floor_tex_name,
+		&data->img_arr->floor_img, data, 1920);
+	set_img(data->text_arr->east_tex_name,
+		&data->img_arr->east_img, data, 1280);
+	set_img(data->text_arr->north_tex_name,
+		&data->img_arr->north_img, data, 1920);
+	set_img(data->text_arr->south_tex_name,
+		&data->img_arr->south_img, data, 512);
 	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
 	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
 			&img->minimap->bits_per_pixel, &img->minimap->line_length,
@@ -146,11 +154,7 @@ void	init_texture(t_tex_name *tex)
 	tex->w_size = 50;
 }
 
-void	setup_grid(t_mlx_data *data)
-{
-	int	y;
-
-	y = 11;
+/* 	y = 12;
 	data->grid = malloc(sizeof(char *) * y);
 	data->grid[0] = strdup("1111111111");
 	data->grid[1] = strdup("1000000001");
@@ -160,7 +164,93 @@ void	setup_grid(t_mlx_data *data)
 	data->grid[5] = strdup("1010001001");
 	data->grid[6] = strdup("100000D001");
 	data->grid[7] = strdup("1000001001");
-	data->grid[8] = strdup("1000001001");
+	data->grid[8] = strdup("1111111111");
 	data->grid[9] = strdup("1111111111");
-	data->grid[10] = NULL;
+	data->grid[10] = strdup("1111111111");
+	data->grid[11] = NULL; */
+
+/* 	y = 21;
+	data->grid = malloc(sizeof(char *) * y);
+	data->grid[0] = strdup("11111111111111111111");
+	data->grid[1] = strdup("10000000000001000001");
+	data->grid[2] = strdup("10000000000001000001");
+	data->grid[3] = strdup("10000000000001000001");
+	data->grid[4] = strdup("10000000000001000001");
+	data->grid[5] = strdup("10000000000001000001");
+	data->grid[6] = strdup("10000000000001000001");
+	data->grid[7] = strdup("10000000000001000001");
+	data->grid[8] = strdup("10000000000001000001");
+	data->grid[9] = strdup("10000000000001000001");
+	data->grid[10] = strdup("10000000000010000001");
+	data->grid[11] = strdup("10000000000010000001");
+	data->grid[12] = strdup("100000000000D0000001");
+	data->grid[13] = strdup("10000000000010000001");
+	data->grid[14] = strdup("10000000000010000001");
+	data->grid[15] = strdup("10000000000010000001");
+	data->grid[16] = strdup("10000000000010000001");
+	data->grid[17] = strdup("10000000000010000001");
+	data->grid[18] = strdup("10000000000010000001");
+	data->grid[19] = strdup("11111111111111111111");
+	data->grid[20] = NULL; */
+
+void	setup_grid(t_mlx_data *data)
+{
+	int	y;
+
+	y = 15;
+	data->grid = malloc(sizeof(char *) * y);
+	data->grid[0] = strdup("        1111111111111111111111111");
+	data->grid[1] = strdup("        100000000011000E000000001");
+	data->grid[2] = strdup("        1011000001110000000000001");
+	data->grid[3] = strdup("        1001000000000000000000001");
+	data->grid[4] = strdup("111111111011000001110000000000001");
+	data->grid[5] = strdup("100000000011000001110111111111111");
+	data->grid[6] = strdup("11110111111111011100000010001    ");
+	data->grid[7] = strdup("11110111111111011101010010001    ");
+	data->grid[8] = strdup("11000000110101011100000010001    ");
+	data->grid[9] = strdup("10000000000000001100000010001    ");
+	data->grid[10] = strdup("10000000000000001101010010001    ");
+	data->grid[11] = strdup("1100000111010101111101111000111  ");
+	data->grid[12] = strdup("11110111 1110101 101111010001    ");
+	data->grid[13] = strdup("11111111 1111111 111111111111    ");
+	data->grid[14] = NULL;
+}
+
+void	setup_angle(char a, t_mlx_data *data)
+{
+	if (a == 'N')
+		data->angle = 3 * M_PI_2;
+	if (a == 'S')
+		data->angle = M_PI_2;
+	if (a == 'E')
+		data->angle = 0;
+	if (a == 'W')
+		data->angle = M_PI;
+}
+
+void	setup_player_pos_angle(t_mlx_data *data)
+{
+	double	i;
+	double	j;
+
+	i = -1;
+	j = -1;
+	while (data->grid[(int)(++i)])
+	{
+		j = -1;
+		while (data->grid[(int)i][(int)(++j)])
+		{
+			if (data->grid[(int)i][(int)j] == 'N'
+				|| data->grid[(int)i][(int)j] == 'S'
+				|| data->grid[(int)i][(int)j] == 'E'
+				|| data->grid[(int)i][(int)j] == 'W')
+			{
+				data->player_x = (i + 0.5) * TILE_SIZE;
+				data->player_y = (j + 0.5) * TILE_SIZE;
+				setup_angle(data->grid[(int)i][(int)j], data);
+				data->grid[(int)i][(int)j] = '0';
+				return ;
+			}
+		}
+	}
 }
