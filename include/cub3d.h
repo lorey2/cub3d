@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:24:21 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 23:00:37 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define INDIGO       0x004B0082  // Indigo: R=75, G=0, B=130
 # define BEIGE        0x00F5F5DC  // Beige: R=245, G=245, B=220
 
-// TODO: WHEN I SAY WILL CHANGE I MEAN THAT WONT BE A DEFINE BUT A PARSED VALUE
+// WARNING: IF NO NSEO (for debug cause it is checked in parsing) :)
 
 //////////////////
 //player related//
@@ -62,9 +62,9 @@
 # define MV_SPD			3.0		//nbr of pxl moved each frame
 # define MOUSE_SENSI	-0.003	//mouse sensi
 # define SAFETY			5.0		//in colision a margin between player and wall
-# define INIT_ANGLE		M_PI_4	//initial angle of player      TODO: WILL CHANGE
-# define PLAYER_INIT_X	75		//position initial of player   TODO: WILL CHANGE
-# define PLAYER_INIT_Y	75     //                             TODO: WILL CHANGE
+# define INIT_ANGLE		M_PI_4	//initial angle of player    WARNING: IF NO NSEO
+# define PLAYER_INIT_X	500		//init pos of player         WARNING: IF NO NSEO
+# define PLAYER_INIT_Y	500     //                           WARNING: IF NO NSEO
 ///////////////////
 //minimap related//
 ///////////////////
@@ -160,6 +160,19 @@ typedef struct s_img_ptr
 	t_data			*selected;
 }				t_img_ptr;
 
+typedef struct s_3d_data
+{
+	double	perp_dist;
+	double	dist_to_proj_plane;
+	double	proj_slice_height;
+	int		draw_start_y_clamped;
+	int		draw_end_y_clamped;
+	int		true_draw_start_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	fov_rad_half;
+}				t_3d_data;
+
 typedef struct s_mlx_data
 {
 	double			mm_ratio;
@@ -178,6 +191,7 @@ typedef struct s_mlx_data
 	t_key			*key;
 	t_dline			*l;
 	t_img_ptr		*img_ptr;
+	t_3d_data		*data_3d;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;
@@ -219,6 +233,7 @@ typedef struct s_liney
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			setup_grid(t_mlx_data *data);
+void			setup_player_pos_angle(t_mlx_data *data);
 //hook
 void			handle_key(t_mlx_data *data);
 int				key_pressed(int keysym, t_mlx_data *data);
@@ -238,6 +253,13 @@ void			safe_free(void **ptr);
 void			draw_best_line(t_mlx_data *data);
 //3d
 void			draw_3d(t_mlx_data *data, int ray);
+//3d_utils
+int				color_y(t_mlx_data *data, int index, double proj_slice_height);
+int				get_texture_pixel(t_data *texture, int tex_x, int tex_y);
+void			calculate_wall_params(t_mlx_data *data, t_3d_data *data_3d);
+void			calculate_draw_limits(t_3d_data *data);
+void			calculate_fc_ray_params(t_mlx_data *data,
+					int x, t_3d_data *data_3d);
 //minimap
 void			size_array(t_mlx_data *data);
 void			draw_minimap_background(t_data *img);

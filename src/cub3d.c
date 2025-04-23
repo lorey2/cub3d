@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 19:03:55 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 22:25:50 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 	size_array(&data);
 	init(&data);
 	init_img(&data, data.img_ptr);
+	setup_player_pos_angle(&data);
 	mlx_mouse_move(data.mlx_ptr, data.win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 	mlx_loop_hook(data.mlx_ptr, display, &data);

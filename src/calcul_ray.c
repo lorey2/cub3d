@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:37:51 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/18 03:14:45 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/21 23:07:28 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ bool	is_door_wall(t_mlx_data *data, int x, int y, bool is_hor)
 		data->is_door_hor = true;
 	if (data->grid[x][y] == 'D' && !is_hor)
 		data->is_door_ver = true;
-	if (data->grid[x][y] == '1' || data->grid[x][y] == 'D')
+	if (data->grid[x][y] == '1'
+		|| data->grid[x][y] == 'D' || data->grid[x][y] == ' ')
 		return (1);
 	return (0);
 }
