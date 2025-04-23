@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/23 18:14:59 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 19:17:06 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	check_texture(char **map, t_mlx_data *data)
 			data->text_arr->floor_tex_name = ft_split(map[i] + 1, ' ');
 		else if (map[i][0] == 'C' && ft_isspace(map[i][1]))
 			data->text_arr->ceiling_tex_name = ft_split(map[i] + 1, ' ');
+		else if (map[i][0] == 'D' && ft_isspace(map[i][1]))
+			data->text_arr->door_tex_name = ft_split(map[i] + 1, ' ');
 		else if (check_all_texture(data))
 			break ;
 	}

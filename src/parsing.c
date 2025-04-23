@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/23 17:59:47 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 19:10:21 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ char	**load_map(char *map_file, t_mlx_data *data, int line_to_rm)
 	int		nb_line;
 	char	**grid;
 	int		i;
-	char	*line;
 
 	fd = open_helper(map_file, data);
 	nb_line = count_map_line(fd, data);

@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/23 18:57:29 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 19:18:14 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	init(t_mlx_data *data)
 	data->key->mouse_x = WIN_SIZE_X / 2;
 	data->is_open = false;
 	data->img_arr = malloc(sizeof(t_tex_img_array));
-	// data->text_arr = malloc(sizeof(t_tex_name));
 	data->img_ptr = malloc(sizeof(t_img_ptr));
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
@@ -41,42 +40,6 @@ void	init(t_mlx_data *data)
 	data->size_y_window = 500;
 	data->win_ptr = mlx_new_window
 		(data->mlx_ptr, WIN_SIZE_X, WIN_SIZE_Y, "CUB3D");
-}
-
-void	set_name(t_tex_name *text_arr)
-{
-	// text_arr->ceiling_tex_name = malloc(sizeof(char *) * 9);
-	// text_arr->ceiling_tex_name[0] = ft_strdup("./img/skyframe1.xpm");
-	// text_arr->ceiling_tex_name[1] = ft_strdup("./img/skyframe2.xpm");
-	// text_arr->ceiling_tex_name[2] = ft_strdup("./img/skyframe3.xpm");
-	// text_arr->ceiling_tex_name[3] = ft_strdup("./img/skyframe4.xpm");
-	// text_arr->ceiling_tex_name[4] = ft_strdup("./img/skyframe5.xpm");
-	// text_arr->ceiling_tex_name[5] = ft_strdup("./img/skyframe6.xpm");
-	// text_arr->ceiling_tex_name[6] = ft_strdup("./img/skyframe7.xpm");
-	// text_arr->ceiling_tex_name[7] = ft_strdup("./img/skyframe8.xpm");
-	// text_arr->ceiling_tex_name[8] = NULL;
-	// text_arr->floor_tex_name = malloc(sizeof(char *) * 2);
-	// text_arr->floor_tex_name[0] = ft_strdup("./img/dirt.xpm");
-	// text_arr->floor_tex_name[1] = NULL;
-	// text_arr->north_tex_name = malloc(sizeof(char *) * 2);
-	// text_arr->north_tex_name[0] = ft_strdup("./img/diam.xpm");
-	// text_arr->north_tex_name[1] = NULL;
-	// text_arr->south_tex_name = malloc(sizeof(char *) * 2);
-	// text_arr->south_tex_name[0] = ft_strdup("./img/cobble.xpm");
-	// text_arr->south_tex_name[1] = NULL;
-	// text_arr->east_tex_name = malloc(sizeof(char *) * 2);
-	// text_arr->east_tex_name[0] = ft_strdup("./img/wood.xpm");
-	// text_arr->east_tex_name[1] = NULL;
-	// text_arr->west_tex_name = malloc(sizeof(char *) * 5);
-	// text_arr->west_tex_name[0] = ft_strdup("./img/frame1.xpm");
-	// text_arr->west_tex_name[1] = ft_strdup("./img/frame2.xpm");
-	// text_arr->west_tex_name[2] = ft_strdup("./img/frame3.xpm");
-	// text_arr->west_tex_name[3] = ft_strdup("./img/frame4.xpm");
-	// text_arr->west_tex_name[4] = NULL;
-	// text_arr->door_tex_name = malloc(sizeof(char *) * 3);
-	// text_arr->door_tex_name[0] = ft_strdup("./img/door.xpm");
-	// text_arr->door_tex_name[1] = ft_strdup("./img/opendoor.xpm");
-	// text_arr->door_tex_name[2] = NULL;
 }
 
 void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
@@ -110,9 +73,11 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
 
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
-	set_name(data->text_arr);
-	// set_img(data->text_arr->door_tex_name,
-	// 	&data->img_arr->door_img, data, 50);
+	if (data->text_arr->door_tex_name)
+	{
+		set_img(data->text_arr->door_tex_name,
+			&data->img_arr->door_img, data, 50);
+	}
 	set_img(data->text_arr->ceiling_tex_name,
 		&data->img_arr->ceiling_img, data, 64);
 	set_img(data->text_arr->west_tex_name,

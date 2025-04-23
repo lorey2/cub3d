@@ -2,7 +2,7 @@
 CC = cc
 SRC_DIR = src/
 OBJ_DIR = obj/
-CFLAGS = -g -I/usr/include -Imlx_linux -I$(INCLUDE) # -Wall -Wextra -Werror
+CFLAGS = -g -I/usr/include -Imlx_linux -I$(INCLUDE) -Wall -Wextra -Werror
 LDFLAGS = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Wall -Wextra -Werror
 INCLUDE = include/
 MLX = $(MLX_DIR)/libmlx_Linux.a

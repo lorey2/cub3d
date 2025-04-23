@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:46:50 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/17 14:59:28 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/23 19:08:19 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	check_door_player_key(int keysym, t_mlx_data *data)
 		data->player_x = 0;
 		free_everything(data);
 		exit (0);
-		return (0);
 	}
 	if (keysym == XK_w)
 		data->key->w = false;
