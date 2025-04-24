@@ -6,29 +6,28 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:14:08 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/24 13:49:11 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/24 18:57:39 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* void	wall_test(t_mlx_data *data)
+void	wall_test(char **map, int y, int x, int nb_line, bool *check)
 {
-} */
-
-char	*create_padding_string(size_t size, t_mlx_data *data)
-{
-	char	*str;
-	size_t	i;
-
-	str = malloc(sizeof(char) * (size + 1));
-	if (!str)
-		err("Cannot allocate memory for padding string", data);
-	i = 0;
-	while (i < size)
-		str[i++] = ' ';
-	str[i] = '\0';
-	return (str);
+	if (map[y][x] == ' ')
+	{
+		*check = false;
+		return ;
+	}
+	map[y][x] = 'X';
+	if (x < (int)ft_strlen(map[y]) - 1 && !check_wall(map[y][x + 1]))
+		wall_test(map, y, x + 1, nb_line, check);
+	if (y > 0 && !check_wall(map[y - 1][x]))
+		wall_test(map, y - 1, x, nb_line, check);
+	if (x > 0 && !check_wall(map[y][x - 1]))
+		wall_test(map, y, x - 1, nb_line, check);
+	if (y < nb_line - 1 && !check_wall(map[y + 1][x]))
+		wall_test(map, y + 1, x, nb_line, check);
 }
 
 void	make_map_square(t_mlx_data *data)
@@ -38,17 +37,9 @@ void	make_map_square(t_mlx_data *data)
 	size_t	diff;
 	char	*padding;
 	char	*new_line;
-
 	int	i;
 
-	longest_line = 0;
-	i = 0;
-	while (data->grid[i])
-	{
-		len = ft_strlen(data->grid[i++]);
-		if (len > longest_line)
-			longest_line = len;
-	}
+	longest_line = get_longest_line(data);
 	i = 0;
 	while (data->grid[i])
 	{
@@ -94,9 +85,27 @@ void	check_map_content(t_mlx_data *data)
 		err("You should provide one player position on the map", data);
 }
 
+void	print_map(char **map_copy)
+{
+	int	i = 0;
+	while (map_copy[i])
+		printf("%s\n", map_copy[i++]);
+}
+
 void	check_map(t_mlx_data *data)
 {
+	char	**map_copy;
+	int		yx[2];
+	bool	wall;
+
 	check_map_content(data);
 	make_map_square(data);
-	// wall_test(data);
+	map_copy = copy_map(data);
+	wall = true;
+	while (get_blank_space(map_copy, yx))
+		wall_test(map_copy, yx[0], yx[1], count_map_line(data), &wall);
+	multi_free(&map_copy);
+	if (!wall)
+		err("The map should be surrounded by walls", data);
+	
 }
