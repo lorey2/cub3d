@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:14:08 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/24 18:57:39 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/24 18:59:00 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,6 @@ void	check_map_content(t_mlx_data *data)
 		err("You should provide one player position on the map", data);
 }
 
-void	print_map(char **map_copy)
-{
-	int	i = 0;
-	while (map_copy[i])
-		printf("%s\n", map_copy[i++]);
-}
 
 void	check_map(t_mlx_data *data)
 {
