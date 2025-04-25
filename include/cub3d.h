@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/23 17:59:14 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/24 17:14:30 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,13 @@ void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
 bool			ft_strisspace(char *str);
 bool			check_line_sanity(char *line);
 void			remove_last_map_line(t_mlx_data *data);
+size_t			get_longest_line(t_mlx_data *data);
+int				count_map_line(t_mlx_data *data);
+char			*create_padding_string(size_t size, t_mlx_data *data);
+char			**copy_map(t_mlx_data *data);
+int				*get_blank_space(char **map, int *yx);
+bool			valid_map_char(char c);
+bool			check_wall(char c);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,
 					double offset, t_data *img);
