@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:01:04 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/24 18:58:10 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 14:51:43 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	*get_blank_space(char **map, int *yx)
 {
 	int	y;
 	int	x;
-	
+
 	y = 0;
 	while (map[y])
 	{
@@ -73,13 +73,6 @@ bool	valid_map_char(char c)
 		&& c != 'E' && c != 'W' && c != 'D' && c != ' ')
 		return (false);
 	return (true);
-}
-
-void	print_map(char **map_copy)
-{
-	int	i = 0;
-	while (map_copy[i])
-		printf("%s\n", map_copy[i++]);
 }
 
 bool	check_wall(char c)

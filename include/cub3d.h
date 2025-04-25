@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 14:45:20 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 17:42:07 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,8 @@ char			**copy_map(t_mlx_data *data);
 int				*get_blank_space(char **map, int *yx);
 bool			valid_map_char(char c);
 bool			check_wall(char c);
+bool			pars_texture(char **split, t_mlx_data *data);
+void			print_map(t_mlx_data *data);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,
 					double offset, t_data *img);

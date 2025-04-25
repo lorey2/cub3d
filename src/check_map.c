@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:14:08 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/24 18:59:00 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 14:54:38 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ void	make_map_square(t_mlx_data *data)
 {
 	size_t	longest_line;
 	size_t	len;
-	size_t	diff;
 	char	*padding;
 	char	*new_line;
-	int	i;
+	int		i;
 
 	longest_line = get_longest_line(data);
 	i = 0;
@@ -46,8 +45,7 @@ void	make_map_square(t_mlx_data *data)
 		len = ft_strlen(data->grid[i]);
 		if (len < longest_line)
 		{
-			diff = longest_line - len;
-			padding = create_padding_string(diff, data);
+			padding = create_padding_string(longest_line - len, data);
 			new_line = ft_strjoin(data->grid[i], padding);
 			safe_free((void **)&data->grid[i]);
 			safe_free((void **)&padding);
@@ -85,7 +83,6 @@ void	check_map_content(t_mlx_data *data)
 		err("You should provide one player position on the map", data);
 }
 
-
 void	check_map(t_mlx_data *data)
 {
 	char	**map_copy;
@@ -101,5 +98,4 @@ void	check_map(t_mlx_data *data)
 	multi_free(&map_copy);
 	if (!wall)
 		err("The map should be surrounded by walls", data);
-	
 }
