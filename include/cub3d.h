@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/24 17:14:30 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 14:45:20 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,6 @@ typedef struct s_liney
 //init_setp
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
-void			setup_grid(t_mlx_data *data);
 void			init_texture(t_tex_name *tex);
 void			setup_player_pos_angle(t_mlx_data *data);
 //hook
