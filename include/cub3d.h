@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 15:01:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 16:57:14 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,6 @@
 # define SIZE_MAP_Y		500		//
 # define POS_MAP_X		0		//position of minimap
 # define POS_MAP_Y		0		//
-//////////////
-//3d related//
-//////////////
-# define SIZE_3D_IMG_X	1000.0	//size of the 3d img
-# define SIZE_3D_IMG_Y	1000.0	//
-# define POS_3D_X		500		//position of the map img in screen
-# define POS_3D_Y		0		//
 /////////////////
 //general/other//
 /////////////////
@@ -86,11 +79,18 @@
 # define MAX_RAY_STEPS	20.0	//nbr of intersection max with grid
 # define TOLERANCE		0.02	//to avoid infinity in trigo
 # define FOV			50.0	//in degree field of wiew
-# define RAY_NUMBER		1000.0	//number of rays. Best equal to SIZE_3D_IMG_X
+# define RAY_NUMBER		2000.0	//number of rays. Best equal to SIZE_3D_IMG_X
 # define FPS			60.0	//to avoid framerate jump the fps is capped
+//////////////
+//3d related//
+//////////////
+# define SIZE_3D_IMG_X	RAY_NUMBER	//size of the 3d img
+# define SIZE_3D_IMG_Y	2000.0	//
+# define POS_3D_X		500		//position of the map img in screen
+# define POS_3D_Y		0		//
 
-# define WIN_SIZE_X	1500	// TODO: CHANGE THAT (OR MAYBE NOT)
-# define WIN_SIZE_Y	1000	// TODO: CHANGE THAT (OR MAYBE NOT)
+# define WIN_SIZE_X	SIZE_MAP_X + SIZE_3D_IMG_X
+# define WIN_SIZE_Y	SIZE_3D_IMG_Y
 
 typedef struct s_data
 {
