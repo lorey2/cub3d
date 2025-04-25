@@ -6,5 +6,5 @@ things to do:
 2) No more minimap grid. (or better one) DONE
 3) Windows scalability DONE
 4) Free
-5) Black square to fill
+5) Black square to fill (now it is a rectangle)
 6) Vibe
