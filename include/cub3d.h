@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 14:45:20 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 15:01:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,8 @@ typedef struct s_liney
 }				t_liney;
 
 //init_setp
+
+void			set_all_data_pointer_to_null(t_mlx_data *data);
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
 void			init_texture(t_tex_name *tex);

@@ -25,7 +25,7 @@ NAME = cub3d
 # Source and object files
 
 SRC_FILES = cub3d draw_utils hook setup_init utils draw_best_line 3d minimap exit calcul_ray update_movement_angle parsing parsing_utils 3d_utils \
-			get_color texture_utils free_utils check_map parsing_utils1 parsing_map_utils
+			get_color texture_utils free_utils check_map parsing_utils1 parsing_map_utils setup_player_pos_angle init_img
       
 GNL_FILES = get_next_line_bonus get_next_line_utils_bonus
 

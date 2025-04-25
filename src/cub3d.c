@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 14:45:06 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/25 15:02:57 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		err("You should provide only one argument", NULL);
+	set_all_data_pointer_to_null(&data);
 	parsing(av[1], &data);
 	size_array(&data);
 	init(&data);
