@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 15:45:18 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/28 13:13:10 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_texture_image(t_mlx_data *data)
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
 	init_texture_image(data);
-	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
+	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, data->y_size);
 	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
 			&img->minimap->bits_per_pixel, &img->minimap->line_length,
 			&img->minimap->endian);
