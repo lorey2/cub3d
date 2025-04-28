@@ -2,8 +2,8 @@
 CC = cc
 SRC_DIR = src/
 OBJ_DIR = obj/
-CFLAGS = -g -I/usr/include -Imlx_linux -I$(INCLUDE) #-Wall -Wextra -Werror
-LDFLAGS = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -Wall -Wextra -Werror
+CFLAGS = -g -I/usr/include -Imlx_linux -I$(INCLUDE) #-Wall -Wextra -Werror -Wpedantic
+LDFLAGS = -Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXfixes -lXext -lX11 -lm -lz -Wall -Wextra -Werror
 INCLUDE = include/
 MLX = $(MLX_DIR)/libmlx_Linux.a
 MLX_DIR = ./mlx_linux
@@ -25,7 +25,7 @@ NAME = cub3d
 # Source and object files
 
 SRC_FILES = cub3d draw_utils hook setup_init utils draw_best_line 3d minimap exit calcul_ray update_movement_angle parsing parsing_utils 3d_utils \
-			get_color texture_utils free_utils check_map parsing_utils1 parsing_map_utils setup_player_pos_angle init_img
+			get_color free_utils check_map parsing_utils1 parsing_map_utils setup_player_pos_angle init_img
       
 GNL_FILES = get_next_line_bonus get_next_line_utils_bonus
 
@@ -52,7 +52,7 @@ $(MLX):
 	@echo "$(GREEN)MLX combiled !$<$(DEF_COLOR)"
 
 # Linking the final executable
-$(NAME): $(MLX) $(LIBC) $(OBJ)
+$(NAME): $(LIBC) $(OBJ)
 	@$(CC) $(OBJ) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)cub3d compiled!$(DEF_COLOR)"
 
@@ -71,8 +71,8 @@ $(OBJ_DIR)/gnl/%.o: $(GNL_DIR)%.c
 clean:
 	@rm -rf $(OBJ_DIR)
 	@make -s -C $(LIBC_DIR) clean
-	@[ -d "$(MLX_DIR)" ] && make -C $(MLX_DIR) clean || true
-	@rm -rf mlx_linux 2>/dev/null
+#	@[ -d "$(MLX_DIR)" ] && make -C $(MLX_DIR) clean || true
+#	@rm -rf mlx_linux 2>/dev/null
 	@echo "$(CYAN)cub3d objet files cleaned!$(DEF_COLOR)"
 
 # Cleaning everything, including the executable
