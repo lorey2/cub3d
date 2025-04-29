@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/23 19:17:06 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 15:56:22 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,17 @@ bool	check_all_texture(t_mlx_data *data)
 
 int	check_texture(char **map, t_mlx_data *data)
 {
-	int	i;
+	int		i;
+	char	**split;
 
 	i = -1;
 	while (map[++i])
 	{
-		if (map[i][0] == 'N' && map[i][1] == 'O' && ft_isspace(map[i][2]))
-			data->text_arr->north_tex_name = ft_split(map[i] + 2, ' ');
-		else if (map[i][0] == 'S' && map[i][1] == 'O' && ft_isspace(map[i][2]))
-			data->text_arr->south_tex_name = ft_split(map[i] + 2, ' ');
-		else if (map[i][0] == 'W' && map[i][1] == 'E' && ft_isspace(map[i][2]))
-			data->text_arr->west_tex_name = ft_split(map[i] + 2, ' ');
-		else if (map[i][0] == 'E' && map[i][1] == 'A' && ft_isspace(map[i][2]))
-			data->text_arr->east_tex_name = ft_split(map[i] + 2, ' ');
-		else if (map[i][0] == 'F' && ft_isspace(map[i][1]))
-			data->text_arr->floor_tex_name = ft_split(map[i] + 1, ' ');
-		else if (map[i][0] == 'C' && ft_isspace(map[i][1]))
-			data->text_arr->ceiling_tex_name = ft_split(map[i] + 1, ' ');
-		else if (map[i][0] == 'D' && ft_isspace(map[i][1]))
-			data->text_arr->door_tex_name = ft_split(map[i] + 1, ' ');
+		split = ft_split(map[i], ' ');
+		if (!split)
+			err("Cannot split texture", data);
+		if (pars_texture(split, data))
+			NULL;
 		else if (check_all_texture(data))
 			break ;
 	}

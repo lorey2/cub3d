@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/29 14:54:49 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 16:30:44 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data)
 				path[i],
 				&(*img)[i]->width,
 				&(*img)[i]->height);
- 		if (!((*img)[i]->img))
+		if (!((*img)[i]->img))
 		{
 			write(1, "Error while trying to setup texture img\n", 40);
 			write(1, "Probably the path is wrong in map\n", 34);
@@ -76,7 +76,6 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 	data->img_arr->west_img = NULL;
 	data->img_arr->ceiling_img = NULL;
 	data->img_arr->floor_img = NULL;
-	init_texture_image(data);
 	data->img_ptr->selected = NULL;
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
@@ -86,6 +85,7 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 			&img->minimap->endian);
 	img->game->img = mlx_new_image(
 			data->mlx_ptr, SIZE_3D_IMG_X, SIZE_3D_IMG_Y);
+	init_texture_image(data);
 	img->game->addr = mlx_get_data_addr(img->game->img,
 			&img->game->bits_per_pixel, &img->game->line_length,
 			&img->game->endian);

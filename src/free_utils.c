@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:23 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/29 14:55:51 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 15:53:43 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	free_texture(t_mlx_data *data)
 	safe_free((void *)&data->text_arr);
 	if (data->img_ptr)
 	{
-
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr->game->img);
+		if (data->img_ptr->game && data->img_ptr->game->img)
+			mlx_destroy_image(data->mlx_ptr, data->img_ptr->game->img);
 		safe_free((void *)&data->img_ptr->game);
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr->minimap->img);
+		if (data->img_ptr->minimap && data->img_ptr->minimap->img)
+			mlx_destroy_image(data->mlx_ptr, data->img_ptr->minimap->img);
 		safe_free((void *)&data->img_ptr->minimap);
 		safe_free((void *)&data->img_ptr);
 	}
@@ -93,7 +94,10 @@ void	free_everything(t_mlx_data *data)
 	safe_free((void *)&data->key);
 	safe_free((void *)&data->l);
 	safe_free((void *)&data->data_3d);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
+	if (data->mlx_ptr && data->win_ptr)
+	{
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		mlx_destroy_display(data->mlx_ptr);
+	}
 	safe_free((void *)&data->mlx_ptr);
 }

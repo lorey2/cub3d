@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:46:06 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/24 15:58:38 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 16:29:17 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,25 @@ void	remove_last_map_line(t_mlx_data *data)
 	while (data->grid[i++])
 		;
 	i -= 2;
-	while (i)
+	while (!check_line_sanity(data->grid[i]))
 	{
-		if (!check_line_sanity(data->grid[i]))
-			safe_free((void **)&data->grid[i]);
+		safe_free((void **)&data->grid[i]);
 		i--;
 	}
+	i = 0;
+	while (!check_line_sanity(data->grid[i]))
+	{
+		safe_free((void **)&data->grid[i]);
+		i++;
+	}
+	// data->grid += i;
 }
 
 size_t	get_longest_line(t_mlx_data *data)
 {
 	size_t	longest_line;
 	size_t	len;
-	int	i;
+	int		i;
 
 	longest_line = 0;
 	i = 0;
