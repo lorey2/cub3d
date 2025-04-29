@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 15:27:20 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 14:12:55 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,9 @@ void	setup_first_variable(t_mlx_data *data)
 	data->key->mouse_x = WIN_SIZE_X / 2;
 }
 
-void	setup_images(t_mlx_data *data)
-{
-	data->img_arr = malloc(sizeof(t_tex_img_array));
-	data->img_arr->north_img = NULL;
-	data->img_arr->south_img = NULL;
-	data->img_arr->east_img = NULL;
-	data->img_arr->west_img = NULL;
-	data->img_arr->ceiling_img = NULL;
-	data->img_arr->floor_img = NULL;
-	data->img_ptr = malloc(sizeof(t_img_ptr));
-	data->img_ptr->game = NULL;
-	data->img_ptr->minimap = NULL;
-	data->img_ptr->selected = NULL;
-	data->img_ptr->game = malloc(sizeof(t_data));
-	data->img_ptr->minimap = malloc(sizeof(t_data));
-}
-
 void	init(t_mlx_data *data)
 {
 	setup_first_variable(data);
-	setup_images(data);
 	data->data_3d = malloc(sizeof(t_3d_data));
 	data->l = malloc(sizeof(t_dline));
 	data->mlx_ptr = mlx_init();

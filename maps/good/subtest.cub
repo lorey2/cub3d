@@ -5,7 +5,7 @@ EA ./img/wood.xpm
 
 
 
-D ./img/door.xpm ./img/opendoor.xpm
+D ./img/doora.xpm ./img/opendoor.xpm
 
 
 

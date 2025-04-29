@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/28 13:13:10 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 14:15:41 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data)
 				path[i],
 				&(*img)[i]->width,
 				&(*img)[i]->height);
+		if (!((*img)[i]->img))
+		{
+			write(1, "Error while trying to setup texture img\n", 40);
+			write(1, "Probably the path is wrong in map\n", 34);
+			free_everything(data);
+			exit(1);
+		}
 		(*img)[i]->addr = mlx_get_data_addr((*img)[i]->img,
 				&(*img)[i]->bits_per_pixel,
 				&(*img)[i]->line_length,
@@ -62,7 +69,20 @@ void	init_texture_image(t_mlx_data *data)
 
 void	init_img(t_mlx_data *data, t_img_ptr *img)
 {
+	data->img_arr = malloc(sizeof(t_tex_img_array));
+	data->img_arr->north_img = NULL;
+	data->img_arr->south_img = NULL;
+	data->img_arr->east_img = NULL;
+	data->img_arr->west_img = NULL;
+	data->img_arr->ceiling_img = NULL;
+	data->img_arr->floor_img = NULL;
 	init_texture_image(data);
+	data->img_ptr = malloc(sizeof(t_img_ptr));
+	data->img_ptr->game = NULL;
+	data->img_ptr->minimap = NULL;
+	data->img_ptr->selected = NULL;
+	data->img_ptr->game = malloc(sizeof(t_data));
+	data->img_ptr->minimap = malloc(sizeof(t_data));
 	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, data->y_size);
 	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
 			&img->minimap->bits_per_pixel, &img->minimap->line_length,
