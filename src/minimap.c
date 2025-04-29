@@ -6,39 +6,25 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 20:01:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/22 05:32:41 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/28 13:12:50 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	draw_minimap_background(t_data *img)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < SIZE_MAP_X)
-	{
-		y = -1;
-		while (++y < SIZE_MAP_Y)
-			my_mlx_pixel_put(&(*img), x, y, BLACK);
-	}
-}
 
 void	draw_player(t_data *img, t_mlx_data *data)
 {
 	int	x;
 	int	y;
 
-	x = -6;
+	x = -5;
 	while (++x < 5)
 	{
-		y = -6;
+		y = -5;
 		while (++y < 5)
 			my_mlx_pixel_put(&(*img),
 				data->player_y * data->mm_ratio + y,
-				(data->player_x + x) * data->mm_ratio, GREEN);
+				data->player_x * data->mm_ratio + x, GREEN);
 	}
 }
 

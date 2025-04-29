@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/22 04:18:06 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/28 12:35:03 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	draw_square(t_data *img, int x, int y, t_mlx_data *data)
 	int	j;
 
 	i = 0;
-	while (++i < TILE_SIZE - 2)
+	while (++i < TILE_SIZE)
 	{
 		j = 1;
-		while (++j < TILE_SIZE - 2)
+		while (++j < TILE_SIZE)
 			my_mlx_pixel_put(
 				&(*img),
 				(x * TILE_SIZE + i) * data->mm_ratio,
@@ -69,6 +69,16 @@ void	draw_line(t_mlx_data *data, t_dline *l)
 	}
 }
 
+void	setup_y_size(t_mlx_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->grid[++i])
+		;
+	data->y_size = i * TILE_SIZE * data->mm_ratio;
+}
+
 void	size_array(t_mlx_data *data)
 {
 	int	i;
@@ -94,4 +104,5 @@ void	size_array(t_mlx_data *data)
 		data->mm_ratio = 500 / (data->tile_max_nbr * TILE_SIZE);
 	else
 		data->mm_ratio = 1;
+	setup_y_size(data);
 }

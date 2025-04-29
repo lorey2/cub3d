@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:54:35 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/21 18:23:38 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/28 16:19:57 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@ void	draw_best_line(t_mlx_data *data)
 
 	ver_no = ver_best_line(data, &ver);
 	hor_no = hor_best_line(data, &hor);
-	data->ray_hor = sqrt(pow(hor.offset, 2)
-			+ pow(hor.delta_y - (double)data->player_y, 2));
-	data->ray_ver = sqrt(pow(ver.delta_x - data->player_x, 2)
-			+ pow(ver.offset, 2));
+	if (hor_no != -1)
+		data->ray_hor = sqrt(pow(hor.offset, 2)
+				+ pow(hor.delta_y - (double)data->player_y, 2));
+	if (ver_no != -1)
+		data->ray_ver = sqrt(pow(ver.delta_x - data->player_x, 2)
+				+ pow(ver.offset, 2));
 	if (ver_no == -1)
 		draw_horizontal_line(data, &hor);
 	else if (hor_no == -1)

@@ -1,23 +1,24 @@
 NO ./img/diam.xpm
 SO ./img/cobble.xpm
-WE ./img/frame1.xpm
+WE ./img/frame1.xpm ./img/frame2.xpm ./img/frame3.xpm ./img/frame4.xpm
 EA ./img/wood.xpm
 
 
 
-D ./img/door.xpm ./img/opendoor.xpm
+D ./img/doora.xpm ./img/opendoor.xpm
 
 
 
 F ./img/dirt.xpm
-C ./img/skyframe1.xpm ./img/skyframe2.xpm ./img/skyframe3.xpm ./img/skyframe4.xpm ./img/skyframe5.xpm
+C ./img/skyframe1.xpm ./img/skyframe2.xpm ./img/skyframe3.xpm ./img/skyframe4.xpm ./img/skyframe5.xpm ./img/skyframe6.xpm ./img/skyframe7.xpm ./img/skyframe8.xpm
+
 
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001
-1000000000110000011101D1111111111
+1000000000110000011101D111D111111
 11110111111111011100000010001
 11110111111111011101010010001
 11000000110101011100000010001

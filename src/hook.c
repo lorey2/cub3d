@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:44:10 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/22 05:26:38 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/28 20:21:37 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,14 @@ int	display(t_mlx_data *data)
 	change_angle(data);
 	mlx_mouse_move(data->mlx_ptr,
 		data->win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
-	draw_minimap_background(minimap_img);
 	draw_grid(minimap_img, data);
 	draw_player(minimap_img, data);
 	draw_rays(data);
 	wait_for_next_frame();
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_3d->img,
-		POS_3D_X, POS_3D_Y);
+		0, POS_3D_Y);
 	mlx_put_image_to_window(
-		data->mlx_ptr, data->win_ptr, minimap_img->img, POS_MAP_X, POS_MAP_Y);
+		data->mlx_ptr, data->win_ptr, minimap_img->img, 0, POS_MAP_Y);
 	data->frame_nbr++;
 	if (data->frame_nbr == FPS)
 		data->frame_nbr -= FPS;

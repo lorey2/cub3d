@@ -6,18 +6,38 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/25 14:46:05 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 14:12:55 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init(t_mlx_data *data)
+//usefull for safefree
+
+void	set_all_data_pointer_to_null(t_mlx_data *data)
+{
+	data->img_arr = NULL;
+	data->text_arr = NULL;
+	data->key = NULL;
+	data->l = NULL;
+	data->img_ptr = NULL;
+	data->data_3d = NULL;
+	data->mlx_ptr = NULL;
+	data->win_ptr = NULL;
+	data->grid = NULL;
+}
+
+void	setup_first_variable(t_mlx_data *data)
 {
 	data->frame_nbr = 0;
 	data->angle = INIT_ANGLE;
 	data->player_x = PLAYER_INIT_X;
 	data->player_y = PLAYER_INIT_Y;
+	data->is_open = false;
+	data->last_frame_time.tv_sec = 0;
+	data->last_frame_time.tv_usec = 0;
+	data->size_x_window = 500;
+	data->size_y_window = 500;
 	data->key = malloc(sizeof(t_key));
 	data->key->w = false;
 	data->key->a = false;
@@ -26,79 +46,16 @@ void	init(t_mlx_data *data)
 	data->key->q = false;
 	data->key->e = false;
 	data->key->mouse_x = WIN_SIZE_X / 2;
-	data->is_open = false;
-	data->img_arr = malloc(sizeof(t_tex_img_array));
-	data->img_ptr = malloc(sizeof(t_img_ptr));
-	data->img_ptr->game = malloc(sizeof(t_data));
-	data->img_ptr->minimap = malloc(sizeof(t_data));
+}
+
+void	init(t_mlx_data *data)
+{
+	setup_first_variable(data);
 	data->data_3d = malloc(sizeof(t_3d_data));
 	data->l = malloc(sizeof(t_dline));
-	data->last_frame_time.tv_sec = 0;
-	data->last_frame_time.tv_usec = 0;
 	data->mlx_ptr = mlx_init();
-	data->size_x_window = 500;
-	data->size_y_window = 500;
 	data->win_ptr = mlx_new_window
 		(data->mlx_ptr, WIN_SIZE_X, WIN_SIZE_Y, "CUB3D");
-}
-
-void	set_img(char **path, t_data ***img, t_mlx_data *data, int tex_size)
-{
-	int	nbr_frame;
-	int	i;
-
-	i = -1;
-	nbr_frame = -1;
-	while (path[++nbr_frame])
-		;
-	*img = malloc(sizeof(t_data *) * (nbr_frame + 1));
-	i = -1;
-	while (++i < nbr_frame)
-	{
-		(*img)[i] = malloc(sizeof(t_data));
-		(*img)[i]->width = tex_size;
-		(*img)[i]->height = tex_size;
-		(*img)[i]->img = mlx_xpm_file_to_image(data->mlx_ptr,
-				path[i],
-				&(*img)[i]->width,
-				&(*img)[i]->height);
-		(*img)[i]->addr = mlx_get_data_addr((*img)[i]->img,
-				&(*img)[i]->bits_per_pixel,
-				&(*img)[i]->line_length,
-				&(*img)[i]->endian);
-	}
-	(*img)[0]->frame_nbr = nbr_frame;
-	(*img)[i] = NULL;
-}
-
-void	init_img(t_mlx_data *data, t_img_ptr *img)
-{
-	if (data->text_arr->door_tex_name)
-	{
-		set_img(data->text_arr->door_tex_name,
-			&data->img_arr->door_img, data, 50);
-	}
-	set_img(data->text_arr->ceiling_tex_name,
-		&data->img_arr->ceiling_img, data, 64);
-	set_img(data->text_arr->west_tex_name,
-		&data->img_arr->west_img, data, 64);
-	set_img(data->text_arr->floor_tex_name,
-		&data->img_arr->floor_img, data, 1920);
-	set_img(data->text_arr->east_tex_name,
-		&data->img_arr->east_img, data, 1280);
-	set_img(data->text_arr->north_tex_name,
-		&data->img_arr->north_img, data, 1920);
-	set_img(data->text_arr->south_tex_name,
-		&data->img_arr->south_img, data, 512);
-	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, SIZE_MAP_Y);
-	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
-			&img->minimap->bits_per_pixel, &img->minimap->line_length,
-			&img->minimap->endian);
-	img->game->img = mlx_new_image(
-			data->mlx_ptr, SIZE_3D_IMG_X, SIZE_3D_IMG_Y);
-	img->game->addr = mlx_get_data_addr(img->game->img,
-			&img->game->bits_per_pixel, &img->game->line_length,
-			&img->game->endian);
 }
 
 void	init_texture(t_tex_name *tex)
@@ -117,43 +74,4 @@ void	init_texture(t_tex_name *tex)
 	tex->n_size = 50;
 	tex->s_size = 50;
 	tex->w_size = 50;
-}
-
-void	setup_angle(char a, t_mlx_data *data)
-{
-	if (a == 'N')
-		data->angle = 3 * M_PI_2;
-	if (a == 'S')
-		data->angle = M_PI_2;
-	if (a == 'E')
-		data->angle = 0;
-	if (a == 'W')
-		data->angle = M_PI;
-}
-
-void	setup_player_pos_angle(t_mlx_data *data)
-{
-	double	i;
-	double	j;
-
-	i = -1;
-	j = -1;
-	while (data->grid[(int)(++i)])
-	{
-		j = -1;
-		while (data->grid[(int)i][(int)(++j)])
-		{
-			if (data->grid[(int)i][(int)j] == 'N'
-				|| data->grid[(int)i][(int)j] == 'S'
-				|| data->grid[(int)i][(int)j] == 'E'
-				|| data->grid[(int)i][(int)j] == 'W')
-			{
-				data->player_x = (i + 0.5) * TILE_SIZE;
-				data->player_y = (j + 0.5) * TILE_SIZE;
-				setup_angle(data->grid[(int)i][(int)j], data);
-				data->grid[(int)i][(int)j] = '0';
-				return ;
-			}
-		}
-	}
 }
