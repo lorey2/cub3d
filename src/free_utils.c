@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:23 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/29 14:06:15 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 14:55:51 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	free_texture(t_mlx_data *data)
 
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr->game->img);
 		safe_free((void *)&data->img_ptr->game);
-		write(1, "YO\n", 3);
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr->minimap->img);
 		safe_free((void *)&data->img_ptr->minimap);
 		safe_free((void *)&data->img_ptr);

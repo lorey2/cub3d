@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/28 20:20:40 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/04/29 14:52:33 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int ac, char **av)
 	parsing(av[1], &data);
 	size_array(&data);
 	init(&data);
+	data.img_ptr = malloc(sizeof(t_img_ptr));
 	init_img(&data, data.img_ptr);
 	setup_player_pos_angle(&data);
 	mlx_mouse_move(data.mlx_ptr, data.win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
