@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/29 16:26:08 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/01 14:43:19 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ void	parsing(char *map_file, t_mlx_data *data)
 	map = load_map(map_file, data, 0);
 	line = collect_texture(map, data);
 	data->grid = load_map(map_file, data, line);
-	print_map(data);
 	remove_last_map_line(data);
-	print_map(data);
 	check_map(data);
 }
 
