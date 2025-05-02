@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:14:08 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/29 15:54:57 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 14:29:40 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	check_map_content(t_mlx_data *data)
 	char	c;
 	int		player;
 
-	i = 0;
+	i = -1;
 	player = 0;
-	while (data->grid[i])
+	while (data->grid[++i])
 	{
 		y = 0;
 		while (data->grid[i][y])
@@ -73,11 +73,12 @@ void	check_map_content(t_mlx_data *data)
 			if (c != '0' && c != '1' && c != 'N' && c != 'S'
 				&& c != 'E' && c != 'W' && c != 'D' && c != ' ')
 				err("Map must contain only: 0, 1, N, S, E, W, D, ' '", data);
+			if (c == 'D')
+				data->door = true;
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 				player++;
 			y++;
 		}
-		i++;
 	}
 	if (player != 1)
 		err("You should provide one player position on the map", data);

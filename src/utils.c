@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:59:34 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/17 14:33:24 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 15:47:50 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,17 @@ void	safe_free(void **ptr)
 		free(*ptr);
 		*ptr = NULL;
 	}
+}
+
+bool	ft_strisdigit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i++]))
+			return (false);
+	}
+	return (true);
 }

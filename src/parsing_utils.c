@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/29 15:56:22 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 14:24:16 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,15 @@ bool	check_all_texture(t_mlx_data *data)
 	if (!tex->ceiling_tex_name || !tex->floor_tex_name || !tex->east_tex_name
 		|| !tex->north_tex_name || !tex->south_tex_name || !tex->west_tex_name)
 		return (false);
+	if (data->door && !tex->door_tex_name)
+		return (false);
 	return (true);
+}
+
+void	err_helper(t_mlx_data *data, char **map, char *str)
+{
+	multi_free(&map);
+	err(str, data);
 }
 
 int	check_texture(char **map, t_mlx_data *data)
@@ -76,6 +84,16 @@ int	check_texture(char **map, t_mlx_data *data)
 			NULL;
 		else if (check_all_texture(data))
 			break ;
+	}
+	if (!check_all_texture(data))
+		err_helper(data, map, "You should provide NO, SO, WE, EA, F \
+and C texture");
+	while (!check_line_sanity(map[i]))
+	{
+		i++;
+		if (!map[i])
+			err_helper(data, map, "Map should be placed after texture \
+declaration");
 	}
 	return (i);
 }

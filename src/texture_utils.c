@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:58:12 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/04/29 15:58:29 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 16:28:16 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,23 @@ char	**copy_texture(char **split)
 	return (tex);
 }
 
-void	print_map(t_mlx_data *data)
+bool	count_rgb(char **f_split, char **c_split)
 {
 	int	i;
 
 	i = 0;
-	while (data->grid[i])
-		printf("%s\n", data->grid[i++]);
+	while (i < 3)
+	{
+		if (!f_split[i++])
+			return (false);
+	}
+	i = 0;
+	while (i < 3)
+	{
+		if (!c_split[i++])
+			return (false);
+	}
+	return (true);
 }
 
 bool	pars_texture(char **split, t_mlx_data *data)
@@ -64,4 +74,48 @@ bool	pars_texture(char **split, t_mlx_data *data)
 	}
 	multi_free(&split);
 	return (true);
+}
+
+bool	check_rgb_digit(char **f_split, char **c_split)
+{
+	int	i;
+
+	i = 0;
+	while (f_split[i])
+	{
+		if (!ft_strisdigit(f_split[i++]))
+			return (multi_free(&f_split), multi_free(&c_split), false);
+	}
+	i = 0;
+	while (c_split[i])
+	{
+		if (!ft_strisdigit(c_split[i++]))
+			return (multi_free(&f_split), multi_free(&c_split), false);
+	}
+	return (true);
+}
+
+void	check_rgb(t_mlx_data *data)
+{
+	char	**f_split;
+	char	**c_split;
+
+	if (data->text_arr->ceiling_tex_name[1]
+		|| data->text_arr->floor_tex_name[1])
+		return ;
+	f_split = ft_split(data->text_arr->floor_tex_name[0], ',');
+	c_split = ft_split(data->text_arr->ceiling_tex_name[0], ',');
+	if (!f_split || !c_split)
+		return ;
+	if (!count_rgb(f_split, c_split))
+	{
+		multi_free(&f_split);
+		multi_free(&c_split);
+		return ;
+	}
+	if (!check_rgb_digit(f_split, c_split))
+		return ;
+	multi_free(&f_split);
+	multi_free(&c_split);
+	data->rgb = true;
 }

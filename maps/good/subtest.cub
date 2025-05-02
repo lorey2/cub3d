@@ -1,5 +1,14 @@
+
+
+
+
+
+
+
+
 NO ./img/diam.xpm
 SO ./img/cobble.xpm
+
 WE ./img/frame1.xpm ./img/frame2.xpm ./img/frame3.xpm ./img/frame4.xpm
 EA ./img/wood.xpm
 
@@ -11,6 +20,16 @@ D ./img/door.xpm ./img/opendoor.xpm
 
 F ./img/dirt.xpm
 C ./img/skyframe1.xpm ./img/skyframe2.xpm ./img/skyframe3.xpm ./img/skyframe4.xpm ./img/skyframe5.xpm ./img/skyframe6.xpm ./img/skyframe7.xpm ./img/skyframe8.xpm
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29,3 +48,22 @@ C ./img/skyframe1.xpm ./img/skyframe2.xpm ./img/skyframe3.xpm ./img/skyframe4.xp
 1100000111010101111101111000111
 11110111 1110101 101111010001
 11111111 1111111 111111111111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
