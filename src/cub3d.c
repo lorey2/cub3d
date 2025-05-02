@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/01 15:30:37 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 16:12:12 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 int	main(int ac, char **av)
 {
+	// char **t = ft_split("200,200,", ',');
+	// multi_free(&t);
+	// return (0);
 	t_mlx_data	data;
 
 	if (ac != 2)

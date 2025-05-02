@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/01 15:42:21 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 14:24:16 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ bool	check_all_texture(t_mlx_data *data)
 
 	tex = data->text_arr;
 	if (!tex->ceiling_tex_name || !tex->floor_tex_name || !tex->east_tex_name
-		|| !tex->north_tex_name || !tex->south_tex_name || !tex->west_tex_name
-		|| !tex->door_tex_name)
+		|| !tex->north_tex_name || !tex->south_tex_name || !tex->west_tex_name)
+		return (false);
+	if (data->door && !tex->door_tex_name)
 		return (false);
 	return (true);
 }

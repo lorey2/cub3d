@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:23 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/29 15:53:43 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 16:26:42 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,18 @@ void	free_img_array(t_mlx_data *data)
 
 void	free_texture(t_mlx_data *data)
 {
-	multi_free(&data->text_arr->north_tex_name);
-	multi_free(&data->text_arr->south_tex_name);
-	multi_free(&data->text_arr->west_tex_name);
-	multi_free(&data->text_arr->east_tex_name);
-	multi_free(&data->text_arr->floor_tex_name);
-	multi_free(&data->text_arr->ceiling_tex_name);
-	multi_free(&data->text_arr->door_tex_name);
-	multi_free(&data->grid);
-	safe_free((void *)&data->text_arr);
+	if (data->text_arr)
+	{
+		multi_free(&data->text_arr->north_tex_name);
+		multi_free(&data->text_arr->south_tex_name);
+		multi_free(&data->text_arr->west_tex_name);
+		multi_free(&data->text_arr->east_tex_name);
+		multi_free(&data->text_arr->floor_tex_name);
+		multi_free(&data->text_arr->ceiling_tex_name);
+		multi_free(&data->text_arr->door_tex_name);
+		multi_free(&data->grid);
+		safe_free((void *)&data->text_arr);
+	}
 	if (data->img_ptr)
 	{
 		if (data->img_ptr->game && data->img_ptr->game->img)

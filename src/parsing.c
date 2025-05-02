@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/01 14:43:19 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 16:28:28 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	collect_texture(char **map, t_mlx_data *data)
 	data->text_arr = tex;
 	init_texture(tex);
 	line_to_remove = check_texture(map, data);
-	if (!check_all_texture(data))
-		err("You should provide NO, SO, WE, EA, F and C texture\n", data);
 	while (map[line_to_remove])
 	{
 		if (!check_line_sanity(map[line_to_remove]))
@@ -70,6 +68,7 @@ int	collect_texture(char **map, t_mlx_data *data)
 		break ;
 	}
 	multi_free(&map);
+	check_rgb(data);
 	return (line_to_remove);
 }
 
@@ -78,6 +77,8 @@ void	parsing(char *map_file, t_mlx_data *data)
 	char	**map;
 	int		line;
 
+	data->door = false;
+	data->rgb = false;
 	check_extension(map_file, data);
 	map = load_map(map_file, data, 0);
 	line = collect_texture(map, data);
