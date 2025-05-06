@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/02 16:28:28 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/06 14:09:08 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	count_mapfile_line(int fd, t_mlx_data *data)
 	i = 0;
 	line = get_next_line(fd);
 	if (!line)
-		err("Cannot get line", data);
+		err("Cannot get line, probably an empty file", data);
 	++i;
 	while (line)
 	{
@@ -57,7 +57,7 @@ int	collect_texture(char **map, t_mlx_data *data)
 
 	tex = malloc(sizeof(t_tex_name));
 	if (!tex)
-		err("Cannot allocate memory for texture\n", data);
+		err("Cannot allocate memory for texture", data);
 	data->text_arr = tex;
 	init_texture(tex);
 	line_to_remove = check_texture(map, data);
@@ -79,6 +79,7 @@ void	parsing(char *map_file, t_mlx_data *data)
 
 	data->door = false;
 	data->rgb = false;
+	data->wall_check = true;
 	check_extension(map_file, data);
 	map = load_map(map_file, data, 0);
 	line = collect_texture(map, data);
@@ -99,7 +100,7 @@ char	**load_map(char *map_file, t_mlx_data *data, int line_to_rm)
 	close(fd);
 	grid = malloc(sizeof(char *) * nb_line);
 	if (!grid)
-		err("Cannot allocate memory for map\n", data);
+		err("Cannot allocate memory for map", data);
 	fd = open_helper(map_file, data);
 	i = 0;
 	while (i < line_to_rm)
