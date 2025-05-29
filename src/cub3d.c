@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/06 13:15:08 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/29 14:57:53 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,15 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win_ptr, key_released, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
+}
+
+void	print_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i++]);
+	}
 }
