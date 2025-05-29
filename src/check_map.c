@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:14:08 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/06 14:47:56 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/29 15:19:24 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,31 @@
 // 	if (y < nb_line - 1 && !check_wall(map[y + 1][x]))
 // 		wall_test(map, y + 1, x, nb_line, check);
 // }
+//
+//
+
+void	check_door(t_mlx_data *data)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	while (data->grid[i])
+	{
+		y = 0;
+		while (data->grid[i][y])
+		{
+			if (data->grid[i][y] == 'D')
+			{
+				if (!data->text_arr->door_tex_name)
+					err("Please provide a texture for the door", data);
+				return ;
+			}
+			y++;
+		}
+		i++;
+	}
+}
 
 void	wall_test(char **map, int y, int x, t_mlx_data *data)
 {
@@ -113,6 +138,7 @@ void	check_map(t_mlx_data *data)
 	int		yx[2];
 
 	check_map_content(data);
+	check_door(data);
 	make_map_square(data);
 	map_copy = copy_map(data);
 	data->map_line = count_map_line(data);
