@@ -18,10 +18,8 @@ D ./img/door.xpm ./img/opendoor.xpm
 
 
 
-F ./img/dirt.xpm
-C ./img/skyframe1.xpm ./img/skyframe2.xpm ./img/skyframe3.xpm ./img/skyframe4.xpm ./img/skyframe5.xpm ./img/skyframe6.xpm ./img/skyframe7.xpm ./img/skyframe8.xpm
-
-
+C ./img/frame1.xpm ./img/frame2.xpm ./img/frame3.xpm ./img/frame4.xpm
+F 0,153,0
 
 
 

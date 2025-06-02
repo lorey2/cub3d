@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:58:12 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/30 15:40:22 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/02 16:28:16 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,14 @@ bool	check_rgb_digit(char **f_split, char **c_split)
 	i = 0;
 	while (f_split[i])
 	{
-		if (!ft_strisdigit(f_split[i]) || f_split[i] > 255 || f_split[i] < 0)
+		if (!ft_strisdigit(f_split[i++]))
 			return (multi_free(&f_split), multi_free(&c_split), false);
-		i++;
 	}
 	i = 0;
 	while (c_split[i])
 	{
-		if (!ft_strisdigit(c_split[i]) || c_split[i] > 255 || c_split[i] < 0)
+		if (!ft_strisdigit(c_split[i++]))
 			return (multi_free(&f_split), multi_free(&c_split), false);
-		i++;
 	}
 	return (true);
 }
