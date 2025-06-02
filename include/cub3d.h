@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/06 14:24:58 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/09 18:02:42 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,18 @@ typedef struct s_3d_data
 	double	fov_rad_half;
 }				t_3d_data;
 
+typedef struct s_rgb_data
+{
+	int	ceiling_r;
+	int	ceiling_g;
+	int	ceiling_b;
+	int	ceiling_color;
+	int	floor_r;
+	int	floor_g;
+	int	floor_b;
+	int	floor_color;
+}				t_rgb_data;
+
 typedef struct s_mlx_data
 {
 	int				y_size;
@@ -192,8 +204,6 @@ typedef struct s_mlx_data
 	bool			is_door_ver;
 	bool			rgb;
 	bool			door;
-	bool			wall_check;
-	int				map_line;
 	int				frame_nbr;
 	int				textu_x;
 	int				start;
@@ -204,6 +214,7 @@ typedef struct s_mlx_data
 	t_dline			*l;
 	t_img_ptr		*img_ptr;
 	t_3d_data		*data_3d;
+	t_rgb_data		*rgb_data;
 	double			size_x_window;
 	double			size_y_window;
 	void			*mlx_ptr;
@@ -246,6 +257,7 @@ typedef struct s_liney
 void			set_all_data_pointer_to_null(t_mlx_data *data);
 void			init(t_mlx_data *data);
 void			init_img(t_mlx_data *data, t_img_ptr *img);
+void			setup_rgb(t_mlx_data *data);
 void			init_texture(t_tex_name *tex);
 void			setup_player_pos_angle(t_mlx_data *data);
 //hook
@@ -309,7 +321,7 @@ int				*get_blank_space(char **map, int *yx);
 bool			valid_map_char(char c);
 bool			check_wall(char c);
 bool			pars_texture(char **split, t_mlx_data *data);
-void			print_map(char **map);
+void			print_map(t_mlx_data *data);
 void			check_rgb(t_mlx_data *data);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,

@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:23 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/02 16:26:42 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/09 18:05:10 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	free_everything(t_mlx_data *data)
 	free_texture(data);
 	multi_free(&data->grid);
 	safe_free((void *)&data->key);
+	safe_free((void *)&data->rgb_data);
 	safe_free((void *)&data->l);
 	safe_free((void *)&data->data_3d);
 	if (data->mlx_ptr && data->win_ptr)

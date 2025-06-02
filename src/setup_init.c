@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 19:21:03 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/02 14:28:55 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/09 18:04:10 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	set_all_data_pointer_to_null(t_mlx_data *data)
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->grid = NULL;
+	data->rgb_data = NULL;
 }
 
 void	setup_first_variable(t_mlx_data *data)
@@ -53,6 +54,7 @@ void	init(t_mlx_data *data)
 	setup_first_variable(data);
 	data->data_3d = malloc(sizeof(t_3d_data));
 	data->l = malloc(sizeof(t_dline));
+	data->rgb_data = malloc(sizeof(t_rgb_data));
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window
 		(data->mlx_ptr, WIN_SIZE_X, WIN_SIZE_Y, "CUB3D");

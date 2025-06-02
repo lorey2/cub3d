@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/09 18:56:26 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/09 18:10:50 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_texture_image(t_mlx_data *data)
 		set_img(data->text_arr->door_tex_name,
 			&data->img_arr->door_img, data);
 	}
-	if (!data->color)
+	if (data->color)
 	{
 		set_img(data->text_arr->ceiling_tex_name,
 			&data->img_arr->ceiling_img, data);
@@ -72,8 +72,8 @@ void	init_texture_image(t_mlx_data *data)
 
 void	setup_rgb(t_mlx_data *data)
 {
-	char	**ceil_split;
-	char	**floor_split;
+	char **ceil_split;
+	char **floor_split;
 
 	if (data->rgb)
 	{
@@ -81,20 +81,7 @@ void	setup_rgb(t_mlx_data *data)
 		data->rgb_data->ceiling_r = ft_atoi(ceil_split[0]);
 		data->rgb_data->ceiling_g = ft_atoi(ceil_split[1]);
 		data->rgb_data->ceiling_b = ft_atoi(ceil_split[2]);
-		data->rgb_data->ceiling_color = (255 << 24
-				| data->rgb_data->ceiling_r << 16
-				| data->rgb_data->ceiling_g << 8
-				| data->rgb_data->ceiling_b);
 		multi_free(&ceil_split);
-		floor_split = ft_split(data->text_arr->floor_tex_name[0], ',');
-		data->rgb_data->floor_r = ft_atoi(floor_split[0]);
-		data->rgb_data->floor_g = ft_atoi(floor_split[1]);
-		data->rgb_data->floor_b = ft_atoi(floor_split[2]);
-		data->rgb_data->floor_color = (255 << 24
-				| data->rgb_data->floor_r << 16
-				| data->rgb_data->floor_g << 8
-				| data->rgb_data->floor_b);
-		multi_free(&floor_split);
 	}
 }
 

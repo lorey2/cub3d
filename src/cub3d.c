@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/29 14:57:53 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/05/09 18:34:12 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	main(int ac, char **av)
 		err("You should provide only one argument", NULL);
 	set_all_data_pointer_to_null(&data);
 	parsing(av[1], &data);
-	// free_everything(&data);
-	size_array(&data);
+ 	size_array(&data);
 	init(&data);
 	data.img_ptr = malloc(sizeof(t_img_ptr));
 	init_img(&data, data.img_ptr);
+	setup_rgb(&data);
 	setup_player_pos_angle(&data);
 	mlx_mouse_move(data.mlx_ptr, data.win_ptr, WIN_SIZE_X / 2, WIN_SIZE_Y / 2);
 	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
@@ -39,15 +39,4 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win_ptr, key_released, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
-}
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i++]);
-	}
 }
