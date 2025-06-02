@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/09 18:34:12 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/02 23:05:23 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 		err("You should provide only one argument", NULL);
 	set_all_data_pointer_to_null(&data);
 	parsing(av[1], &data);
- 	size_array(&data);
+	size_array(&data);
 	init(&data);
 	data.img_ptr = malloc(sizeof(t_img_ptr));
 	init_img(&data, data.img_ptr);

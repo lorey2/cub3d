@@ -6,11 +6,19 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/09 18:56:26 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/02 23:13:11 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	set_img_error(t_mlx_data *data)
+{
+	write(1, "Error while trying to setup texture img\n", 40);
+	write(1, "Probably the path is wrong in map\n", 34);
+	free_everything(data);
+	exit(1);
+}
 
 void	set_img(char **path, t_data ***img, t_mlx_data *data)
 {
@@ -31,12 +39,7 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data)
 				&(*img)[i]->width,
 				&(*img)[i]->height);
 		if (!((*img)[i]->img))
-		{
-			write(1, "Error while trying to setup texture img\n", 40);
-			write(1, "Probably the path is wrong in map\n", 34);
-			free_everything(data);
-			exit(1);
-		}
+			set_img_error(data);
 		(*img)[i]->addr = mlx_get_data_addr((*img)[i]->img,
 				&(*img)[i]->bits_per_pixel,
 				&(*img)[i]->line_length,
@@ -53,7 +56,7 @@ void	init_texture_image(t_mlx_data *data)
 		set_img(data->text_arr->door_tex_name,
 			&data->img_arr->door_img, data);
 	}
-	if (!data->color)
+	if (!data->rgb)
 	{
 		set_img(data->text_arr->ceiling_tex_name,
 			&data->img_arr->ceiling_img, data);

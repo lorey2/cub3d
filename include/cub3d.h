@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/09 18:02:42 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/02 23:17:36 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,4 +326,8 @@ void			check_rgb(t_mlx_data *data);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,
 					double offset, t_data *img);
+//ceiling_floor
+void			draw_floor_slice(t_mlx_data *data, int x, t_3d_data *data_3d);
+void			draw_ceiling_slice(t_mlx_data *data, int x, t_3d_data *data_3d);
+
 #endif

@@ -18,7 +18,7 @@ D ./img/door.xpm ./img/opendoor.xpm
 
 
 
-C ./img/frame1.xpm ./img/frame2.xpm ./img/frame3.xpm ./img/frame4.xpm
+C 1,1,1
 F 0,153,0
 
 

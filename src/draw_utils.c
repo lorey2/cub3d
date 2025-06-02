@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
+/*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/04 13:43:38 by lorey             #+#    #+#             */
-/*   Updated: 2025/04/28 12:35:03 by lorey            ###   LAUSANNE.ch       */
+/*   Created: 2025/06/02 22:57:04 by lorey             #+#    #+#             */
+/*   Updated: 2025/06/02 23:03:37 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 void	draw_square(t_data *img, int x, int y, t_mlx_data *data)
 {
-	int	i;
-	int	j;
+	int	current_pixel_x;
+	int	current_pixel_y;
+	int	end_pixel_x;
+	int	end_pixel_y;
 
-	i = 0;
-	while (++i < TILE_SIZE)
+	current_pixel_x = round(x * TILE_SIZE * data->mm_ratio);
+	current_pixel_y = round(y * TILE_SIZE * data->mm_ratio);
+	end_pixel_x = round((x * TILE_SIZE + TILE_SIZE) * data->mm_ratio);
+	end_pixel_y = round((y * TILE_SIZE + TILE_SIZE) * data->mm_ratio);
+	while (current_pixel_x < end_pixel_x)
 	{
-		j = 1;
-		while (++j < TILE_SIZE)
-			my_mlx_pixel_put(
-				&(*img),
-				(x * TILE_SIZE + i) * data->mm_ratio,
-				(y * TILE_SIZE + j) * data->mm_ratio, data->color);
+		current_pixel_y = round(y * TILE_SIZE * data->mm_ratio);
+		while (current_pixel_y < end_pixel_y)
+		{
+			my_mlx_pixel_put(&(*img), current_pixel_x,
+				current_pixel_y, data->color);
+			current_pixel_y++;
+		}
+		current_pixel_x++;
 	}
 }
 
