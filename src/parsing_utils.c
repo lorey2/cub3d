@@ -6,18 +6,11 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/02 14:24:16 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 03:01:22 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v')
-		return (true);
-	return (false);
-}
 
 bool	ft_strisspace(char *str)
 {
@@ -88,6 +81,9 @@ int	check_texture(char **map, t_mlx_data *data)
 	if (!check_all_texture(data))
 		err_helper(data, map, "You should provide NO, SO, WE, EA, F \
 and C texture");
+	if (!map[i])
+		err_helper(data, map, "Map should be placed after texture \
+declaration");
 	while (!check_line_sanity(map[i]))
 	{
 		i++;

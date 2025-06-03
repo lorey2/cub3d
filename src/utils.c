@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:59:34 by lorey             #+#    #+#             */
-/*   Updated: 2025/05/02 15:47:50 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 02:57:06 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,11 @@ bool	ft_strisdigit(char *str)
 			return (false);
 	}
 	return (true);
+}
+
+bool	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\v')
+		return (true);
+	return (false);
 }

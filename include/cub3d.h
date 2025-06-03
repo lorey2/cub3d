@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/02 23:17:36 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 03:03:56 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ typedef struct s_mlx_data
 	bool			is_door_ver;
 	bool			rgb;
 	bool			door;
+	bool			wall_check;
+	int				map_line;
 	int				frame_nbr;
 	int				textu_x;
 	int				start;
@@ -309,7 +311,8 @@ void			check_map(t_mlx_data *data);
 int				check_texture(char **map, t_mlx_data *data);
 char			*remove_line_return(char *line);
 bool			check_all_texture(t_mlx_data *data);
-void			remove_texture_from_map(char **map, int line_to_rm, t_mlx_data *data);
+void			remove_texture_from_map(char **map,
+					int line_to_rm, t_mlx_data *data);
 bool			ft_strisspace(char *str);
 bool			check_line_sanity(char *line);
 void			remove_last_map_line(t_mlx_data *data);

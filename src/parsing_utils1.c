@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:46:06 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/05/02 15:25:26 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 03:01:48 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	open_helper(char *map_file, t_mlx_data *data)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
-		err("Cannot open map file\n", data);
+		err("Cannot open map file", data);
 	return (fd);
 }
 
