@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:43:48 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/03/24 18:11:28 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 15:44:18 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ char	**ft_split(char const *s, char c)
 	int		count;
 	int		x;
 
+	if (!s)
+		return (NULL);
 	count = ft_count(s, c);
 	if (!count)
 	{

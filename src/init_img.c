@@ -6,16 +6,17 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/02 23:13:11 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 15:02:46 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_img_error(t_mlx_data *data)
+void	set_img_error(t_mlx_data *data, t_data **img)
 {
 	write(1, "Error while trying to setup texture img\n", 40);
 	write(1, "Probably the path is wrong in map\n", 34);
+	safe_free((void **)img);
 	free_everything(data);
 	exit(1);
 }
@@ -39,7 +40,7 @@ void	set_img(char **path, t_data ***img, t_mlx_data *data)
 				&(*img)[i]->width,
 				&(*img)[i]->height);
 		if (!((*img)[i]->img))
-			set_img_error(data);
+			set_img_error(data, &(*img)[i]);
 		(*img)[i]->addr = mlx_get_data_addr((*img)[i]->img,
 				&(*img)[i]->bits_per_pixel,
 				&(*img)[i]->line_length,
@@ -111,6 +112,7 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 	data->img_arr->ceiling_img = NULL;
 	data->img_arr->floor_img = NULL;
 	data->img_ptr->selected = NULL;
+	data->img_arr->door_img = NULL;
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
 	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, data->y_size);

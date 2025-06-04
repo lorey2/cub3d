@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/03 03:03:56 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 14:10:51 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@
 # define MAX_RAY_STEPS	20.0	//nbr of intersection max with grid
 # define TOLERANCE		0.02	//to avoid infinity in trigo
 # define FOV			50.0	//in degree field of wiew
-# define RAY_NUMBER		1000.0	//number of rays. Best equal to SIZE_3D_IMG_X
+# define RAY_NUMBER		2000.0	//number of rays. Best equal to SIZE_3D_IMG_X
 # define FPS			60.0	//to avoid framerate jump the fps is capped
 //////////////
 //3d related//
 //////////////
 # define SIZE_3D_IMG_X	RAY_NUMBER	//size of the 3d img
-# define SIZE_3D_IMG_Y	1000.0	//
+# define SIZE_3D_IMG_Y	1500.0	//
 # define POS_3D_X		500		//position of the map img in screen
 # define POS_3D_Y		0		//
 

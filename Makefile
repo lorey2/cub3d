@@ -43,11 +43,11 @@ $(LIBC):
 	@make -s -C $(LIBC_DIR) all
 
 $(MLX):
-	@wget -q https://cdn.intra.42.fr/document/document/31540/minilibx-linux.tgz
-	@tar xf minilibx-linux.tgz
-	@rm minilibx-linux.tgz
-	@mv minilibx-linux mlx_linux
-	@sed -i -E 's|^\t(\./configure.*)|\t@\1 > /dev/null 2>\&1|' mlx_linux/Makefile
+#	@wget -q https://cdn.intra.42.fr/document/document/31540/minilibx-linux.tgz
+#	@tar xf minilibx-linux.tgz
+#	@rm minilibx-linux.tgz
+#	@mv minilibx-linux mlx_linux
+#	@sed -i -E 's|^\t(\./configure.*)|\t@\1 > /dev/null 2>\&1|' mlx_linux/Makefile
 	@make -C $(MLX_DIR) all
 	@echo "$(GREEN)MLX combiled !$<$(DEF_COLOR)"
 

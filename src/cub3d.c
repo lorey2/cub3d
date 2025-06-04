@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/02 23:05:23 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/03 14:36:13 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int ac, char **av)
 	size_array(&data);
 	init(&data);
 	data.img_ptr = malloc(sizeof(t_img_ptr));
+	if (!data.img_ptr)
+		err("Malloc error", &data);
 	init_img(&data, data.img_ptr);
 	setup_rgb(&data);
 	setup_player_pos_angle(&data);
