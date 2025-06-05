@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:48:07 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/06/03 03:01:22 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/05 16:13:14 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_texture(char **map, t_mlx_data *data)
 		split = ft_split(map[i], ' ');
 		if (!split)
 			err("Cannot split texture", data);
-		if (pars_texture(split, data))
+		if (pars_texture(split, data, map))
 			NULL;
 		else if (check_all_texture(data))
 			break ;

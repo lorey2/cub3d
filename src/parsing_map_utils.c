@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:01:04 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/06/03 03:00:51 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/05 15:37:08 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	*get_blank_space(char **map, int *yx)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == '0')
+			if (map[y][x] == '0' || map[y][x] == 'W' || map[y][x] == 'N'
+			|| map[y][x] == 'S' || map[y][x] == 'E')
 				return (yx[0] = y, yx[1] = x, yx);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/03 14:10:51 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/05 16:20:15 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,8 +323,8 @@ char			**copy_map(t_mlx_data *data);
 int				*get_blank_space(char **map, int *yx);
 bool			valid_map_char(char c);
 bool			check_wall(char c);
-bool			pars_texture(char **split, t_mlx_data *data);
-void			print_map(t_mlx_data *data);
+bool			pars_texture(char **split, t_mlx_data *data, char **map);
+void			print_map(char **map);
 void			check_rgb(t_mlx_data *data);
 //get_color
 int				get_color(double player_pos, t_mlx_data *data,
@@ -332,5 +332,8 @@ int				get_color(double player_pos, t_mlx_data *data,
 //ceiling_floor
 void			draw_floor_slice(t_mlx_data *data, int x, t_3d_data *data_3d);
 void			draw_ceiling_slice(t_mlx_data *data, int x, t_3d_data *data_3d);
+//utils_helper
+void			pars_texture_helper_utils(char **split, char **map,
+					t_mlx_data *data);
 
 #endif

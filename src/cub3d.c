@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/03 14:36:13 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/05 16:18:50 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,17 @@ int	main(int ac, char **av)
 	mlx_key_hook(data.win_ptr, key_released, &data);
 	mlx_loop(data.mlx_ptr);
 	return (0);
+}
+
+void	pars_texture_helper_utils(char **split, char **map, t_mlx_data *data)
+{
+	if (ft_isequal(split[0], "NO") || ft_isequal(split[0], "SO")
+		|| ft_isequal(split[0], "EA") || ft_isequal(split[0], "WE")
+		|| ft_isequal(split[0], "F") || ft_isequal(split[0], "C")
+		|| ft_isequal(split[0], "D"))
+	{
+		multi_free(&split);
+		multi_free(&map);
+		err("Duplicate texture", data);
+	}
 }

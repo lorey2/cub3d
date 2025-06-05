@@ -1,8 +1,10 @@
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
-EA textures/test/east.xpm
+
+
+NO img/cobble.xpm
+SO img/cobble.xpm
+WE img/cobble.xpm 
+EA img/cobble.xpm
+EA img/cobble.xpm
 
 F 20,20,20
 C 200,200,200

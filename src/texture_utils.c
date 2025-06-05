@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:58:12 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/06/03 15:44:23 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/05 16:22:05 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,25 @@ bool	count_rgb(char **f_split, char **c_split)
 	return (true);
 }
 
-bool	pars_texture(char **split, t_mlx_data *data)
+bool	pars_texture(char **split, t_mlx_data *data, char **map)
 {
-	if (ft_isequal(split[0], "NO"))
+	if (ft_isequal(split[0], "NO") && !data->text_arr->north_tex_name)
 		data->text_arr->north_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "SO"))
+	else if (ft_isequal(split[0], "SO") && !data->text_arr->south_tex_name)
 		data->text_arr->south_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "WE"))
+	else if (ft_isequal(split[0], "WE") && !data->text_arr->west_tex_name)
 		data->text_arr->west_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "EA"))
+	else if (ft_isequal(split[0], "EA") && !data->text_arr->east_tex_name)
 		data->text_arr->east_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "F"))
+	else if (ft_isequal(split[0], "F") && !data->text_arr->floor_tex_name)
 		data->text_arr->floor_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "C"))
+	else if (ft_isequal(split[0], "C") && !data->text_arr->ceiling_tex_name)
 		data->text_arr->ceiling_tex_name = copy_texture(split);
-	else if (ft_isequal(split[0], "D"))
+	else if (ft_isequal(split[0], "D") && !data->text_arr->door_tex_name)
 		data->text_arr->door_tex_name = copy_texture(split);
 	else
-	{
-		multi_free(&split);
-		return (false);
-	}
+		return (pars_texture_helper_utils(split, map, data),
+			multi_free(&split), false);
 	multi_free(&split);
 	return (true);
 }
@@ -104,7 +102,9 @@ void	check_rgb(t_mlx_data *data)
 	char	**f_split;
 	char	**c_split;
 
-	if (data->text_arr->ceiling_tex_name[1]
+	if (!data->text_arr->ceiling_tex_name[0]
+		|| !data->text_arr->floor_tex_name[0]
+		|| data->text_arr->ceiling_tex_name[1]
 		|| data->text_arr->floor_tex_name[1])
 		return ;
 	f_split = ft_split(data->text_arr->floor_tex_name[0], ',');
