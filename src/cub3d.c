@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:46:36 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/05 16:18:50 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/09 15:50:31 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ void	pars_texture_helper_utils(char **split, char **map, t_mlx_data *data)
 		multi_free(&map);
 		err("Duplicate texture", data);
 	}
+}
+
+int	count_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i);
 }

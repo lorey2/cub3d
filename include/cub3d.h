@@ -6,7 +6,7 @@
 /*   By: lorey <loic.rey.vs@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 13:45:58 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/05 16:20:15 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/09 15:51:04 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,5 +335,6 @@ void			draw_ceiling_slice(t_mlx_data *data, int x, t_3d_data *data_3d);
 //utils_helper
 void			pars_texture_helper_utils(char **split, char **map,
 					t_mlx_data *data);
+int				count_split(char **split);
 
 #endif

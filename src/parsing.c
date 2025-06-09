@@ -6,7 +6,7 @@
 /*   By: maambuhl <marcambuehl4@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:59:43 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/06/03 14:30:59 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/09 15:48:31 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	collect_texture(char **map, t_mlx_data *data)
 {
 	t_tex_name	*tex;
 	int			line_to_remove;
+	int			i;
 
 	tex = malloc(sizeof(t_tex_name));
 	if (!tex)

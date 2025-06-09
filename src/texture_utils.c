@@ -6,7 +6,7 @@
 /*   By: maambuhl <maambuhl@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:58:12 by maambuhl          #+#    #+#             */
-/*   Updated: 2025/06/05 16:22:05 by maambuhl         ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/09 15:55:38 by maambuhl         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@ bool	count_rgb(char **f_split, char **c_split)
 	int	i;
 
 	i = 0;
-	while (i < 3)
-	{
-		if (!f_split[i++])
-			return (false);
-	}
+	while (f_split[i])
+		i++;
+	if (i != 3)
+		return (false);
 	i = 0;
-	while (i < 3)
-	{
-		if (!c_split[i++])
-			return (false);
-	}
+	while (c_split[i])
+		i++;
+	if (i != 3)
+		return (false);
 	return (true);
 }
 
