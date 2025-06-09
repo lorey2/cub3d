@@ -1,17 +1,17 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      textures/wolfenstein/purple_stone.xpm
+   WE                            ./img/dirt.xpm
+NO      ./img/cobble.xpm
 
 
 
-SO textures/wolfenstein/red_brick.xpm
+SO ./img/diam.xpm
 
-F      17,    38,     64
+F      17,38,64
 
-EA textures/wolfenstein/wood.xpm
+EA ./img/frame1.xpm
 
 
 
-C 218, 234, 235
+C 218,234,235
 
 1111111111111111111111111
 10S0110000100000000000001
@@ -19,3 +19,8 @@ C 218, 234, 235
 1000110000000000110001001
 1000000000100000000001001
 1111111111111111111111111
+
+
+
+
+

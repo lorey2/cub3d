@@ -1,9 +1,9 @@
 
 
-NO img/cobble.xpm
-SO img/cobble.xpm
-WE img/cobble.xpm 
-EA img/cobble.xpm
+NO ./img/cobble.xpm
+SO ./img/diam.xpm
+WE ./img/dirt.xpm
+EA ./img/frame1.xpm
 
 F 20,20,20
 C 200,200,200

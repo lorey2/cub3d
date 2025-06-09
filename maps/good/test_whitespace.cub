@@ -6,7 +6,7 @@
 
 
 
-NO textures/test/north.xpm
+NO ./img/cobble.xpm
 
 
 
@@ -15,12 +15,12 @@ NO textures/test/north.xpm
 
 
 
-SO textures/test/south.xpm
-                        WE textures/test/west.xpm
-        EA textures/test/east.xpm            
+SO ./img/diam.xpm
+                        WE ./img/dirt.xpm
+        EA ./img/frame1.xpm            
 
-        F 20,           20,             20
-C 200,          200,200
+        F 20,20,20
+C 200,200,200
 
 11111
 10001

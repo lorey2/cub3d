@@ -1,7 +1,7 @@
-NO textures/simonkraft/soul_sand.xpm
-SO textures/simonkraft/soul_soil_01.xpm
-WE textures/simonkraft/soul_soil.xpm
-EA textures/simonkraft/soul_sand.xpm
+NO ./img/cobble.xpm
+SO ./img/diam.xpm
+WE ./img/dirt.xpm
+EA ./img/frame1.xpm
 
 C 53,41,34
 F 45,33,27

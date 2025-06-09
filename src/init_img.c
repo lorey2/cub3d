@@ -6,7 +6,7 @@
 /*   By: lorey <lorey@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:24:54 by lorey             #+#    #+#             */
-/*   Updated: 2025/06/03 15:02:46 by lorey            ###   LAUSANNE.ch       */
+/*   Updated: 2025/06/09 15:40:47 by lorey            ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void	init_img(t_mlx_data *data, t_img_ptr *img)
 	data->img_arr->door_img = NULL;
 	data->img_ptr->game = malloc(sizeof(t_data));
 	data->img_ptr->minimap = malloc(sizeof(t_data));
-	img->minimap->img = mlx_new_image(data->mlx_ptr, SIZE_MAP_X, data->y_size);
+	img->minimap->img = mlx_new_image(data->mlx_ptr,
+			data->tile_y_nbr * TILE_SIZE * data->mm_ratio, data->y_size);
 	img->minimap->addr = mlx_get_data_addr(img->minimap->img,
 			&img->minimap->bits_per_pixel, &img->minimap->line_length,
 			&img->minimap->endian);

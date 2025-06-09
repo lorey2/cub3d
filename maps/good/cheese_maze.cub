@@ -1,7 +1,7 @@
 NO ./img/cobble.xpm
-SO ./img/cobble.xpm
-WE ./img/cobble.xpm
-EA ./img/cobble.xpm
+SO ./img/diam.xpm
+WE ./img/dirt.xpm
+EA ./img/frame1.xpm
 
 
 
